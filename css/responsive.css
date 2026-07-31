@@ -1,0 +1,83 @@
+@media(max-width:700px){
+
+
+
+.navbar {
+
+margin:10px;
+
+}
+
+
+
+.navbar h1 {
+
+font-size:22px;
+
+}
+
+
+
+.hero h2 {
+
+
+font-size:40px;
+
+letter-spacing:-2px;
+
+
+}
+
+
+
+main {
+
+padding:10px;
+
+}
+
+
+
+.movie-grid {
+
+
+grid-template-columns:
+
+repeat(2,1fr);
+
+
+gap:15px;
+
+
+}
+
+
+
+.movie-card {
+
+
+padding:10px;
+
+
+}
+
+
+}
+
+
+
+@media(min-width:1000px){
+
+
+.movie-grid {
+
+grid-template-columns:
+
+repeat(5,1fr);
+
+
+}
+
+
+
+}

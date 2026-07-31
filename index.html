@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WatchList</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/glass.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body>
+
+
+<div class="background"></div>
+
+
+<header class="navbar glass">
+
+    <h1>WatchList</h1>
+
+    <button id="addMovieBtn">
+        +
+    </button>
+
+</header>
+
+
+
+<main>
+
+
+<section class="hero">
+
+    <h2>
+        I tuoi film,
+        <span>la tua storia.</span>
+    </h2>
+
+    <p id="stats">
+        Nessun film aggiunto
+    </p>
+
+
+</section>
+
+
+
+<section id="movieContainer" class="movie-grid">
+
+</section>
+
+
+</main>
+
+
+
+
+<!-- POPUP AGGIUNTA FILM -->
+
+
+<div id="modal" class="modal hidden">
+
+
+<div class="modal-box glass">
+
+
+<h2>
+Aggiungi film
+</h2>
+
+
+<input 
+id="titleInput"
+type="text"
+placeholder="Titolo film">
+
+
+
+<label>
+Copertina
+</label>
+
+
+<input 
+id="imageInput"
+type="file"
+accept="image/*">
+
+
+
+<select id="whereInput">
+
+<option value="">
+Dove lo hai visto?
+</option>
+
+<option>
+Netflix
+</option>
+
+<option>
+Prime Video
+</option>
+
+<option>
+Disney+
+</option>
+
+<option>
+Cinema
+</option>
+
+<option>
+Altro
+</option>
+
+</select>
+
+
+
+
+<div class="stars" id="stars">
+
+</div>
+
+
+
+<textarea 
+id="noteInput"
+placeholder="Nota (facoltativa)">
+</textarea>
+
+
+
+<div class="buttons">
+
+<button id="saveBtn">
+Salva
+</button>
+
+
+<button id="closeBtn">
+Chiudi
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<footer class="footer glass">
+
+    <p>
+        © 2026 WatchList • Created by Matteo
+    </p>
+
+</footer>
+
+
+<script src="js/storage.js"></script>
+<script src="js/stars.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/app.js"></script>
+
+
+</body>
+</html>

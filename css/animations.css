@@ -1,0 +1,103 @@
+.movie-card,
+.navbar,
+.modal-box {
+
+
+animation:
+
+appear .6s cubic-bezier(.2,.8,.2,1);
+
+
+}
+
+
+
+.movie-card {
+
+transition:.35s;
+
+}
+
+
+
+.movie-card:hover {
+
+
+transform:
+
+translateY(-10px)
+scale(1.03);
+
+
+}
+
+
+
+
+@keyframes appear {
+
+
+from {
+
+opacity:0;
+
+transform:
+translateY(30px)
+scale(.95);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform:
+translateY(0)
+scale(1);
+
+}
+
+
+}
+
+
+
+
+.modal-box {
+
+
+animation:
+
+popup .35s cubic-bezier(.2,1.3,.5,1);
+
+
+}
+
+
+
+
+@keyframes popup {
+
+
+from {
+
+transform:
+scale(.7);
+
+opacity:0;
+
+}
+
+
+to {
+
+transform:
+scale(1);
+
+opacity:1;
+
+}
+
+
+}
