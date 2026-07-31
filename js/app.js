@@ -60,25 +60,19 @@ else {
 
 let movie={
 
-
 title:titleInput.value,
-
 
 image:imageURL,
 
-
 rating:rating,
-
 
 where:whereInput.value,
 
+note:noteInput.value,
 
-note:noteInput.value
-
-
+favorite:false
 
 };
-
 
 
 movies.push(movie);
@@ -139,3 +133,66 @@ function convertImageToBase64(file) {
 
 
 }
+
+const searchInput =
+document.getElementById("searchInput");
+
+
+
+searchInput.addEventListener(
+"input",
+function(){
+
+
+let text=
+this.value.toLowerCase();
+
+
+
+let result =
+movies.filter(movie=>
+
+movie.title
+.toLowerCase()
+.includes(text)
+
+);
+
+
+
+renderMovies(result);
+
+
+
+});
+
+
+
+
+
+document
+.getElementById("favoriteMovies")
+.onclick=function(){
+
+
+showFavorites=true;
+
+renderMovies();
+
+
+};
+
+
+
+
+document
+.getElementById("allMovies")
+.onclick=function(){
+
+
+showFavorites=false;
+
+renderMovies();
+
+
+};

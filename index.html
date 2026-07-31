@@ -15,17 +15,50 @@
 
 <body>
 
+    <div class="background"></div>
 
-<div class="background"></div>
+    <aside id="sidebar" class="sidebar glass">
 
+
+<h2>
+Menu
+</h2>
+
+
+<button id="allMovies">
+🎬 Tutti
+</button>
+
+
+<button id="favoriteMovies">
+❤️ Preferiti
+</button>
+
+
+</aside>
 
 <header class="navbar glass">
 
-    <h1>WatchList</h1>
 
-    <button id="addMovieBtn">
-        +
-    </button>
+<button id="menuBtn">
+☰
+</button>
+
+
+<h1>
+WatchList
+</h1>
+
+
+<div class="search-box">
+
+<input 
+id="searchInput"
+type="text"
+placeholder="🔍 Cerca film...">
+
+</div>
+
 
 </header>
 
@@ -48,6 +81,16 @@
 
 </section>
 
+
+
+<div class="search-box glass">
+
+    <input 
+    id="searchInput"
+    type="text"
+    placeholder="🔍 Cerca un film...">
+
+</div>
 
 
 <section id="movieContainer" class="movie-grid">
@@ -156,6 +199,9 @@ Chiudi
 
 </div>
 
+<button id="addMovieBtn" class="floating-add">
++
+</button>
 
 <footer class="footer glass">
 

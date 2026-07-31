@@ -81,3 +81,41 @@ repeat(5,1fr);
 
 
 }
+
+@media(max-width:700px){
+
+
+.navbar h1{
+
+display:none;
+
+}
+
+
+
+.search-box{
+
+width:100%;
+
+}
+
+
+
+.sidebar.open{
+
+left:10px;
+
+}
+
+
+
+.floating-add{
+
+right:20px;
+
+bottom:20px;
+
+}
+
+
+}
