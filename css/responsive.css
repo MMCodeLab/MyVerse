@@ -82,8 +82,17 @@ repeat(5,1fr);
 
 }
 
-@media(max-width:700px){
+@media (max-width:700px){
 
+.navbar{
+
+margin:10px;
+
+padding:10px 14px;
+
+gap:10px;
+
+}
 
 .navbar h1{
 
@@ -91,31 +100,72 @@ display:none;
 
 }
 
-
-
 .search-box{
 
-width:100%;
+flex:1;
+
+max-width:none;
 
 }
 
+.search-box input{
 
+font-size:15px;
 
-.sidebar.open{
-
-left:10px;
+padding:10px 15px;
 
 }
 
+.movie-grid{
 
+grid-template-columns:repeat(2,1fr);
+
+gap:12px;
+
+}
+
+.movie-card{
+
+padding:10px;
+
+}
+
+.movie-info h3{
+
+font-size:17px;
+
+}
+
+.movie-info p{
+
+font-size:13px;
+
+}
+
+.sidebar{
+
+width:220px;
+
+}
 
 .floating-add{
 
-right:20px;
+width:58px;
 
-bottom:20px;
+height:58px;
+
+font-size:34px;
+
+right:18px;
+
+bottom:18px;
 
 }
 
+.hero h2{
+
+font-size:34px;
+
+}
 
 }

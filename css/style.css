@@ -6,16 +6,18 @@
 }
 
 
-body {
+body{
 
     min-height:100vh;
 
     display:flex;
     flex-direction:column;
 
+    background:#050505;
     color:white;
 
     overflow-x:hidden;
+    width:100%;
 
 }
 
@@ -579,6 +581,8 @@ transform:scale(1.08);
 position:absolute;
 
 inset:0;
+
+pointer-events:none;
 
 background:
 linear-gradient(

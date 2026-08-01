@@ -1,209 +1,134 @@
-const container =
-document.getElementById("movieContainer");
+const container = document.getElementById("movieContainer");
 
+let showFavorites = false;
 
-let showFavorites=false;
+function renderMovies(list = movies) {
 
+    container.innerHTML = "";
 
+    let filtered = list;
 
-function renderMovies(list=movies){
+    if (showFavorites) {
+        filtered = movies.filter(movie => movie.favorite);
+    }
 
+    filtered.forEach((movie) => {
 
-container.innerHTML="";
+        let card = document.createElement("div");
 
+        card.className = "movie-card glass";
 
+        card.innerHTML = `
 
-let filtered=list;
+        <div class="favorite ${movie.favorite ? "active" : ""}">
+            ${movie.favorite ? "❤️" : "♡"}
+        </div>
 
+        <img src="${movie.image}">
 
+        <div class="movie-overlay"></div>
 
-if(showFavorites){
+        <div class="movie-info">
 
-filtered=
-movies.filter(movie=>movie.favorite);
+            <h3>${movie.title}</h3>
 
-}
+            <p>⭐ ${movie.rating}/10</p>
 
+            <p>${movie.where}</p>
 
+            <p>${movie.note || ""}</p>
 
-filtered.forEach((movie,index)=>{
+            <button class="delete">
+                Elimina
+            </button>
 
+        </div>
 
+        `;
 
-let card=document.createElement("div");
+        // =========================
+        // PREFERITI
+        // =========================
 
+        card.querySelector(".favorite").onclick = function (e) {
 
-card.className="movie-card glass";
+            e.stopPropagation();
 
+            movie.favorite = !movie.favorite;
 
+            saveMovies();
 
-card.innerHTML=`
+            renderMovies();
 
-<div class="favorite ${movie.favorite ? "active":""}">
-${movie.favorite ? "❤️":"♡"}
-</div>
+        };
 
+        // =========================
+        // ELIMINA
+        // =========================
 
-<img src="${movie.image}">
+        card.querySelector(".delete").onclick = function (e) {
 
+            e.stopPropagation();
 
-<div class="movie-overlay">
+            movies.splice(
+                movies.indexOf(movie),
+                1
+            );
 
-<button class="details-btn">
-Dettagli
-</button>
+            saveMovies();
 
-</div>
+            renderMovies();
 
+        };
 
+        // =========================
+        // DETTAGLI
+        // =========================
 
-<div class="movie-info">
+        card.onclick = function (e) {
 
+            if (
+                e.target.closest(".delete") ||
+                e.target.closest(".favorite")
+            ) return;
 
-<h3>
-${movie.title}
-</h3>
-
-
-<p>
-⭐ ${movie.rating}/10
-</p>
-
-
-<p>
-${movie.where}
-</p>
-
-
-<p>
-${movie.note || ""}
-</p>
-
-
-<button class="delete">
-Elimina
-</button>
-
-
-</div>
-
-`;
-
-
-
-
-
-// preferiti
-
-card.querySelector(".favorite")
-.onclick=function(e){
-
-
-e.stopPropagation();
-
-
-movie.favorite=
-!movie.favorite;
-
-
-saveMovies();
-
-
-renderMovies();
-
-
-
-};
-
-
-
-
-// elimina
-
-
-card.querySelector(".delete")
-.onclick=function(){
-
-
-movies.splice(
-movies.indexOf(movie),
-1
-);
-
-
-saveMovies();
-
-renderMovies();
-
-
-};
-
-card.querySelector(".details-btn")
-.onclick=function(){
-
-
-alert(
-`
-${movie.title}
+            alert(
+`${movie.title}
 
 ⭐ Voto: ${movie.rating}/10
 
 📺 Visto su: ${movie.where}
 
-📝 ${movie.note || "Nessuna nota"}
-`
-);
+📝 ${movie.note || "Nessuna nota"}`
+            );
 
+        };
 
-};
+        container.appendChild(card);
 
+    });
 
-
-container.appendChild(card);
-
-
-
-});
-
-
-
-updateStats();
-
+    updateStats();
 
 }
 
+function updateStats() {
 
+    const stats = document.getElementById("stats");
 
+    if (movies.length === 0) {
 
-function updateStats(){
+        stats.innerHTML = "Nessun film aggiunto";
 
+        return;
 
-const stats=
-document.getElementById("stats");
+    }
 
+    let average =
+        movies.reduce((a, b) => a + b.rating, 0) /
+        movies.length;
 
-
-if(movies.length===0){
-
-stats.innerHTML=
-"Nessun film aggiunto";
-
-return;
-
-}
-
-
-
-let average=
-movies.reduce(
-(a,b)=>a+b.rating,0
-)
-/
-movies.length;
-
-
-
-stats.innerHTML=
-`${movies.length} film • Media ⭐ ${average.toFixed(1)}/10`;
+    stats.innerHTML =
+        `${movies.length} film • Media ⭐ ${average.toFixed(1)}/10`;
 
 }
