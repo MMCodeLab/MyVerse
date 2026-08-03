@@ -1,0 +1,35 @@
+.settings-box h3 {
+
+    margin-top:20px;
+    margin-bottom:10px;
+
+}
+
+
+.settings-box select,
+.settings-box button {
+
+    width:100%;
+    margin-top:12px;
+
+}
+
+
+.settings-box hr {
+
+    margin:25px 0;
+
+    border:none;
+
+    height:1px;
+
+    background:#ffffff30;
+
+}
+
+
+.settings-box input[type="file"] {
+
+    margin-top:15px;
+
+}

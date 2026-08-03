@@ -27,52 +27,75 @@ saveBtn.onclick = async function(){
 
 if(titleInput.value===""){
 
+
 alert("Inserisci un titolo");
+
 
 return;
 
-}
-
-
-
-let imageURL = "";
-
-
-if(imageInput.files[0]) {
-
-
-    imageURL = await convertImageToBase64(imageInput.files[0]);
-
 
 }
 
-else {
 
 
-    imageURL =
-    "https://via.placeholder.com/300x450";
+
+let imageURL="";
+
+
+
+if(imageInput.files[0]){
+
+
+imageURL =
+await convertImageToBase64(
+imageInput.files[0]
+);
 
 
 }
+
+else{
+
+
+imageURL =
+"https://via.placeholder.com/300x450";
+
+
+}
+
+
 
 
 
 
 let movie={
 
+
 title:titleInput.value,
+
 
 image:imageURL,
 
+
 rating:rating,
+
 
 where:whereInput.value,
 
+
 note:noteInput.value,
 
-favorite:false
+
+favorite:false,
+
+
+date:Date.now()
+
 
 };
+
+
+
 
 
 movies.push(movie);
@@ -82,25 +105,37 @@ movies.push(movie);
 saveMovies();
 
 
+
 renderMovies();
+
 
 
 
 
 titleInput.value="";
 
+
 whereInput.value="";
+
 
 noteInput.value="";
 
+
+imageInput.value="";
+
+
 rating=0;
+
 
 updateStars();
 
 
 
-document.getElementById("modal")
+
+document
+.getElementById("modal")
 .classList.add("hidden");
+
 
 
 };
@@ -108,31 +143,45 @@ document.getElementById("modal")
 
 
 
-renderMovies();
-
-function convertImageToBase64(file) {
 
 
-    return new Promise((resolve)=>{
+function convertImageToBase64(file){
 
 
-        const reader = new FileReader();
+return new Promise((resolve)=>{
 
 
-        reader.onload = () => {
-
-            resolve(reader.result);
-
-        };
+const reader =
+new FileReader();
 
 
-        reader.readAsDataURL(file);
+
+reader.onload=()=>{
 
 
-    });
+resolve(reader.result);
+
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+
+
+});
 
 
 }
+
+
+
+
+
+
+// RICERCA
+
 
 const searchInput =
 document.getElementById("searchInput");
@@ -144,19 +193,43 @@ searchInput.addEventListener(
 function(){
 
 
-let text=
+let text =
 this.value.toLowerCase();
 
 
 
+
 let result =
-movies.filter(movie=>
+movies.filter(movie=>{
+
+
+return (
 
 movie.title
 .toLowerCase()
 .includes(text)
 
+
+||
+
+
+(movie.where || "")
+.toLowerCase()
+.includes(text)
+
+
+||
+
+
+(movie.note || "")
+.toLowerCase()
+.includes(text)
+
 );
+
+
+
+});
 
 
 
@@ -170,6 +243,12 @@ renderMovies(result);
 
 
 
+
+
+// FILTRI MENU
+
+
+
 document
 .getElementById("favoriteMovies")
 .onclick=function(){
@@ -177,10 +256,12 @@ document
 
 showFavorites=true;
 
+
 renderMovies();
 
 
 };
+
 
 
 
@@ -191,6 +272,7 @@ document
 
 
 showFavorites=false;
+
 
 renderMovies();
 

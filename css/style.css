@@ -856,3 +856,120 @@ transform:scale(1.1) rotate(90deg);
 max-width:350px;
 
 }
+
+/* =========================
+   LIST VIEW
+========================= */
+
+
+.movie-grid.list-layout {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.list-layout .movie-card {
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:12px 18px;
+
+    border-radius:22px;
+
+    min-height:100px;
+
+
+}
+
+
+
+.list-layout .movie-card img {
+
+
+    width:65px;
+
+    height:90px;
+
+    aspect-ratio:auto;
+
+    border-radius:12px;
+
+    flex-shrink:0;
+
+
+}
+
+
+
+.list-layout .movie-info {
+
+
+    padding:0;
+
+    flex:1;
+
+
+}
+
+
+
+.list-layout .movie-info h3 {
+
+
+    font-size:20px;
+
+    margin-bottom:5px;
+
+
+}
+
+
+
+.list-layout .movie-info p {
+
+
+    margin:3px 0;
+
+    font-size:14px;
+
+
+}
+
+
+
+.list-layout .favorite {
+
+
+    position:absolute;
+
+    right:20px;
+
+    top:15px;
+
+
+}
+
+
+
+.list-layout .delete {
+
+
+    padding:7px 14px;
+
+    margin-top:5px;
+
+    font-size:13px;
+
+
+}
