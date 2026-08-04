@@ -1,4 +1,4 @@
-const CACHE_NAME = "watchlist-v1";
+const CACHE_NAME = "MyVerse-cache-v1";
 
 const urlsToCache = [
 

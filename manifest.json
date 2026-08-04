@@ -1,6 +1,6 @@
 {
-    "name": "WatchList",
-    "short_name": "WatchList",
+    "name": "MyVerse",
+    "short_name": "MyVerse",
     "description": "La tua raccolta personale di film.",
     "start_url": "./",
     "display": "standalone",
