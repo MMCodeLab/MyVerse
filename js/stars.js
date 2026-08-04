@@ -1,35 +1,65 @@
 let rating = 0;
 
-
-const starsContainer = document.getElementById("stars");
-
-
-function createStars(){
+let songRating = 0;
 
 
-    starsContainer.innerHTML="";
+const starsContainer =
+document.getElementById("stars");
+
+
+const songStarsContainer =
+document.getElementById("songStars");
+
+
+
+function createStars(container, type){
+
+
+    if(!container) return;
+
+
+    container.innerHTML="";
 
 
     for(let i=1;i<=10;i++){
 
 
-        let star=document.createElement("span");
+        let star =
+        document.createElement("span");
+
 
         star.innerHTML="★";
+
 
         star.dataset.value=i;
 
 
+
         star.onclick=function(){
 
-            rating=i;
 
-            updateStars();
+            if(type==="movie"){
+
+                rating=i;
+
+            }
+
+            else{
+
+                songRating=i;
+
+            }
+
+
+            updateStars(container,type);
+
 
         };
 
 
-        starsContainer.appendChild(star);
+
+        container.appendChild(star);
+
 
     }
 
@@ -38,16 +68,32 @@ function createStars(){
 
 
 
-function updateStars(){
+
+function updateStars(container,type){
 
 
-    const stars=document.querySelectorAll("#stars span");
+    if(!container) return;
+
+
+
+    let value =
+    type==="movie"
+    ?
+    rating
+    :
+    songRating;
+
+
+
+    const stars =
+    container.querySelectorAll("span");
+
 
 
     stars.forEach((star,index)=>{
 
 
-        if(index < rating){
+        if(index < value){
 
             star.classList.add("active");
 
@@ -63,8 +109,19 @@ function updateStars(){
     });
 
 
+
 }
 
 
 
-createStars();
+
+createStars(
+starsContainer,
+"movie"
+);
+
+
+createStars(
+songStarsContainer,
+"song"
+);

@@ -973,3 +973,20 @@ max-width:350px;
 
 
 }
+
+.spotify-btn{
+
+background:#1ed760;
+color:white;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+margin-top:10px;
+
+}

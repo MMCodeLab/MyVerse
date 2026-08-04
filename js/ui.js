@@ -1,230 +1,384 @@
-const container = document.getElementById("movieContainer");
+const container =
+document.getElementById("movieContainer");
 
-let showFavorites = false;
 
+let showFavorites=false;
 
 
-function renderMovies(list = movies) {
+let currentFilter="all";
 
 
-    container.innerHTML = "";
 
 
-    let filtered = [...list];
 
+function renderMovies(list=movies){
 
 
-    // FILTRO PREFERITI
 
-    if(showFavorites){
+container.innerHTML="";
 
-        filtered =
-        filtered.filter(movie => movie.favorite);
 
-    }
 
+let filtered=[...list];
 
 
-    // ORDINAMENTO
 
-    if(typeof sortMovies === "function"){
 
-        filtered = sortMovies(filtered);
+if(showFavorites){
 
-    }
 
+filtered =
+filtered.filter(item=>item.favorite);
 
 
+}
 
-    // LAYOUT SCELTO
 
-    let layout =
-    localStorage.getItem("layout")
-    || "grid";
 
 
+if(currentFilter==="movie"){
 
 
-    if(layout === "list"){
+filtered =
+filtered.filter(item=>item.type==="movie");
 
-        container.classList.add("list-layout");
 
-    }
+}
 
-    else{
 
-        container.classList.remove("list-layout");
 
-    }
 
+if(currentFilter==="song"){
 
 
+filtered =
+filtered.filter(item=>item.type==="song");
 
 
+}
 
-    filtered.forEach((movie)=>{
 
 
-        let card =
-        document.createElement("div");
 
 
+if(typeof sortMovies==="function"){
 
-        card.className =
-        "movie-card glass";
 
+filtered =
+sortMovies(filtered);
 
 
+}
 
-        card.innerHTML = `
 
 
-        <div class="favorite ${movie.favorite ? "active" : ""}">
 
-        ${movie.favorite ? "❤️" : "♡"}
 
-        </div>
+filtered.forEach(item=>{
 
 
 
-        <img src="${movie.image}">
+let card =
+document.createElement("div");
 
 
 
-        <div class="movie-info">
+card.className =
+"movie-card glass";
 
 
-        <h3>
-        ${movie.title}
-        </h3>
 
 
-        <p>
-        ⭐ ${movie.rating}/10
-        </p>
 
+let image =
+item.image ||
+"https://via.placeholder.com/300";
 
-        <p>
-        ${movie.where || ""}
-        </p>
 
 
-        <p>
-        ${movie.note || ""}
-        </p>
 
 
+if(item.type==="song"){
 
-        <button class="delete">
 
-        Elimina
 
-        </button>
+card.innerHTML=`
 
+<div class="favorite ${item.favorite ? "active":""}">
 
-        </div>
+${item.favorite ? "❤️":"♡"}
 
+</div>
 
-        `;
 
+<img src="${image}">
 
 
 
-        // PREFERITO
+<div class="movie-info">
 
-        card.querySelector(".favorite")
-        .onclick=function(e){
 
+<h3>
+🎵 ${item.title}
+</h3>
 
-            e.stopPropagation();
 
 
-            movie.favorite =
-            !movie.favorite;
+<p>
 
+${item.artist || ""}
 
-            saveMovies();
+</p>
 
 
-            renderMovies();
 
+<p>
 
-        };
+⭐ ${item.rating}/10
 
+</p>
 
 
 
+<button class="spotify-btn">
 
-        // ELIMINA
+▶ Spotify
 
-        card.querySelector(".delete")
-        .onclick=function(e){
+</button>
 
 
-            e.stopPropagation();
 
+<button class="delete">
 
-            movies.splice(
-            movies.indexOf(movie),
-            1
-            );
+Elimina
 
+</button>
 
-            saveMovies();
 
 
-            renderMovies();
+</div>
 
+`;
 
-        };
 
 
 
 
+card.querySelector(".spotify-btn")
+.onclick=function(e){
 
-        // DETTAGLI
 
-        card.onclick=function(e){
+e.stopPropagation();
 
 
-            if(
-            e.target.closest(".delete") ||
-            e.target.closest(".favorite")
-            )
+if(item.spotify){
 
-            return;
+window.open(
+item.spotify,
+"_blank"
+);
 
+}
 
 
-            alert(
+};
 
-`${movie.title}
 
 
-⭐ Voto: ${movie.rating}/10
 
 
-📺 Visto su: ${movie.where || "Non specificato"}
+}
 
+else{
 
-📝 ${movie.note || "Nessuna nota"}`
 
-            );
+card.innerHTML=`
 
+<div class="favorite ${item.favorite ? "active":""}">
 
-        };
+${item.favorite ? "❤️":"♡"}
 
+</div>
 
 
 
-        container.appendChild(card);
+<img src="${image}">
 
 
-    });
 
+<div class="movie-info">
 
 
-    updateStats();
+<h3>
+
+🎬 ${item.title}
+
+</h3>
+
+
+<p>
+
+⭐ ${item.rating}/10
+
+</p>
+
+
+
+<p>
+
+${item.where || ""}
+
+</p>
+
+
+
+<p>
+
+${item.note || ""}
+
+</p>
+
+
+
+<button class="delete">
+
+Elimina
+
+</button>
+
+
+</div>
+
+
+`;
+
+}
+
+
+
+card.querySelector(".favorite")
+.onclick=function(e){
+
+
+e.stopPropagation();
+
+
+item.favorite =
+!item.favorite;
+
+
+saveMovies();
+
+
+renderMovies();
+
+
+};
+
+
+
+
+card.querySelector(".delete")
+.onclick=function(e){
+
+
+e.stopPropagation();
+
+
+
+movies.splice(
+movies.indexOf(item),
+1
+);
+
+
+
+saveMovies();
+
+
+renderMovies();
+
+
+};
+
+
+card.onclick=function(e){
+
+
+if(
+e.target.closest(".delete") ||
+e.target.closest(".favorite") ||
+e.target.closest(".spotify-btn")
+)
+
+return;
+
+
+
+if(item.type==="song"){
+
+
+alert(
+
+`${item.title}
+
+
+🎤 Artista:
+${item.artist || "Sconosciuto"}
+
+
+⭐ Voto:
+${item.rating}/10
+
+
+🎵 Spotify:
+${item.spotify || "Nessun link"}
+
+
+📝 Nota:
+${item.note || "Nessuna nota"}`
+
+);
+
+
+}
+
+else{
+
+
+alert(
+
+`${item.title}
+
+
+⭐ Voto:
+${item.rating}/10
+
+
+📺 Dove:
+${item.where || "Non specificato"}
+
+
+📝 Nota:
+${item.note || "Nessuna nota"}`
+
+);
+
+
+}
+
+
+};
+
+container.appendChild(card);
+
+
+
+});
+
+
+
+updateStats();
 
 
 }
@@ -234,7 +388,10 @@ function renderMovies(list = movies) {
 
 
 
+
+
 function updateStats(){
+
 
 
 const stats =
@@ -242,11 +399,23 @@ document.getElementById("stats");
 
 
 
-if(movies.length === 0){
+let films =
+movies.filter(x=>x.type==="movie").length;
 
 
-stats.innerHTML =
-"Nessun film aggiunto";
+
+let songs =
+movies.filter(x=>x.type==="song").length;
+
+
+
+
+
+if(movies.length===0){
+
+
+stats.innerHTML=
+"Nessuna recensione aggiunta";
 
 
 return;
@@ -257,23 +426,10 @@ return;
 
 
 
-let average =
-
-movies.reduce(
-(a,b)=>a+b.rating,
-0
-)
-
-/
-
-movies.length;
-
-
-
 
 stats.innerHTML =
 
-`${movies.length} film • Media ⭐ ${average.toFixed(1)}/10`;
+`${films} film • ${songs} canzoni`;
 
 
 
