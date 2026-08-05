@@ -1,5 +1,5 @@
 // ===============================
-// MODALI
+// MODALI MYVERSE V3
 // ===============================
 
 
@@ -20,24 +20,41 @@ document.getElementById("songModal");
 
 
 
-// tipo corrente
-currentType = "movie";
-
+let currentType = "movie";
 
 
 
 // ===============================
-// APRI SCELTA TIPO
+// APERTURA MENU AGGIUNTA
 // ===============================
 
 
 addBtn.onclick=function(){
 
 
-    typeModal.classList.remove("hidden");
+    const opened =
+    !typeModal.classList.contains("hidden");
+
+
+    if(opened){
+
+        closeAllModals();
+
+        addBtn.classList.remove("active");
+
+    }
+
+    else{
+
+        typeModal.classList.remove("hidden");
+
+        addBtn.classList.add("active");
+
+    }
 
 
 };
+
 
 
 
@@ -51,17 +68,16 @@ document
 .getElementById("movieChoice")
 .onclick=function(){
 
-
     currentType="movie";
-
 
     typeModal.classList.add("hidden");
 
-
     movieModal.classList.remove("hidden");
 
+    addBtn.classList.remove("active");
 
 };
+
 
 
 
@@ -75,60 +91,102 @@ document
 .getElementById("songChoice")
 .onclick=function(){
 
-
     currentType="song";
-
 
     typeModal.classList.add("hidden");
 
-
     songModal.classList.remove("hidden");
 
+    addBtn.classList.remove("active");
 
 };
 
 
 
 
+
+
 // ===============================
-// CHIUSURA FILM
+// CHIUSURE
 // ===============================
+
 
 
 document
 .getElementById("closeBtn")
 .onclick=function(){
 
-
     movieModal.classList.add("hidden");
-
 
 };
 
-
-
-
-// ===============================
-// CHIUSURA CANZONE
-// ===============================
 
 
 document
 .getElementById("closeSongBtn")
 .onclick=function(){
 
+    songModal.classList.add("hidden");
+
+};
+
+
+
+function closeAllModals(){
+
+
+    typeModal.classList.add("hidden");
+
+    movieModal.classList.add("hidden");
 
     songModal.classList.add("hidden");
 
+    if(typeof settingsModal !== "undefined"){
+        settingsModal.classList.add("hidden");
+    }
 
-};
+
+    addBtn.classList.remove("active");
+
+
+}
+
+
+
+
+
+// chiusura cliccando fuori
+
+
+document.querySelectorAll(".modal")
+.forEach(modal=>{
+
+
+modal.addEventListener(
+"click",
+function(e){
+
+
+if(e.target===modal){
+
+    closeAllModals();
+
+    addBtn.classList.remove("active");
+
+}
+
+
+});
+
+
+});
 
 
 
 
 
 // ===============================
-// MENU LATERALE
+// SIDEBAR
 // ===============================
 
 
@@ -144,7 +202,7 @@ document.getElementById("sidebar");
 menuBtn.onclick=function(){
 
 
-    sidebar.classList.toggle("open");
+sidebar.classList.toggle("open");
 
 
 };
@@ -153,28 +211,30 @@ menuBtn.onclick=function(){
 
 
 
-document.addEventListener("click",function(e){
+document.addEventListener(
+"click",
+function(e){
 
 
-    if(
+if(
 
-        sidebar.classList.contains("open")
+sidebar.classList.contains("open")
 
-        &&
+&&
 
-        !sidebar.contains(e.target)
+!sidebar.contains(e.target)
 
-        &&
+&&
 
-        !menuBtn.contains(e.target)
+!menuBtn.contains(e.target)
 
-    ){
-
-
-        sidebar.classList.remove("open");
+){
 
 
-    }
+sidebar.classList.remove("open");
+
+
+}
 
 
 });
@@ -182,28 +242,28 @@ document.addEventListener("click",function(e){
 
 
 
-// ===============================
-// FILTRI MENU
-// ===============================
 
+
+
+// ===============================
+// FILTRI
+// ===============================
 
 
 document
 .getElementById("allMovies")
 .onclick=function(){
 
+showFavorites=false;
 
-    currentFilter="all";
+currentFilter="all";
 
-    showFavorites=false;
+renderMovies();
 
-    renderMovies();
-
-
-    sidebar.classList.remove("open");
-
+sidebar.classList.remove("open");
 
 };
+
 
 
 
@@ -212,18 +272,16 @@ document
 .getElementById("onlyMovies")
 .onclick=function(){
 
+showFavorites=false;
 
-    currentFilter="movie";
+currentFilter="movie";
 
-    showFavorites=false;
+renderMovies();
 
-    renderMovies();
-
-
-    sidebar.classList.remove("open");
-
+sidebar.classList.remove("open");
 
 };
+
 
 
 
@@ -232,16 +290,13 @@ document
 .getElementById("onlySongs")
 .onclick=function(){
 
+showFavorites=false;
 
-    currentFilter="song";
+currentFilter="song";
 
-    showFavorites=false;
+renderMovies();
 
-    renderMovies();
-
-
-    sidebar.classList.remove("open");
-
+sidebar.classList.remove("open");
 
 };
 
@@ -253,17 +308,12 @@ document
 .getElementById("favoriteMovies")
 .onclick=function(){
 
+showFavorites=true;
 
-    showFavorites=true;
+currentFilter="all";
 
+renderMovies();
 
-    currentFilter="all";
-
-
-    renderMovies();
-
-
-    sidebar.classList.remove("open");
-
+sidebar.classList.remove("open");
 
 };

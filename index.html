@@ -19,7 +19,13 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 <link rel="manifest" href="manifest.json">
 
-<meta name="theme-color" content="#1ed760">
+<meta name="theme-color" content="#050505">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-title" content="MyVerse">
 
 <link rel="apple-touch-icon"
 href="icons/icon-192.png">
@@ -122,24 +128,30 @@ Cosa vuoi aggiungere?
 </h2>
 
 
-<div class="buttons">
+<div class="choice-grid">
 
-<button id="movieChoice">
+<button id="movieChoice" class="choice-card">
 
-🎬 Film
+<span>🎬</span>
 
-</button>
+<h3>Film</h3>
 
-
-<button id="songChoice">
-
-🎵 Canzone
+<p>Recensisci un film</p>
 
 </button>
 
+
+<button id="songChoice" class="choice-card">
+
+<span>🎵</span>
+
+<h3>Musica</h3>
+
+<p>Salva una canzone</p>
+
+</button>
 
 </div>
-
 
 </div>
 
@@ -434,7 +446,7 @@ class="floating-add">
 
 <p>
 
-© 2026 WatchList • Created by Matteo
+© 2026 MyVerse • Created by Matteo Minniti
 
 </p>
 
