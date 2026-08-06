@@ -379,3 +379,33 @@ repeat(5,1fr);
 
 
 }
+
+@media(max-width:700px){
+
+
+.details-box{
+
+    max-height:85vh;
+
+    overflow-y:auto;
+
+}
+
+
+.details-image{
+
+    width:140px;
+
+    height:210px;
+
+}
+
+
+.details-box h2{
+
+    font-size:24px;
+
+}
+
+
+}
