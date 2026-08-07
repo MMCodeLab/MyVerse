@@ -17,7 +17,7 @@ const backup={
 movies:movies,
 
 
-settings:{
+settings:{ 
 
 
 theme:

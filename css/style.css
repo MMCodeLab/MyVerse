@@ -11,7 +11,7 @@
     sans-serif;
 }
 
-
+ 
 html{
     scroll-behavior:smooth;
 }
@@ -2686,8 +2686,9 @@ cursor:pointer;
     margin-top: 4px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Imposta il limite massimo a 3 righe */
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* compatibility with WebKit/Blink */
+    line-clamp: 3;        /* standard property */
 }
 
 /* Spinge automaticamente il bottone in fondo alla card */
@@ -2756,4 +2757,142 @@ cursor:pointer;
     margin-top: 8px !important;
     padding: 8px 16px !important;
     font-size: 13px !important;
+}
+
+/* ===============================
+   ANTEPRIMA API (Spotify / TMDB)
+   =============================== */
+
+.api-preview{
+
+    display:block;
+
+    width:140px;
+
+    height:auto;
+
+    max-height:200px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    margin:15px auto 0;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.4);
+
+    animation:
+    imagePop .4s cubic-bezier(.2,1.4,.4,1);
+
+}
+
+/* ===============================
+   FIX MODAL CON ANTEPRIMA API
+   =============================== */
+
+.modal-box{
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+}
+
+
+.api-hint{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#999;
+
+    margin-top:15px;
+
+    font-weight:400;
+
+}
+
+/* ===============================
+   FIX MODAL CON ANTEPRIMA API
+   =============================== */
+
+.modal-box{
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    padding-right:22px;
+
+}
+
+
+.api-hint{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#999;
+
+    margin-top:15px;
+
+    font-weight:400;
+
+}
+
+
+/* SCROLLBAR GLASS */
+
+.modal-box::-webkit-scrollbar{
+
+    width:5px;
+
+}
+
+
+.modal-box::-webkit-scrollbar-button{
+
+    display:none;
+
+}
+
+
+.modal-box::-webkit-scrollbar-track{
+
+    background:transparent;
+
+    margin:15px 0;
+
+}
+
+
+.modal-box::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(10px);
+
+}
+
+
+.modal-box::-webkit-scrollbar-thumb:hover{
+
+    background:rgba(255,255,255,.28);
+
+}
+
+
+/* FIREFOX */
+
+.modal-box{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:rgba(255,255,255,.15) transparent;
+
 }

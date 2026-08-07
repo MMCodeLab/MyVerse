@@ -46,12 +46,14 @@ let imageURL =
 
 if(imageInput.files[0]){
 
+    imageURL =
+    await convertImageToBase64(
+    imageInput.files[0]
+    );
 
-imageURL =
-await convertImageToBase64(
-imageInput.files[0]
-);
+} else if(typeof tmdbPosterUrl !== "undefined" && tmdbPosterUrl){
 
+    imageURL = tmdbPosterUrl;
 
 }
 
@@ -138,6 +140,22 @@ rating=0;
 updateStars();
 
 
+if(typeof tmdbPosterUrl !== "undefined"){
+
+    tmdbPosterUrl = "";
+
+}
+
+
+const preview =
+document.getElementById("moviePosterPreview");
+
+if(preview){
+    preview.src = "";
+    preview.classList.add("hidden");
+}
+
+
 }
 
 
@@ -210,7 +228,9 @@ artist:artist,
 spotify:spotify,
 
 
-image:"https://via.placeholder.com/300",
+image:(typeof spotifyCoverUrl !== "undefined" && spotifyCoverUrl)
+    ? spotifyCoverUrl
+    : "https://via.placeholder.com/300",
 
 
 rating:songRating,
@@ -263,6 +283,22 @@ document.getElementById("spotifyInput").value="";
 document.getElementById("songNoteInput").value="";
 
 
+if(typeof spotifyCoverUrl !== "undefined"){
+
+    spotifyCoverUrl = "";
+
+}
+
+
+const preview =
+document.getElementById("songCoverPreview");
+
+if(preview){
+    preview.src = "";
+    preview.classList.add("hidden");
+}
+
+
 rating=0;
 
 updateStars();
@@ -272,13 +308,7 @@ songRating=0;
 updateStars(
 songStarsContainer,
 "song"
-);songRating=0;
-
-updateStars(
-songStarsContainer,
-"song"
 );
-
 
 
 };
