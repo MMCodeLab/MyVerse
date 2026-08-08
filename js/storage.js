@@ -44,7 +44,17 @@ function loadMovies(){
 
             artist: item.artist || "",
 
-            spotify: item.spotify || ""
+            spotify: item.spotify || "",
+
+            genre: item.genre || "",
+
+            director: item.director || "",
+
+            duration: item.duration || "",
+
+            cast: item.cast || "",
+
+            trailer: item.trailer || "",
 
         };
 

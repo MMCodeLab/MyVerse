@@ -10,6 +10,28 @@ let selectedDetailItem = null;
 
 
 
+// ===============================
+// HELPER VOTO (gestisce anche i negativi)
+// ===============================
+
+
+function formatRating(value){
+
+
+    if(value < 0){
+
+        return `<span class="icon-row negative-rating">${ICONS.star} ${value}</span>`;
+
+    }
+
+
+    return `<span class="icon-row">${ICONS.star} ${value}/10</span>`;
+
+
+}
+
+
+
 
 // ===============================
 // DETTAGLI MODAL
@@ -38,6 +60,35 @@ item.image ||
 
 
 
+// riga extra con genere/regista/durata/cast, solo se il film ne ha almeno uno
+let extraInfo = "";
+
+
+if(item.type==="movie" && (item.genre || item.director || item.duration || item.cast)){
+
+
+    extraInfo = `
+
+    <div class="details-note">
+
+        ${item.genre ? `<p class="icon-row">${ICONS.tag} ${item.genre}</p>` : ""}
+
+        ${item.director ? `<p class="icon-row">${ICONS.clapper} Regia: ${item.director}</p>` : ""}
+
+        ${item.duration ? `<p class="icon-row">${ICONS.clock} ${item.duration}</p>` : ""}
+
+        ${item.cast ? `<p class="icon-row">${ICONS.users} ${item.cast}</p>` : ""}
+
+    </div>
+
+    `;
+
+
+}
+
+
+
+
 modal.innerHTML = `
 
 <div class="details-box glass">
@@ -59,9 +110,9 @@ onerror="this.src='icons/icon-512.png'"
 
 
 
-<h2>
+<h2 class="icon-row">
 
-${item.type==="song" ? "🎵" : "🎬"}
+${item.type==="song" ? ICONS.music : ICONS.film}
 
 ${item.title}
 
@@ -73,9 +124,9 @@ ${item.artist ?
 
 `
 
-<p class="details-artist">
+<p class="details-artist icon-row">
 
-🎤 ${item.artist}
+${ICONS.mic} ${item.artist}
 
 </p>
 
@@ -87,7 +138,7 @@ ${item.artist ?
 
 <div class="details-rating">
 
-⭐ ${item.rating}/10
+${formatRating(item.rating)}
 
 </div>
 
@@ -107,6 +158,9 @@ ${item.where}
 
 :""}
 
+
+
+${extraInfo}
 
 
 
@@ -147,9 +201,9 @@ ${item.spotify ?
 
 `
 
-<button class="spotify-btn">
+<button class="spotify-btn icon-row">
 
-▶ Spotify
+${ICONS.play} Spotify
 
 </button>
 
@@ -159,17 +213,17 @@ ${item.spotify ?
 
 
 
-<button class="favorite-detail">
+<button class="favorite-detail icon-row">
 
-${item.favorite ? "❤️ Preferito":"♡ Preferito"}
+${item.favorite ? ICONS.heartFilled : ICONS.heart} Preferito
 
 </button>
 
 
 
-<button class="delete-detail">
+<button class="delete-detail icon-row">
 
-🗑 Elimina
+${ICONS.trash} Elimina
 
 </button>
 
@@ -188,6 +242,17 @@ ${item.favorite ? "❤️ Preferito":"♡ Preferito"}
 
 document.body.appendChild(modal);
 
+if(item.trailer){
+
+    const posterImg = modal.querySelector(".details-image");
+
+    posterImg.classList.add("has-trailer");
+
+    posterImg.onclick = () => {
+        window.open(item.trailer, "_blank");
+    };
+
+}
 
 
 
@@ -484,7 +549,7 @@ card.innerHTML = `
 
 <div class="favorite ${item.favorite ? "active":""}">
 
-${item.favorite ? "❤️":"♡"}
+${item.favorite ? ICONS.heartFilled : ICONS.heart}
 
 </div>
 
@@ -497,9 +562,9 @@ ${item.favorite ? "❤️":"♡"}
 <div class="movie-info">
 
 
-<h3>
+<h3 class="icon-row">
 
-🎬 ${item.title}
+${ICONS.film} ${item.title}
 
 </h3>
 
@@ -507,7 +572,7 @@ ${item.favorite ? "❤️":"♡"}
 
 <p>
 
-⭐ ${item.rating}/10
+${formatRating(item.rating)}
 
 </p>
 
@@ -521,9 +586,9 @@ ${item.where ?
 
 
 
-<button class="delete">
+<button class="delete icon-row">
 
-Elimina
+${ICONS.trash} Elimina
 
 </button>
 
@@ -556,7 +621,7 @@ card.innerHTML = `
 
 <div class="favorite ${item.favorite ? "active":""}">
 
-${item.favorite ? "❤️":"♡"}
+${item.favorite ? ICONS.heartFilled : ICONS.heart}
 
 </div>
 
@@ -569,9 +634,9 @@ ${item.favorite ? "❤️":"♡"}
 <div class="movie-info">
 
 
-<h3>
+<h3 class="icon-row">
 
-🎵 ${item.title}
+${ICONS.music} ${item.title}
 
 </h3>
 
@@ -581,9 +646,9 @@ ${item.artist ?
 
 `
 
-<p>
+<p class="icon-row">
 
-🎤 ${item.artist}
+${ICONS.mic} ${item.artist}
 
 </p>
 
@@ -596,7 +661,7 @@ ${item.artist ?
 
 <p>
 
-⭐ ${item.rating}/10
+${formatRating(item.rating)}
 
 </p>
 
@@ -607,9 +672,9 @@ ${item.spotify ?
 
 `
 
-<button class="spotify-btn">
+<button class="spotify-btn icon-row">
 
-▶ Spotify
+${ICONS.play} Spotify
 
 </button>
 
@@ -619,9 +684,9 @@ ${item.spotify ?
 
 
 
-<button class="delete">
+<button class="delete icon-row">
 
-Elimina
+${ICONS.trash} Elimina
 
 </button>
 
@@ -1012,10 +1077,10 @@ card.innerHTML = `
 
     <div class="recommend-content">
         <h3>${item.title}</h3>
-        <p>⭐ ${item.rating}/10</p>
+        <p class="icon-row">${ICONS.star} ${item.rating}/10</p>
         <p>${item.note || item.description || ""}</p>
 
-        <button>＋ Aggiungi</button>
+        <button>+ Aggiungi</button>
     </div>
 `;
 
@@ -1053,6 +1118,5 @@ box.appendChild(card);
 
 
 });
-
 
 }

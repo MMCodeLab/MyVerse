@@ -84,6 +84,7 @@ if(spotifyInput){
 // TMDB
 // -------------------------------
 
+// Inserisci qui la tua API key gratuita di themoviedb.org
 const TMDB_KEY = "0007864f4243ad65379a35b0538acf35";
 
 
@@ -94,18 +95,65 @@ async function fetchMovieData(movieTitle){
 
     try{
 
-        const res = await fetch(searchUrl);
-        const data = await res.json();
+        const searchRes = await fetch(searchUrl);
+        const searchData = await searchRes.json();
 
-        if(!data.results || data.results.length===0) return null;
+        if(!searchData.results || searchData.results.length===0) return null;
 
-        const movie = data.results[0];
+        // primo risultato = più rilevante
+        const movieId = searchData.results[0].id;
+
+        // seconda chiamata: dettagli completi + credits (regista/cast)
+        const detailsUrl =
+            `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_KEY}&language=it-IT&append_to_response=credits,videos`;
+
+        const detailsRes = await fetch(detailsUrl);
+        const details = await detailsRes.json();
+
+        const director =
+        (details.credits && details.credits.crew)
+            ? details.credits.crew
+                .filter(p => p.job === "Director")
+                .map(p => p.name)
+                .join(", ")
+            : "";
+
+        const cast =
+        (details.credits && details.credits.cast)
+            ? details.credits.cast
+                .slice(0, 5)
+                .map(p => p.name)
+                .join(", ")
+            : "";
+
+        const genre =
+        details.genres
+            ? details.genres.map(g => g.name).join(", ")
+            : "";
+
+        const duration =
+        details.runtime
+            ? `${details.runtime} min`
+            : "";
+
+        const trailerData =
+(details.videos && details.videos.results)
+    ? details.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube")
+    : null;
+
+const trailer =
+trailerData ? `https://www.youtube.com/watch?v=${trailerData.key}` : "";    
 
         return {
-            title: movie.title,
-            poster: movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : ""
+            title: details.title || movieTitle,
+            poster: details.poster_path
+                ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
+                : "",
+            genre: genre,
+            director: director,
+            duration: duration,
+            cast: cast,
+            trailer: trailer
         };
 
     }catch(err){
@@ -118,7 +166,14 @@ async function fetchMovieData(movieTitle){
 }
 
 
+// variabili globali: tengono i dati recuperati da TMDB,
+// così app.js può usarli al momento del salvataggio
 let tmdbPosterUrl = "";
+let tmdbGenre = "";
+let tmdbDirector = "";
+let tmdbDuration = "";
+let tmdbCast = "";
+let tmdbTrailerUrl = "";
 
 
 const titleInputMovie =
@@ -135,17 +190,44 @@ if(titleInputMovie){
 
         const data = await fetchMovieData(title);
 
-        if(data && data.poster){
+        if(data){
 
-            tmdbPosterUrl = data.poster;
+            if(data.poster){
 
-            const preview =
-            document.getElementById("moviePosterPreview");
+                tmdbPosterUrl = data.poster;
 
-            if(preview){
-                preview.src = data.poster;
-                preview.classList.remove("hidden");
+                const preview =
+                document.getElementById("moviePosterPreview");
+
+                if(preview){
+                    preview.src = data.poster;
+                    preview.classList.remove("hidden");
+                }
+
             }
+
+            tmdbGenre = data.genre;
+            tmdbDirector = data.director;
+            tmdbDuration = data.duration;
+            tmdbCast = data.cast;
+            tmdbTrailerUrl = data.trailer;
+
+            const genreField =
+            document.getElementById("genreDisplay");
+
+            const directorField =
+            document.getElementById("directorDisplay");
+
+            const durationField =
+            document.getElementById("durationDisplay");
+
+            const castField =
+            document.getElementById("castDisplay");
+
+            if(genreField) genreField.value = data.genre;
+            if(directorField) directorField.value = data.director;
+            if(durationField) durationField.value = data.duration;
+            if(castField) castField.value = data.cast;
 
         }
 

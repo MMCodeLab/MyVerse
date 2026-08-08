@@ -90,7 +90,21 @@ date:Date.now(),
 artist:"",
 
 
-spotify:""
+spotify:"",
+
+
+genre:(typeof tmdbGenre !== "undefined") ? tmdbGenre : "",
+
+
+director:(typeof tmdbDirector !== "undefined") ? tmdbDirector : "",
+
+
+duration:(typeof tmdbDuration !== "undefined") ? tmdbDuration : "",
+
+
+cast:(typeof tmdbCast !== "undefined") ? tmdbCast : "", 
+
+trailer:(typeof tmdbTrailerUrl !== "undefined") ? tmdbTrailerUrl : ""
 
 
 };
@@ -111,6 +125,7 @@ renderMovies();
 
 
 resetMovieForm();
+
 
 
 document
@@ -143,6 +158,11 @@ updateStars();
 if(typeof tmdbPosterUrl !== "undefined"){
 
     tmdbPosterUrl = "";
+    tmdbGenre = "";
+    tmdbDirector = "";
+    tmdbDuration = "";
+    tmdbCast = "";
+    tmdbTrailerUrl = "";
 
 }
 
@@ -154,6 +174,17 @@ if(preview){
     preview.src = "";
     preview.classList.add("hidden");
 }
+
+
+const genreField = document.getElementById("genreDisplay");
+const directorField = document.getElementById("directorDisplay");
+const durationField = document.getElementById("durationDisplay");
+const castField = document.getElementById("castDisplay");
+
+if(genreField) genreField.value = "";
+if(directorField) directorField.value = "";
+if(durationField) durationField.value = "";
+if(castField) castField.value = "";
 
 
 }
@@ -245,7 +276,19 @@ where:"Spotify",
 favorite:false,
 
 
-date:Date.now()
+date:Date.now(),
+
+
+genre:"",
+
+
+director:"",
+
+
+duration:"",
+
+
+cast:""
 
 
 
