@@ -1,5 +1,5 @@
 // ===============================
-// FILM
+// MOVIES
 // ===============================
 
 
@@ -31,7 +31,7 @@ saveBtn.onclick = async function(){
 
 if(titleInput.value.trim()===""){
 
-alert("Inserisci un titolo");
+alert("Please enter a title");
 
 return;
 
@@ -108,7 +108,13 @@ duration:(typeof tmdbDuration !== "undefined") ? tmdbDuration : "",
 cast:(typeof tmdbCast !== "undefined") ? tmdbCast : "",
 
 
-trailer:(typeof tmdbTrailerUrl !== "undefined") ? tmdbTrailerUrl : ""
+trailer:(typeof tmdbTrailerUrl !== "undefined") ? tmdbTrailerUrl : "",
+
+
+author:"",
+
+
+pages:""
 
 
 };
@@ -199,7 +205,7 @@ if(castField) castField.value = "";
 
 
 // ===============================
-// CANZONI
+// SONGS
 // ===============================
 
 
@@ -235,7 +241,7 @@ document.getElementById("songNoteInput").value;
 if(title.trim()===""){
 
 
-alert("Inserisci il titolo della canzone");
+alert("Please enter the song title");
 
 
 return;
@@ -297,7 +303,13 @@ duration:"",
 cast:"",
 
 
-trailer:""
+trailer:"",
+
+
+author:"",
+
+
+pages:""
 
 
 
@@ -376,7 +388,186 @@ songStarsContainer,
 
 
 // ===============================
-// IMMAGINI
+// BOOKS
+// ===============================
+
+
+
+const saveBookBtn =
+document.getElementById("saveBookBtn");
+
+
+if(saveBookBtn){
+
+
+saveBookBtn.onclick=function(){
+
+
+const title =
+document.getElementById("bookTitleInput").value;
+
+
+const author =
+document.getElementById("bookAuthorInput").value;
+
+
+const pages =
+document.getElementById("bookPagesInput").value;
+
+
+const note =
+document.getElementById("bookNoteInput").value;
+
+
+
+
+if(title.trim()===""){
+
+
+alert("Please enter the book title");
+
+
+return;
+
+
+}
+
+
+
+
+
+let book={
+
+
+id:generateId(),
+
+
+type:"book",
+
+
+title:title,
+
+
+author:author,
+
+
+pages:pages,
+
+
+image:(typeof openLibraryCoverUrl !== "undefined" && openLibraryCoverUrl)
+    ? openLibraryCoverUrl
+    : "https://via.placeholder.com/300x450",
+
+
+rating:bookRating,
+
+
+note:note,
+
+
+where:"",
+
+
+favorite:false,
+
+
+date:Date.now(),
+
+
+artist:"",
+
+
+spotify:"",
+
+
+genre:"",
+
+
+director:"",
+
+
+duration:"",
+
+
+cast:"",
+
+
+trailer:""
+
+
+
+};
+
+
+
+
+loadMovies();
+
+movies.push(book);
+
+
+saveMovies();
+
+
+renderMovies();
+
+
+
+
+
+document
+.getElementById("bookModal")
+.classList.add("hidden");
+
+
+
+document.getElementById("bookTitleInput").value="";
+
+document.getElementById("bookAuthorInput").value="";
+
+document.getElementById("bookPagesInput").value="";
+
+document.getElementById("bookNoteInput").value="";
+
+
+if(typeof openLibraryCoverUrl !== "undefined"){
+
+    openLibraryCoverUrl = "";
+
+}
+
+
+const preview =
+document.getElementById("bookCoverPreview");
+
+if(preview){
+    preview.src = "";
+    preview.classList.add("hidden");
+}
+
+
+bookRating=0;
+
+updateStars(
+bookStarsContainer,
+"book"
+);
+
+
+};
+
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// IMAGES
 // ===============================
 
 
@@ -418,7 +609,7 @@ reader.readAsDataURL(file);
 
 
 // ===============================
-// RICERCA
+// SEARCH
 // ===============================
 
 
@@ -456,6 +647,16 @@ item.title
 
 
 (item.artist || "")
+.toLowerCase()
+.includes(text)
+
+
+
+||
+
+
+
+(item.author || "")
 .toLowerCase()
 .includes(text)
 
@@ -503,7 +704,7 @@ renderMovies(result);
 
 
 // ===============================
-// FILTRI (resettano anche la vista cartella)
+// FILTERS (also reset folder view)
 // ===============================
 
 
@@ -589,3 +790,32 @@ renderMovies();
 
 
 };
+
+
+
+const onlyBooksBtn =
+document.getElementById("onlyBooks");
+
+
+if(onlyBooksBtn){
+
+
+onlyBooksBtn.onclick=function(){
+
+
+if(typeof closeFolderView === "function") closeFolderView();
+
+
+showFavorites=false;
+
+
+currentFilter="book";
+
+
+renderMovies();
+
+
+};
+
+
+}

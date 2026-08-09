@@ -63,7 +63,11 @@ function loadMovies(){
 
             cast: item.cast || "",
 
-            trailer: item.trailer || ""
+            trailer: item.trailer || "",
+
+            author: item.author || "",
+
+            pages: item.pages || ""
 
         };
 

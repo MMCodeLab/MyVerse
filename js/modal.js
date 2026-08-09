@@ -19,6 +19,10 @@ const songModal =
 document.getElementById("songModal");
 
 
+const bookModal =
+document.getElementById("bookModal");
+
+
 
 let currentType = "movie";
 
@@ -106,6 +110,37 @@ document
 
 
 // ===============================
+// SCELTA LIBRO
+// ===============================
+
+
+const bookChoiceBtn =
+document.getElementById("bookChoice");
+
+
+if(bookChoiceBtn){
+
+
+    bookChoiceBtn.onclick=function(){
+
+        currentType="book";
+
+        typeModal.classList.add("hidden");
+
+        bookModal.classList.remove("hidden");
+
+        addBtn.classList.remove("active");
+
+    };
+
+
+}
+
+
+
+
+
+// ===============================
 // SCELTA CARTELLA
 // ===============================
 
@@ -165,6 +200,24 @@ document
 
 
 
+const closeBookBtn =
+document.getElementById("closeBookBtn");
+
+
+if(closeBookBtn){
+
+
+    closeBookBtn.onclick=function(){
+
+        bookModal.classList.add("hidden");
+
+    };
+
+
+}
+
+
+
 function closeAllModals(){
 
 
@@ -173,6 +226,10 @@ function closeAllModals(){
     movieModal.classList.add("hidden");
 
     songModal.classList.add("hidden");
+
+    if(bookModal){
+        bookModal.classList.add("hidden");
+    }
 
     if(typeof settingsModal !== "undefined"){
         settingsModal.classList.add("hidden");

@@ -2,6 +2,8 @@ let rating = 0;
 
 let songRating = 0;
 
+let bookRating = 0;
+
 
 const starsContainer =
 document.getElementById("stars");
@@ -11,8 +13,44 @@ const songStarsContainer =
 document.getElementById("songStars");
 
 
-// durata pressione prolungata per attivare la scelta del voto negativo (ms)
+const bookStarsContainer =
+document.getElementById("bookStars");
+
+
+// long-press duration to trigger negative rating selection (ms)
 const LONG_PRESS_MS = 1200;
+
+
+
+function getRatingValue(type){
+
+
+    if(type==="movie") return rating;
+
+    if(type==="song") return songRating;
+
+    if(type==="book") return bookRating;
+
+
+    return 0;
+
+
+}
+
+
+
+function setRatingValue(type, value){
+
+
+    if(type==="movie") rating = value;
+
+    else if(type==="song") songRating = value;
+
+    else if(type==="book") bookRating = value;
+
+
+}
+
 
 
 
@@ -44,7 +82,7 @@ function createStars(container, type){
         let longPressFired = false;
 
 
-        // pressione prolungata solo sulla prima stella
+        // long-press only on the first star
         if(i===1){
 
 
@@ -56,9 +94,6 @@ function createStars(container, type){
 
                     longPressFired = true;
 
-                    // entra in modalità "scelta voto negativo":
-                    // il prossimo click su una stella qualsiasi
-                    // sceglierà il valore negativo (es. 3ª stella = -3)
                     container.classList.add("negative-mode");
 
                     updateStars(container,type);
@@ -78,7 +113,16 @@ function createStars(container, type){
 
             star.addEventListener("mousedown", startPress);
 
-            star.addEventListener("touchstart", startPress, {passive:true});
+
+            // preventDefault stops iOS from treating this as a
+            // text-selection long-press instead of our custom gesture
+            star.addEventListener("touchstart", function(e){
+
+                e.preventDefault();
+
+                startPress();
+
+            }, {passive:false});
 
 
             star.addEventListener("mouseup", cancelPress);
@@ -97,8 +141,6 @@ function createStars(container, type){
         star.onclick=function(){
 
 
-            // ignora il click di rilascio che segue
-            // immediatamente la pressione prolungata
             if(i===1 && longPressFired){
 
                 longPressFired=false;
@@ -108,22 +150,10 @@ function createStars(container, type){
             }
 
 
-            // modalità scelta voto negativo attiva:
-            // il click su una stella qualsiasi sceglie il valore
             if(container.classList.contains("negative-mode")){
 
 
-                if(type==="movie"){
-
-                    rating = -i;
-
-                }
-
-                else{
-
-                    songRating = -i;
-
-                }
+                setRatingValue(type, -i);
 
 
                 container.classList.remove("negative-mode");
@@ -137,20 +167,7 @@ function createStars(container, type){
             }
 
 
-            // voto normale positivo
-
-
-            if(type==="movie"){
-
-                rating=i;
-
-            }
-
-            else{
-
-                songRating=i;
-
-            }
+            setRatingValue(type, i);
 
 
             updateStars(container,type);
@@ -178,12 +195,7 @@ function updateStars(container,type){
 
 
 
-    let value =
-    type==="movie"
-    ?
-    rating
-    :
-    songRating;
+    let value = getRatingValue(type);
 
 
 
@@ -192,8 +204,6 @@ function updateStars(container,type){
 
 
 
-    // modalità scelta voto negativo: mostra le stelle
-    // pronte per la selezione, senza indicare un voto già dato
     if(container.classList.contains("negative-mode")){
 
 
@@ -212,8 +222,6 @@ function updateStars(container,type){
 
 
 
-    // voto negativo già scelto: riempi di rosso
-    // tante stelle quante indica il valore assoluto
     if(value < 0){
 
 
@@ -246,9 +254,6 @@ function updateStars(container,type){
 
     }
 
-
-
-    // voto normale positivo
 
 
     stars.forEach((star,index)=>{
@@ -287,4 +292,11 @@ starsContainer,
 
 createStars(
 songStarsContainer,
-"song");
+"song"
+);
+
+
+createStars(
+bookStarsContainer,
+"book"
+);

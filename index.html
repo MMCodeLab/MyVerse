@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 
-<title>WatchList</title>
+<title>MyVerse</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/glass.css">
@@ -42,23 +42,25 @@ href="icons/icon-192.png">
 
 <h2>Menu</h2>
 
-<button id="allMovies"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg> Tutti</span></button>
+<button id="allMovies"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg> All</span></button>
 
-<button id="onlyMovies"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="17" y2="20"/><line x1="3" y1="9" x2="7" y2="9"/><line x1="17" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="7" y2="15"/><line x1="17" y1="15" x2="21" y2="15"/></svg> Film</span></button>
+<button id="onlyMovies"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="17" y2="20"/><line x1="3" y1="9" x2="7" y2="9"/><line x1="17" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="7" y2="15"/><line x1="17" y1="15" x2="21" y2="15"/></svg> Movies</span></button>
 
-<button id="onlySongs"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Musica</span></button>
+<button id="onlySongs"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Music</span></button>
 
-<button id="favoriteMovies"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Preferiti</span></button>
+<button id="onlyBooks"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Books</span></button>
 
-<button id="settingsBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Impostazioni</span></button>
+<button id="favoriteMovies"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Favorites</span></button>
+
+<button id="settingsBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Settings</span></button>
 
 <hr class="sidebar-divider">
 
-<h3 class="sidebar-heading">Cartelle</h3>
+<h3 class="sidebar-heading">Folders</h3>
 
 <div id="folderList"></div>
 
-<button id="newFolderBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg> Nuova cartella</span></button>
+<button id="newFolderBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg> New folder</span></button>
 
 </aside>
 
@@ -75,12 +77,12 @@ href="icons/icon-192.png">
 <section class="hero">
 
 <h2>
-Le tue passioni,
-<span>la tua storia.</span>
+Let your passions,<br> 
+<span>Become your story.</span>
 </h2>
 
 <p id="stats">
-Nessun film aggiunto
+No reviews yet
 </p>
 
 </section>
@@ -89,16 +91,16 @@ Nessun film aggiunto
 
 <span class="search-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
 
-<input id="searchInput" type="text" placeholder="Cerca un film...">
+<input id="searchInput" type="text" placeholder="Search your collection...">
 
 </div>
 
-<!-- SUGGERIMENTI -->
+<!-- RECOMMENDATIONS -->
 
 <section class="recommendations">
 
-<h2>Consigli della settimana</h2>
-<p>Film che potrebbero piacerti</p>
+<h2>Just for you</h2>
+<p>Movies you might like</p>
 
 <div id="recommendedContainer" class="recommended-grid"></div>
 
@@ -108,32 +110,38 @@ Nessun film aggiunto
 
 </main>
 
-<!-- SCELTA TIPO -->
+<!-- TYPE CHOICE -->
 
 <div id="typeModal" class="modal hidden">
 
 <div class="modal-box glass">
 
-<h2>Cosa vuoi aggiungere?</h2>
+<h2>What do you want to add?</h2>
 
 <div class="choice-grid">
 
 <button id="movieChoice" class="choice-card">
 <span><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="17" y2="20"/><line x1="3" y1="9" x2="7" y2="9"/><line x1="17" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="7" y2="15"/><line x1="17" y1="15" x2="21" y2="15"/></svg></span>
-<h3>Film</h3>
-<p>Recensisci un film</p>
+<h3>Movie</h3>
+<p>Review a movie</p>
 </button>
 
 <button id="songChoice" class="choice-card">
 <span><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-<h3>Musica</h3>
-<p>Salva una canzone</p>
+<h3>Music</h3>
+<p>Save a song</p>
+</button>
+
+<button id="bookChoice" class="choice-card">
+<span><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+<h3>Book</h3>
+<p>Review a book</p>
 </button>
 
 <button id="folderChoice" class="choice-card">
 <span><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg></span>
-<h3>Cartella</h3>
-<p>Crea una collezione</p>
+<h3>Folder</h3>
+<p>Create a collection</p>
 </button>
 
 </div>
@@ -142,7 +150,7 @@ Nessun film aggiunto
 
 </div>
 
-<!-- MODAL FILM -->
+<!-- MOVIE MODAL -->
 
 <div id="modal" class="modal hidden">
 
@@ -152,29 +160,29 @@ Nessun film aggiunto
 
 <input id="titleInput" type="text" placeholder="Title">
 
-<!-- ANTEPRIMA POSTER TMDB -->
+<!-- TMDB POSTER PREVIEW -->
 <img id="moviePosterPreview" class="api-preview hidden" src="" alt="Poster">
 
-<!-- DATI AUTOMATICI TMDB -->
-<input id="genreDisplay" type="text" class="readonly-field" placeholder="Genere (compilable only automatically)" readonly>
+<!-- AUTOMATIC TMDB DATA -->
+<input id="genreDisplay" type="text" class="readonly-field" placeholder="Genre (auto-filled only)" readonly>
 
-<input id="directorDisplay" type="text" class="readonly-field" placeholder="Director (compilable only automatically)" readonly>
+<input id="directorDisplay" type="text" class="readonly-field" placeholder="Director (auto-filled only)" readonly>
 
-<input id="durationDisplay" type="text" class="readonly-field" placeholder="Duration (compilable only automatically)" readonly>
+<input id="durationDisplay" type="text" class="readonly-field" placeholder="Duration (auto-filled only)" readonly>
 
-<input id="castDisplay" type="text" class="readonly-field" placeholder="Cast (compilable only automatically)" readonly>
+<input id="castDisplay" type="text" class="readonly-field" placeholder="Cast (auto-filled only)" readonly>
 
-<label class="api-hint">Cover (manual only if is not found on TMDB)</label>
+<label class="api-hint">Cover (manual, optional if found on TMDB)</label>
 
 <input id="imageInput" type="file" accept="image/*">
 
 <select id="whereInput">
-<option value="">Dove lo hai visto?</option>
+<option value="">Where did you watch it?</option>
 <option>Netflix</option>
 <option>Prime Video</option>
 <option>Disney+</option>
 <option>Cinema</option>
-<option>Altro</option>
+<option>Other</option>
 </select>
 
 <div class="stars" id="stars"></div>
@@ -182,15 +190,15 @@ Nessun film aggiunto
 <textarea id="noteInput" placeholder="Note"></textarea>
 
 <div class="buttons">
-<button id="saveBtn">Salva</button>
-<button id="closeBtn">Chiudi</button>
+<button id="saveBtn">Save</button>
+<button id="closeBtn">Close</button>
 </div>
 
 </div>
 
 </div>
 
-<!-- MODAL CANZONE -->
+<!-- SONG MODAL -->
 
 <div id="songModal" class="modal hidden">
 
@@ -202,25 +210,55 @@ Nessun film aggiunto
 
 <input id="artistInput" placeholder="Artist">
 
-<input id="spotifyInput" placeholder="Link Spotify">
+<input id="spotifyInput" placeholder="Spotify link">
 
-<!-- ANTEPRIMA COPERTINA SPOTIFY -->
-<img id="songCoverPreview" class="api-preview hidden" src="" alt="Copertina">
+<!-- SPOTIFY COVER PREVIEW -->
+<img id="songCoverPreview" class="api-preview hidden" src="" alt="Cover">
 
 <div class="stars" id="songStars"></div>
 
 <textarea id="songNoteInput" placeholder="Note"></textarea>
 
 <div class="buttons">
-<button id="saveSongBtn">Salva</button>
-<button id="closeSongBtn">Chiudi</button>
+<button id="saveSongBtn">Save</button>
+<button id="closeSongBtn">Close</button>
 </div>
 
 </div>
 
 </div>
 
-<!-- MODAL CREAZIONE/MODIFICA CARTELLA -->
+<!-- BOOK MODAL -->
+
+<div id="bookModal" class="modal hidden">
+
+<div class="modal-box glass">
+
+<h2>Add book</h2>
+
+<input id="bookTitleInput" placeholder="Book title">
+
+<!-- OPEN LIBRARY COVER PREVIEW -->
+<img id="bookCoverPreview" class="api-preview hidden" src="" alt="Cover">
+
+<input id="bookAuthorInput" placeholder="Author">
+
+<input id="bookPagesInput" type="number" placeholder="Number of pages">
+
+<div class="stars" id="bookStars"></div>
+
+<textarea id="bookNoteInput" placeholder="Note"></textarea>
+
+<div class="buttons">
+<button id="saveBookBtn">Save</button>
+<button id="closeBookBtn">Close</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CREATE/EDIT FOLDER MODAL -->
 
 <div id="folderItemsModal" class="modal hidden">
 
@@ -228,72 +266,72 @@ Nessun film aggiunto
 
 <h2 id="folderModalTitle">New folder</h2>
 
-<input id="folderNameInput" type="text" placeholder="Nome cartella">
+<input id="folderNameInput" type="text" placeholder="Folder name">
 
 <div id="folderItemsGrid" class="folder-items-grid"></div>
 
 <div class="buttons">
-<button id="saveFolderBtn">Salva</button>
-<button id="closeFolderItemsBtn">Chiudi</button>
+<button id="saveFolderBtn">Save</button>
+<button id="closeFolderItemsBtn">Close</button>
 </div>
 
 </div>
 
 </div>
 
-<!-- IMPOSTAZIONI -->
+<!-- SETTINGS -->
 
 <div id="settingsModal" class="modal hidden">
 
 <div class="modal-box glass settings-box">
 
-<h2>Impostazioni</h2>
+<h2>Settings</h2>
 
-<h3>Tema</h3>
+<h3>Theme</h3>
 
 <select id="themeSelect">
-<option value="dark">Scuro</option>
-<option value="light">Chiaro</option>
+<option value="dark">Dark</option>
+<option value="light">Light</option>
 </select>
 
 <h3>Layout</h3>
 
 <select id="layoutSelect">
-<option value="grid">Card</option>
-<option value="list">Lista</option>
+<option value="grid">Cards</option>
+<option value="list">List</option>
 </select>
 
-<h3>Ordina per</h3>
+<h3>Sort by</h3>
 
 <select id="sortSelect">
-<option value="recent">Più recenti</option>
-<option value="old">Meno recenti</option>
-<option value="voteDesc">Voto ↓</option>
-<option value="voteAsc">Voto ↑</option>
+<option value="recent">Newest</option>
+<option value="old">Oldest</option>
+<option value="voteDesc">Rating ↓</option>
+<option value="voteAsc">Rating ↑</option>
 <option value="az">A-Z</option>
 <option value="za">Z-A</option>
-<option value="favorite">Preferiti</option>
+<option value="favorite">Favorites</option>
 </select>
 
 <hr>
 
-<button id="exportBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Esporta Backup</span></button>
+<button id="exportBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export Backup</span></button>
 <input id="importInput" type="file" accept=".json">
 
 <hr>
 
-<button id="privacyBtn">Informativa Privacy</button>
-<button id="manualBtn">Manuale d'uso</button>
+<button id="privacyBtn">Privacy Policy</button>
+<button id="manualBtn">User Guide</button>
 
 <div class="buttons">
-<button id="closeSettings">Chiudi</button>
+<button id="closeSettings">Close</button>
 </div>
 
 </div>
 
 </div>
 
-<!-- MODAL DETTAGLI -->
+<!-- DETAILS MODAL -->
 
 <div id="detailsModal" class="modal hidden">
 
@@ -303,21 +341,21 @@ Nessun film aggiunto
 
         <img id="detailsImage" class="details-image" src="" alt="">
 
-        <h2 id="detailsTitle">Titolo</h2>
+        <h2 id="detailsTitle">Title</h2>
 
-        <p id="detailsMeta">Informazioni</p>
+        <p id="detailsMeta">Info</p>
 
         <div class="details-rating">
             <strong id="detailsRating">0/10</strong>
         </div>
 
-        <div id="detailsWhere" class="details-pill">Dove</div>
+        <div id="detailsWhere" class="details-pill">Where</div>
 
-        <div id="detailsNote" class="details-note">Nessuna nota</div>
+        <div id="detailsNote" class="details-note">No notes</div>
 
         <div class="details-buttons">
-            <button id="detailsFavorite" class="details-action favorite-action">Preferiti</button>
-            <button id="detailsDelete" class="details-action delete-action">Elimina</button>
+            <button id="detailsFavorite" class="details-action favorite-action">Favorite</button>
+            <button id="detailsDelete" class="details-action delete-action">Delete</button>
         </div>
 
     </div>

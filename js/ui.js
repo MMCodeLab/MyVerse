@@ -11,7 +11,7 @@ let selectedDetailItem = null;
 
 
 // ===============================
-// HELPER VOTO (gestisce anche i negativi)
+// RATING HELPER (also handles negative values)
 // ===============================
 
 
@@ -34,7 +34,7 @@ function formatRating(value){
 
 
 // ===============================
-// DETTAGLI MODAL
+// DETAILS MODAL
 // ===============================
 
 
@@ -60,7 +60,7 @@ item.image ||
 
 
 
-// riga extra con genere/regista/durata/cast, solo se il film ne ha almeno uno
+// extra row with genre/director/duration/cast, movies only
 let extraInfo = "";
 
 
@@ -73,7 +73,7 @@ if(item.type==="movie" && (item.genre || item.director || item.duration || item.
 
         ${item.genre ? `<p class="icon-row">${ICONS.tag} ${item.genre}</p>` : ""}
 
-        ${item.director ? `<p class="icon-row">${ICONS.clapper} Regia: ${item.director}</p>` : ""}
+        ${item.director ? `<p class="icon-row">${ICONS.clapper} Director: ${item.director}</p>` : ""}
 
         ${item.duration ? `<p class="icon-row">${ICONS.clock} ${item.duration}</p>` : ""}
 
@@ -85,6 +85,33 @@ if(item.type==="movie" && (item.genre || item.director || item.duration || item.
 
 
 }
+
+
+// extra row with page count, books only
+if(item.type==="book" && item.pages){
+
+
+    extraInfo = `
+
+    <div class="details-note">
+
+        <p class="icon-row">${ICONS.book} ${item.pages} pages</p>
+
+    </div>
+
+    `;
+
+
+}
+
+
+
+
+let typeIcon = ICONS.film;
+
+if(item.type==="song") typeIcon = ICONS.music;
+
+if(item.type==="book") typeIcon = ICONS.book;
 
 
 
@@ -112,7 +139,7 @@ onerror="this.src='icons/icon-512.png'"
 
 <h2 class="icon-row">
 
-${item.type==="song" ? ICONS.music : ICONS.film}
+${typeIcon}
 
 ${item.title}
 
@@ -127,6 +154,22 @@ ${item.artist ?
 <p class="details-artist icon-row">
 
 ${ICONS.mic} ${item.artist}
+
+</p>
+
+`
+
+:""}
+
+
+
+${item.author ?
+
+`
+
+<p class="details-artist icon-row">
+
+${ICONS.book} ${item.author}
 
 </p>
 
@@ -183,7 +226,7 @@ ${item.note}
 
 <div class="details-note">
 
-Nessuna nota
+No notes
 
 </div>
 
@@ -215,7 +258,7 @@ ${ICONS.play} Spotify
 
 <button class="share-detail icon-row">
 
-${ICONS.share} Condividi
+${ICONS.share} Share
 
 </button>
 
@@ -223,7 +266,7 @@ ${ICONS.share} Condividi
 
 <button class="favorite-detail icon-row">
 
-${item.favorite ? ICONS.heartFilled : ICONS.heart} Preferito
+${item.favorite ? ICONS.heartFilled : ICONS.heart} Favorite
 
 </button>
 
@@ -231,7 +274,7 @@ ${item.favorite ? ICONS.heartFilled : ICONS.heart} Preferito
 
 <button class="delete-detail icon-row">
 
-${ICONS.trash} Elimina
+${ICONS.trash} Delete
 
 </button>
 
@@ -254,7 +297,7 @@ document.body.appendChild(modal);
 
 
 
-// trailer: click sulla copertina, solo se disponibile
+// trailer: click on the cover, only if available
 
 
 if(item.trailer){
@@ -305,7 +348,7 @@ item.spotify,
 
 
 
-// condivisione
+// share
 
 
 modal
@@ -323,7 +366,7 @@ generateShareCard(item);
 
 
 
-// preferito dettaglio
+// toggle favorite
 
 
 modal
@@ -352,7 +395,7 @@ modal.remove();
 
 
 
-// elimina dettaglio
+// delete
 
 
 modal
@@ -382,7 +425,7 @@ modal.remove();
 
 
 
-// chiudi X
+// close X
 
 
 modal
@@ -399,7 +442,7 @@ modal.remove();
 
 
 
-// chiudi cliccando fuori
+// close by clicking outside
 
 
 modal.onclick=(e)=>{
@@ -479,7 +522,7 @@ let filtered=[...list];
 
 
 
-// CARTELLA (se una cartella è attualmente aperta, mostra solo i suoi elementi)
+// FOLDER (if a folder is currently open, show only its items)
 
 
 if(typeof currentFolderId !== "undefined" && currentFolderId){
@@ -508,7 +551,7 @@ if(typeof currentFolderId !== "undefined" && currentFolderId){
 
 
 
-// FAVORITI
+// FAVORITES
 
 
 if(showFavorites){
@@ -526,7 +569,7 @@ item=>item.favorite
 
 
 
-// FILTRI
+// FILTERS
 
 
 if(currentFilter==="movie"){
@@ -557,11 +600,24 @@ item=>item.type==="song"
 
 
 
+if(currentFilter==="book"){
+
+
+filtered =
+filtered.filter(
+item=>item.type==="book"
+);
+
+
+}
 
 
 
 
-// ORDINAMENTO
+
+
+
+// SORTING
 
 
 if(typeof sortMovies==="function"){
@@ -606,7 +662,7 @@ item.image ||
 
 
 
-// CARD FILM
+// MOVIE CARD
 
 
 if(item.type==="movie"){
@@ -657,7 +713,7 @@ ${item.where ?
 
 <button class="delete icon-row">
 
-${ICONS.trash} Elimina
+${ICONS.trash} Delete
 
 </button>
 
@@ -677,10 +733,10 @@ ${ICONS.trash} Elimina
 
 
 
-// CARD CANZONE
+// SONG CARD
 
 
-else{
+else if(item.type==="song"){
 
 
 
@@ -755,7 +811,96 @@ ${ICONS.play} Spotify
 
 <button class="delete icon-row">
 
-${ICONS.trash} Elimina
+${ICONS.trash} Delete
+
+</button>
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+// BOOK CARD
+
+
+else{
+
+
+
+card.innerHTML = `
+
+
+
+<div class="favorite ${item.favorite ? "active":""}">
+
+${item.favorite ? ICONS.heartFilled : ICONS.heart}
+
+</div>
+
+
+
+<img src="${image}">
+
+
+
+<div class="movie-info">
+
+
+<h3 class="icon-row">
+
+${ICONS.book} ${item.title}
+
+</h3>
+
+
+
+${item.author ?
+
+`
+
+<p class="icon-row">
+
+${ICONS.book} ${item.author}
+
+</p>
+
+`
+
+:""}
+
+
+
+
+<p>
+
+${formatRating(item.rating)}
+
+</p>
+
+
+
+${item.pages ?
+
+`<p>${item.pages} pages</p>`
+
+:""}
+
+
+
+<button class="delete icon-row">
+
+${ICONS.trash} Delete
 
 </button>
 
@@ -776,7 +921,7 @@ ${ICONS.trash} Elimina
 
 
 
-// PREFERITO
+// FAVORITE TOGGLE
 
 
 card
@@ -808,7 +953,7 @@ renderMovies();
 
 
 
-// ELIMINA
+// DELETE
 
 
 card
@@ -880,7 +1025,7 @@ item.spotify,
 
 
 
-// DETTAGLI
+// DETAILS
 
 
 card.onclick=function(e){
@@ -943,7 +1088,7 @@ const recommendations = [
         where: "Cinema",
         type: "movie",
         image: "images/interstellar.jpg",
-        note: "Un viaggio emozionante tra spazio, tempo e sentimenti."
+        note: "An emotional journey through space, time and feeling."
     },
     {
         title: "Inception",
@@ -951,7 +1096,7 @@ const recommendations = [
         where: "Netflix",
         type: "movie",
         image: "images/inception.jpg",
-        note: "Un thriller mentale pieno di idee incredibili."
+        note: "A mind-bending thriller full of incredible ideas."
     },
     {
         title: "The Prestige",
@@ -959,7 +1104,7 @@ const recommendations = [
         where: "Prime Video",
         type: "movie",
         image: "images/prestige.jpg",
-        note: "Una sfida tra due illusionisti."
+        note: "A rivalry between two illusionists."
     },
     {
         title: "Oppenheimer",
@@ -967,7 +1112,7 @@ const recommendations = [
         where: "Cinema",
         type: "movie",
         image: "images/oppenheimer.jpg",
-        note: "La storia della nascita della bomba atomica."
+        note: "The story behind the birth of the atomic bomb."
     },
     {
         title: "Dune",
@@ -975,13 +1120,13 @@ const recommendations = [
         where: "Netflix",
         type: "movie",
         image: "images/dune.jpg",
-        note: "Fantascienza epica ambientata su Arrakis."
+        note: "Epic sci-fi set on the desert planet Arrakis."
     }
 ];
 
 
 // ===============================
-// STATISTICHE
+// STATS
 // ===============================
 
 
@@ -1009,6 +1154,13 @@ x=>x.type==="song"
 
 
 
+let books =
+movies.filter(
+x=>x.type==="book"
+).length;
+
+
+
 
 
 
@@ -1016,7 +1168,7 @@ if(movies.length===0){
 
 
 stats.innerHTML =
-"Nessuna recensione aggiunta";
+"No reviews yet";
 
 
 return;
@@ -1032,7 +1184,7 @@ return;
 stats.innerHTML =
 
 
-`${films} film • ${songs} canzoni`;
+`${films} movies • ${songs} songs • ${books} books`;
 
 
 
@@ -1050,7 +1202,7 @@ stats.innerHTML =
 // ===============================
 
 
-// AVVIO AUTOMATICO
+// AUTO START
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -1120,7 +1272,7 @@ document.getElementById(
 
 if(!box) return;
 
-// Aggiunte proprietà inline per sbloccare lo scorrimento fluido da mobile
+// inline properties to unlock smooth scrolling on mobile
 box.style.display = "flex";
 box.style.overflowX = "auto";
 box.style.scrollBehavior = "smooth";
@@ -1138,7 +1290,7 @@ let card=document.createElement("div");
 
 
 card.className="recommend-card glass";
-card.style.flex = "0 0 auto"; // Impedisce alle card di restringersi
+card.style.flex = "0 0 auto"; // prevents cards from shrinking
 
 
 card.innerHTML = `
@@ -1149,7 +1301,7 @@ card.innerHTML = `
         <p class="icon-row">${ICONS.star} ${item.rating}/10</p>
         <p>${item.note || item.description || ""}</p>
 
-        <button>+ Aggiungi</button>
+        <button>+ Add</button>
     </div>
 `;
 
@@ -1166,7 +1318,7 @@ movies.push({
         favorite: false
     });
 
-    card.querySelector("button").innerHTML = "✓ Aggiunto";
+    card.querySelector("button").innerHTML = "✓ Added";
 
     saveMovies();
     renderMovies();

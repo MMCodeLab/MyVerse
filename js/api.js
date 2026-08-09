@@ -1,6 +1,6 @@
 // ===============================
 // API ESTERNE - MYVERSE
-// (Spotify oEmbed + TMDB)
+// (Spotify oEmbed + TMDB + Open Library)
 // ===============================
 
 
@@ -85,7 +85,7 @@ if(spotifyInput){
 // -------------------------------
 
 // Inserisci qui la tua API key gratuita di themoviedb.org
-const TMDB_KEY = "0007864f4243ad65379a35b0538acf35";
+const TMDB_KEY = "LA_TUA_API_KEY";
 
 
 async function fetchMovieData(movieTitle){
@@ -103,9 +103,9 @@ async function fetchMovieData(movieTitle){
         // primo risultato = più rilevante
         const movieId = searchData.results[0].id;
 
-        // seconda chiamata: dettagli completi + credits (regista/cast)
+        // seconda chiamata: dettagli completi + credits (regista/cast) + video (trailer)
         const detailsUrl =
-            `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_KEY}&language=it-IT&append_to_response=credits,videos`;
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_KEY}&language=it-IT&append_to_response=credits,videos`;
 
         const detailsRes = await fetch(detailsUrl);
         const details = await detailsRes.json();
@@ -137,12 +137,12 @@ async function fetchMovieData(movieTitle){
             : "";
 
         const trailerData =
-(details.videos && details.videos.results)
-    ? details.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube")
-    : null;
+        (details.videos && details.videos.results)
+            ? details.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube")
+            : null;
 
-const trailer =
-trailerData ? `https://www.youtube.com/watch?v=${trailerData.key}` : "";    
+        const trailer =
+        trailerData ? `https://www.youtube.com/watch?v=${trailerData.key}` : "";
 
         return {
             title: details.title || movieTitle,
@@ -232,5 +232,153 @@ if(titleInputMovie){
         }
 
     });
+
+}
+
+
+
+
+// -------------------------------
+// OPEN LIBRARY (libri)
+// gratuita, senza chiave API
+// -------------------------------
+
+
+async function fetchBookData(bookTitle){
+
+
+    const searchUrl =
+    `https://openlibrary.org/search.json?title=${encodeURIComponent(bookTitle)}&limit=1`;
+
+
+    try{
+
+        const res = await fetch(searchUrl);
+
+        const data = await res.json();
+
+
+        if(!data.docs || data.docs.length===0) return null;
+
+
+        const book = data.docs[0];
+
+
+        const author =
+        book.author_name ? book.author_name.join(", ") : "";
+
+
+        const pages =
+        book.number_of_pages_median || "";
+
+
+        const cover =
+        book.cover_i
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+            : "";
+
+
+        return {
+
+            title: book.title || bookTitle,
+
+            author: author,
+
+            pages: pages,
+
+            cover: cover
+
+        };
+
+
+    }catch(err){
+
+        console.error("Errore Open Library:", err);
+
+        return null;
+
+    }
+
+
+}
+
+
+
+let openLibraryCoverUrl = "";
+
+
+const bookTitleInput =
+document.getElementById("bookTitleInput");
+
+
+if(bookTitleInput){
+
+
+    bookTitleInput.addEventListener("blur", async function(){
+
+
+        const title = bookTitleInput.value.trim();
+
+
+        if(!title) return;
+
+
+        const data = await fetchBookData(title);
+
+
+        if(data){
+
+
+            const authorField =
+            document.getElementById("bookAuthorInput");
+
+            const pagesField =
+            document.getElementById("bookPagesInput");
+
+
+            // l'autore e le pagine restano modificabili a mano:
+            // li compiliamo solo se il campo è ancora vuoto,
+            // così non sovrascriviamo quello che l'utente ha già scritto
+            if(authorField && !authorField.value.trim() && data.author){
+
+                authorField.value = data.author;
+
+            }
+
+
+            if(pagesField && !pagesField.value.trim() && data.pages){
+
+                pagesField.value = data.pages;
+
+            }
+
+
+            if(data.cover){
+
+
+                openLibraryCoverUrl = data.cover;
+
+
+                const preview =
+                document.getElementById("bookCoverPreview");
+
+
+                if(preview){
+
+                    preview.src = data.cover;
+
+                    preview.classList.remove("hidden");
+
+                }
+
+
+            }
+
+
+        }
+
+
+    });
+
 
 }

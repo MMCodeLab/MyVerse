@@ -1,7 +1,7 @@
 // ===============================
-// CONDIVISIONE CARD - MYVERSE
-// genera un'immagine (stile storia)
-// con copertina, titolo, voto e link
+// SHARE CARD - MYVERSE
+// generates an image (story style)
+// with cover, title, rating and link
 // ===============================
 
 
@@ -171,7 +171,7 @@ async function generateShareCard(item){
     const ctx = canvas.getContext("2d");
 
 
-    // sfondo scuro con gradiente, in stile MyVerse
+    // dark gradient background, in MyVerse style
     const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
 
     bg.addColorStop(0, "#0a0a0a");
@@ -183,7 +183,7 @@ async function generateShareCard(item){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
-    // alone verde decorativo, coerente con lo sfondo del sito
+    // decorative green glow, consistent with the site background
     const glow = ctx.createRadialGradient(
         canvas.width / 2, 300, 50,
         canvas.width / 2, 300, 700
@@ -198,7 +198,7 @@ async function generateShareCard(item){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
-    // dimensioni copertina: quadrata per canzoni, verticale per film
+    // cover size: square for songs, portrait for movies/books
     const cardW = 760;
 
     const cardH = item.type === "song" ? 760 : 1080;
@@ -226,7 +226,7 @@ async function generateShareCard(item){
 
     else{
 
-        // sfondo di riserva se l'immagine non è disponibile
+        // fallback background if the image isn't available
         ctx.fillStyle = "rgba(255,255,255,0.08)";
 
         ctx.fillRect(cardX, cardY, cardW, cardH);
@@ -234,7 +234,7 @@ async function generateShareCard(item){
     }
 
 
-    // titolo
+    // title
     ctx.fillStyle = "#ffffff";
 
     ctx.font = "bold 64px sans-serif";
@@ -247,17 +247,17 @@ async function generateShareCard(item){
     const afterTitleY = wrapText(ctx, item.title, canvas.width / 2, titleY, 900, 74);
 
 
-    // voto
+    // rating
     ctx.fillStyle = "#aaaaaa";
 
     ctx.font = "44px sans-serif";
 
-    const ratingText = item.rating < 0 ? `Voto ${item.rating}` : `${item.rating}/10`;
+    const ratingText = item.rating < 0 ? `Rating ${item.rating}` : `${item.rating}/10`;
 
     ctx.fillText(ratingText, canvas.width / 2, afterTitleY + 80);
 
 
-    // link al sito, in fondo
+    // site link, at the bottom
     ctx.fillStyle = "#1ed760";
 
     ctx.font = "bold 40px sans-serif";
@@ -265,13 +265,13 @@ async function generateShareCard(item){
     ctx.fillText("matt3xx.github.io/MyVerse", canvas.width / 2, canvas.height - 100);
 
 
-    // esportazione ed eventuale condivisione
+    // export and optional sharing
     canvas.toBlob(async function(blob){
 
 
         if(!blob){
 
-            alert("Non è stato possibile generare l'immagine da condividere.");
+            alert("Could not generate the image to share.");
 
             return;
 
@@ -304,7 +304,7 @@ async function generateShareCard(item){
 
             catch(err){
 
-                console.error("Condivisione annullata o non riuscita:", err);
+                console.error("Sharing cancelled or failed:", err);
 
             }
 
@@ -312,7 +312,7 @@ async function generateShareCard(item){
         }
 
 
-        // fallback: scarica semplicemente l'immagine
+        // fallback: just download the image
         const url = URL.createObjectURL(blob);
 
         const link = document.createElement("a");

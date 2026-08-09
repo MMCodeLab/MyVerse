@@ -1,5 +1,5 @@
 // ===============================
-// CARTELLE - MYVERSE
+// FOLDERS - MYVERSE
 // ===============================
 
 
@@ -43,7 +43,7 @@ function saveFolders(){
 
 
 // ===============================
-// ICONA A MAZZO (usa le copertine dei primi 3 elementi)
+// DECK ICON (uses the first 3 items' covers)
 // ===============================
 
 
@@ -83,7 +83,7 @@ function buildDeckIcon(folder){
 
 
 // ===============================
-// SIDEBAR - LISTA CARTELLE
+// SIDEBAR - FOLDER LIST
 // ===============================
 
 
@@ -140,7 +140,7 @@ function renderFolderSidebar(){
 
 
 // ===============================
-// APERTURA / CHIUSURA VISTA CARTELLA
+// OPEN / CLOSE FOLDER VIEW
 // ===============================
 
 
@@ -207,11 +207,11 @@ function showFolderHeader(folder){
 
     <div class="folder-view-actions">
 
-    <button id="editFolderBtn">Modifica</button>
+    <button id="editFolderBtn">Edit</button>
 
-    <button id="deleteFolderBtn">Elimina cartella</button>
+    <button id="deleteFolderBtn">Delete folder</button>
 
-    <button id="closeFolderBtn">Chiudi cartella</button>
+    <button id="closeFolderBtn">Close folder</button>
 
     </div>
 
@@ -231,7 +231,7 @@ function showFolderHeader(folder){
     document.getElementById("deleteFolderBtn").onclick = function(){
 
 
-        if(confirm(`Eliminare la cartella "${folder.name}"? Gli elementi al suo interno non verranno cancellati.`)){
+        if(confirm(`Delete the folder "${folder.name}"? The items inside it will not be deleted.`)){
 
 
             folders = folders.filter(f => f.id !== folder.id);
@@ -281,7 +281,7 @@ function hideFolderHeader(){
 
 
 // ===============================
-// CREAZIONE / MODIFICA CARTELLA
+// CREATE / EDIT FOLDER
 // ===============================
 
 
@@ -293,7 +293,7 @@ function openFolderCreation(){
     selectedFolderItemIds = [];
 
 
-    document.getElementById("folderModalTitle").innerHTML = "Nuova cartella";
+    document.getElementById("folderModalTitle").innerHTML = "New folder";
 
     document.getElementById("folderNameInput").value = "";
 
@@ -316,7 +316,7 @@ function openFolderEditor(folder){
     selectedFolderItemIds = [...folder.itemIds];
 
 
-    document.getElementById("folderModalTitle").innerHTML = "Modifica cartella";
+    document.getElementById("folderModalTitle").innerHTML = "Edit folder";
 
     document.getElementById("folderNameInput").value = folder.name;
 
@@ -409,7 +409,7 @@ function renderFolderItemsGrid(){
 
 
 // ===============================
-// SALVATAGGIO CARTELLA
+// SAVE FOLDER
 // ===============================
 
 
@@ -429,7 +429,7 @@ if(saveFolderBtn){
 
         if(name === ""){
 
-            alert("Inserisci un nome per la cartella");
+            alert("Please enter a folder name");
 
             return;
 
@@ -477,7 +477,7 @@ if(saveFolderBtn){
         document.getElementById("folderItemsModal").classList.add("hidden");
 
 
-        // se la cartella modificata è quella attualmente aperta, aggiorna la vista
+        // if the edited folder is the one currently open, refresh the view
         if(currentFolderId === editingFolderId && editingFolderId){
 
 
@@ -518,7 +518,7 @@ if(closeFolderItemsBtn){
 
 
 // ===============================
-// AVVIO
+// STARTUP
 // ===============================
 
 

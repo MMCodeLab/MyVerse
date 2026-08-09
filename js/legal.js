@@ -1,55 +1,61 @@
 // ===============================
-// PRIVACY E MANUALE - MYVERSE
+// PRIVACY AND USER GUIDE - MYVERSE
 // ===============================
 
 
-const PRIVACY_TITLE = "Informativa Privacy";
+const PRIVACY_TITLE = "Privacy Policy";
 
 
 const PRIVACY_PARAGRAPHS = [
 
-"MyVerse non raccoglie, non invia e non conserva alcun dato su server propri. Non esiste un backend: è un sito che gira interamente nel tuo browser.",
+"MyVerse does not collect, send, or store any data on servers of its own. There is no backend: it's a site that runs entirely in your browser.",
 
-"Tutti i film e le canzoni che aggiungi vengono salvati esclusivamente sul tuo dispositivo, nella memoria locale del browser (localStorage). Nessuno oltre a te può vederli, a meno che tu non esporti manualmente il backup e lo condivida.",
+"All the movies, songs and books you add are saved only on your device, in your browser's local storage. No one but you can see them, unless you manually export your backup and share it.",
 
-"Non è richiesto nessun account, login o registrazione per usare l'app, e non viene effettuato alcun tracciamento del tuo utilizzo.",
+"No account, login or sign-up is required to use the app, and your usage is not tracked in any way.",
 
-"Quando digiti il titolo di un film, quel testo viene inviato direttamente dal tuo browser a TMDB (The Movie Database) per recuperare poster, genere, regista, cast, durata e trailer. MyVerse non intercetta né conserva questa richiesta altrove.",
+"When you type a movie title, that text is sent directly from your browser to TMDB (The Movie Database) to fetch the poster, genre, director, cast, duration and trailer. MyVerse does not intercept or store this request anywhere else.",
 
-"Quando incolli un link Spotify, quel link viene inviato direttamente dal tuo browser a Spotify per recuperare titolo e copertina della canzone, con lo stesso principio.",
+"When you paste a Spotify link, that link is sent directly from your browser to Spotify to fetch the song's title and cover art, on the same principle.",
 
-"Puoi esportare il tuo backup o cancellare tutti i tuoi dati in qualsiasi momento dalle Impostazioni."
+"When you type a book title, that text is sent directly from your browser to Open Library to fetch the cover, author and page count.",
+
+"You can export your backup or delete all your data at any time from Settings."
 
 ];
 
 
 
-const MANUAL_TITLE = "Manuale d'uso";
+const MANUAL_TITLE = "User Guide";
 
 
 const MANUAL_PARAGRAPHS = [
 
-"Aggiungere un film o una canzone: tocca il pulsante + in basso a destra, poi scegli tra Film o Musica.",
+"Adding a movie, song or book: tap the + button in the bottom right, then choose Movie, Music or Book.",
 
-"Film: scrivi il titolo. Quando esci dal campo, l'app cerca automaticamente il film su TMDB e compila da sola poster, genere, regista, durata e cast — questi campi non sono modificabili a mano. Puoi comunque caricare una copertina personalizzata se preferisci, dal campo file sotto l'anteprima.",
+"Movie: type the title. When you leave the field, the app automatically searches TMDB and fills in the poster, genre, director, duration and cast on its own — these fields are not editable by hand. You can still upload a custom cover if you prefer, using the file field below the preview.",
 
-"Canzone: incolla il link Spotify della traccia nel campo apposito. Uscendo dal campo, l'app recupera automaticamente titolo e copertina della canzone. L'artista va comunque inserito a mano, perché Spotify non lo fornisce in questo modo.",
+"Song: paste the Spotify link of the track in the field provided. When you leave the field, the app automatically fetches the song title and cover art. The artist still needs to be entered by hand, since Spotify doesn't provide it this way.",
 
-"Voto: tocca le stelle per assegnare un punteggio da 1 a 10.",
+"Book: type the title. The app tries to fetch the cover, author and page count from Open Library. Unlike movies, author and page count remain editable at any time — if you type them in yourself first, the app won't overwrite them.",
 
-"Dove l'hai visto/ascoltato e nota: campi liberi, da compilare a mano.",
+"Rating: tap the stars to give a score from 1 to 10.",
 
-"Trailer: se un film ha un trailer disponibile su TMDB, puoi guardarlo toccando direttamente la copertina nella schermata dei dettagli — si aprirà su YouTube in una nuova scheda.",
+"Where you watched/listened and note: free-text fields, filled in by hand.",
 
-"Preferiti: tocca il cuore su una card, o nella schermata dei dettagli, per aggiungerla o rimuoverla dai preferiti.",
+"Trailer: if a movie has a trailer available on TMDB, you can watch it by tapping directly on the cover in the details screen — it opens on YouTube in a new tab.",
 
-"Ricerca: usa la barra di ricerca in alto per filtrare per titolo, artista, dove l'hai vista/ascoltata o nota.",
+"Favorites: tap the heart on a card, or in the details screen, to add or remove it from favorites.",
 
-"Filtri e layout: dal menu laterale puoi mostrare tutti gli elementi, solo i film, solo la musica o solo i preferiti. Dalle Impostazioni puoi cambiare tema (scuro/chiaro), layout (card o lista) e criterio di ordinamento.",
+"Search: use the search bar at the top to filter by title, artist, author, where you watched/listened, or note.",
 
-"Backup: dalle Impostazioni puoi esportare tutti i tuoi dati in un file, per tenerli al sicuro o trasferirli su un altro dispositivo, e importarli di nuovo quando vuoi.",
+"Filters and layout: from the side menu you can show everything, only movies, only music, only books, or only favorites. From Settings you can change the theme (dark/light), the layout (cards or list), and the sort order.",
 
-"Eliminare un elemento: tocca il pulsante Elimina sulla card o nella schermata dei dettagli. L'operazione è definitiva."
+"Folders: from the side menu you can create your own collections. Tap New folder, name it, then tap the items you want to include — an item can belong to more than one folder at the same time.",
+
+"Backup: from Settings you can export all your data to a file, to keep it safe or move it to another device, and import it again whenever you want.",
+
+"Deleting an item: tap the Delete button on the card or in the details screen. This action is permanent."
 
 ];
 
@@ -57,7 +63,7 @@ const MANUAL_PARAGRAPHS = [
 
 
 // ===============================
-// APERTURA CARD INFO (privacy/manuale)
+// OPEN INFO CARD (privacy/manual)
 // ===============================
 
 
@@ -154,7 +160,7 @@ modal.remove();
 
 
 // ===============================
-// COLLEGAMENTO PULSANTI
+// BUTTON WIRING
 // ===============================
 
 
