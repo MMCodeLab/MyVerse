@@ -104,7 +104,7 @@ modal.innerHTML = `
 
 <img 
 src="${item.image}" 
-class="details-image"
+class="details-image${item.trailer ? " has-trailer" : ""}"
 onerror="this.src='icons/icon-512.png'"
 >
 
@@ -213,6 +213,14 @@ ${ICONS.play} Spotify
 
 
 
+<button class="share-detail icon-row">
+
+${ICONS.share} Condividi
+
+</button>
+
+
+
 <button class="favorite-detail icon-row">
 
 ${item.favorite ? ICONS.heartFilled : ICONS.heart} Preferito
@@ -242,17 +250,32 @@ ${ICONS.trash} Elimina
 
 document.body.appendChild(modal);
 
+
+
+
+
+// trailer: click sulla copertina, solo se disponibile
+
+
 if(item.trailer){
 
-    const posterImg = modal.querySelector(".details-image");
 
-    posterImg.classList.add("has-trailer");
+    modal
+    .querySelector(".details-image")
+    .onclick=function(){
 
-    posterImg.onclick = () => {
-        window.open(item.trailer, "_blank");
+
+        window.open(
+        item.trailer,
+        "_blank"
+        );
+
+
     };
 
+
 }
+
 
 
 
@@ -277,6 +300,23 @@ item.spotify,
 
 
 }
+
+
+
+
+
+// condivisione
+
+
+modal
+.querySelector(".share-detail")
+.onclick=function(){
+
+
+generateShareCard(item);
+
+
+};
 
 
 
@@ -433,6 +473,35 @@ container.classList.remove(
 
 
 let filtered=[...list];
+
+
+
+
+
+
+// CARTELLA (se una cartella è attualmente aperta, mostra solo i suoi elementi)
+
+
+if(typeof currentFolderId !== "undefined" && currentFolderId){
+
+
+    const activeFolder =
+    folders.find(f => f.id === currentFolderId);
+
+
+    if(activeFolder){
+
+
+        filtered =
+        filtered.filter(
+        item => activeFolder.itemIds.includes(item.id)
+        );
+
+
+    }
+
+
+}
 
 
 
@@ -1092,6 +1161,7 @@ card.querySelector("button").onclick=()=>{
 movies.push({
     
         ...item,
+        id: generateId(),
         type: "movie",
         favorite: false
     });

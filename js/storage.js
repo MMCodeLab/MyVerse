@@ -1,3 +1,10 @@
+function generateId(){
+
+    return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+
+}
+
+
 let movies = [];
 
 
@@ -25,6 +32,8 @@ function loadMovies(){
     movies = movies.map(item=>{
 
         return {
+
+            id: item.id || generateId(),
 
             type: item.type || "movie",
 
@@ -54,7 +63,7 @@ function loadMovies(){
 
             cast: item.cast || "",
 
-            trailer: item.trailer || "",
+            trailer: item.trailer || ""
 
         };
 

@@ -3157,3 +3157,267 @@ cursor:pointer;
     translateY(-2px);
 
 }
+
+.share-detail{
+
+    flex:1;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:22px;
+
+    color:white;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.22),
+        rgba(255,255,255,.08)
+    );
+
+    border:
+
+    1px solid rgba(255,255,255,.18);
+
+}
+
+
+.share-detail:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ===============================
+   CARTELLE
+   =============================== */
+
+.sidebar-divider{
+
+    border:none;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    margin:20px 0 10px;
+
+}
+
+
+.sidebar-heading{
+
+    font-size:14px;
+
+    color:#999;
+
+    margin-bottom:10px;
+
+}
+
+
+.folder-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    text-align:left;
+
+}
+
+
+.deck-icon{
+
+    position:relative;
+
+    width:32px;
+
+    height:32px;
+
+    flex-shrink:0;
+
+    display:inline-block;
+
+}
+
+
+.deck-icon img{
+
+    position:absolute;
+
+    width:24px;
+
+    height:24px;
+
+    object-fit:cover;
+
+    border-radius:6px;
+
+    border:1px solid rgba(255,255,255,.3);
+
+    top:0;
+
+    left:0;
+
+}
+
+
+.deck-icon img:nth-child(1){ transform:translate(6px,6px) rotate(4deg); }
+
+.deck-icon img:nth-child(2){ transform:translate(3px,3px) rotate(-3deg); }
+
+.deck-icon img:nth-child(3){ transform:translate(0,0) rotate(0deg); }
+
+
+.deck-icon.empty{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#999;
+
+}
+
+
+.folder-view-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    padding:16px 20px;
+
+    border-radius:24px;
+
+    margin-bottom:20px;
+
+}
+
+
+.folder-view-header h2{
+
+    font-size:20px;
+
+}
+
+
+.folder-view-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+
+.folder-view-actions button{
+
+    padding:10px 16px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+}
+
+
+.folder-items-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
+
+    gap:12px;
+
+    max-height:340px;
+
+    overflow-y:auto;
+
+    margin-top:20px;
+
+}
+
+
+.folder-item-select{
+
+    cursor:pointer;
+
+    border-radius:16px;
+
+    padding:6px;
+
+    border:2px solid transparent;
+
+    text-align:center;
+
+    opacity:.55;
+
+    transition:.2s;
+
+}
+
+
+.folder-item-select img{
+
+    width:100%;
+
+    aspect-ratio:2/3;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+}
+
+
+.folder-item-select p{
+
+    font-size:11px;
+
+    margin-top:6px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+.folder-item-select.selected{
+
+    opacity:1;
+
+    border-color:#1ed760;
+
+}

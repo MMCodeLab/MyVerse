@@ -52,6 +52,14 @@ href="icons/icon-192.png">
 
 <button id="settingsBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Impostazioni</span></button>
 
+<hr class="sidebar-divider">
+
+<h3 class="sidebar-heading">Cartelle</h3>
+
+<div id="folderList"></div>
+
+<button id="newFolderBtn"><span class="icon-row"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg> Nuova cartella</span></button>
+
 </aside>
 
 <header class="navbar glass">
@@ -120,6 +128,12 @@ Nessun film aggiunto
 <span><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
 <h3>Musica</h3>
 <p>Salva una canzone</p>
+</button>
+
+<button id="folderChoice" class="choice-card">
+<span><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg></span>
+<h3>Cartella</h3>
+<p>Crea una collezione</p>
 </button>
 
 </div>
@@ -200,6 +214,27 @@ Nessun film aggiunto
 <div class="buttons">
 <button id="saveSongBtn">Salva</button>
 <button id="closeSongBtn">Chiudi</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- MODAL CREAZIONE/MODIFICA CARTELLA -->
+
+<div id="folderItemsModal" class="modal hidden">
+
+<div class="modal-box glass">
+
+<h2 id="folderModalTitle">Nuova cartella</h2>
+
+<input id="folderNameInput" type="text" placeholder="Nome cartella">
+
+<div id="folderItemsGrid" class="folder-items-grid"></div>
+
+<div class="buttons">
+<button id="saveFolderBtn">Salva</button>
+<button id="closeFolderItemsBtn">Chiudi</button>
 </div>
 
 </div>
@@ -297,6 +332,7 @@ Nessun film aggiunto
 
 <script src="js/storage.js"></script>
 <script src="js/icons.js"></script>
+<script src="js/folders.js"></script>
 <script src="js/suggestions.js"></script>
 <script src="js/stars.js"></script>
 <script src="js/sort.js"></script>
@@ -306,9 +342,28 @@ Nessun film aggiunto
 <script src="js/modal.js"></script>
 <script src="js/api.js"></script>
 <script src="js/legal.js"></script>
+<script src="js/share.js"></script>
 <script src="js/app.js"></script>
 
 <script>
+
+const newFolderBtn = document.getElementById("newFolderBtn");
+
+if(newFolderBtn){
+
+    newFolderBtn.onclick = function(){
+
+        sidebar.classList.remove("open");
+
+        if(typeof openFolderCreation === "function"){
+            openFolderCreation();
+        }
+
+    };
+
+}
+
+
 if("serviceWorker" in navigator){
 window.addEventListener("load",()=>{
 navigator.serviceWorker.register("service-worker.js");

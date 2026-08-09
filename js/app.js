@@ -63,6 +63,9 @@ if(imageInput.files[0]){
 let item={
 
 
+id:generateId(),
+
+
 type:"movie",
 
 
@@ -102,7 +105,8 @@ director:(typeof tmdbDirector !== "undefined") ? tmdbDirector : "",
 duration:(typeof tmdbDuration !== "undefined") ? tmdbDuration : "",
 
 
-cast:(typeof tmdbCast !== "undefined") ? tmdbCast : "", 
+cast:(typeof tmdbCast !== "undefined") ? tmdbCast : "",
+
 
 trailer:(typeof tmdbTrailerUrl !== "undefined") ? tmdbTrailerUrl : ""
 
@@ -125,7 +129,6 @@ renderMovies();
 
 
 resetMovieForm();
-
 
 
 document
@@ -247,6 +250,9 @@ return;
 let song={
 
 
+id:generateId(),
+
+
 type:"song",
 
 
@@ -288,7 +294,10 @@ director:"",
 duration:"",
 
 
-cast:""
+cast:"",
+
+
+trailer:""
 
 
 
@@ -494,7 +503,7 @@ renderMovies(result);
 
 
 // ===============================
-// FILTRI
+// FILTRI (resettano anche la vista cartella)
 // ===============================
 
 
@@ -502,6 +511,9 @@ renderMovies(result);
 document
 .getElementById("favoriteMovies")
 .onclick=function(){
+
+
+if(typeof closeFolderView === "function") closeFolderView();
 
 
 showFavorites=true;
@@ -522,6 +534,9 @@ document
 .onclick=function(){
 
 
+if(typeof closeFolderView === "function") closeFolderView();
+
+
 showFavorites=false;
 
 
@@ -540,6 +555,9 @@ document
 .onclick=function(){
 
 
+if(typeof closeFolderView === "function") closeFolderView();
+
+
 showFavorites=false;
 
 
@@ -556,6 +574,9 @@ renderMovies();
 document
 .getElementById("onlySongs")
 .onclick=function(){
+
+
+if(typeof closeFolderView === "function") closeFolderView();
 
 
 showFavorites=false;

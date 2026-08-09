@@ -105,6 +105,39 @@ document
 
 
 
+// ===============================
+// SCELTA CARTELLA
+// ===============================
+
+
+const folderChoiceBtn =
+document.getElementById("folderChoice");
+
+
+if(folderChoiceBtn){
+
+
+    folderChoiceBtn.onclick=function(){
+
+        typeModal.classList.add("hidden");
+
+        addBtn.classList.remove("active");
+
+
+        if(typeof openFolderCreation === "function"){
+
+            openFolderCreation();
+
+        }
+
+    };
+
+
+}
+
+
+
+
 
 // ===============================
 // CHIUSURE
@@ -143,6 +176,14 @@ function closeAllModals(){
 
     if(typeof settingsModal !== "undefined"){
         settingsModal.classList.add("hidden");
+    }
+
+
+    const folderItemsModal =
+    document.getElementById("folderItemsModal");
+
+    if(folderItemsModal){
+        folderItemsModal.classList.add("hidden");
     }
 
 
@@ -238,82 +279,3 @@ sidebar.classList.remove("open");
 
 
 });
-
-
-
-
-
-
-
-// ===============================
-// FILTRI
-// ===============================
-
-
-document
-.getElementById("allMovies")
-.onclick=function(){
-
-showFavorites=false;
-
-currentFilter="all";
-
-renderMovies();
-
-sidebar.classList.remove("open");
-
-};
-
-
-
-
-
-document
-.getElementById("onlyMovies")
-.onclick=function(){
-
-showFavorites=false;
-
-currentFilter="movie";
-
-renderMovies();
-
-sidebar.classList.remove("open");
-
-};
-
-
-
-
-
-document
-.getElementById("onlySongs")
-.onclick=function(){
-
-showFavorites=false;
-
-currentFilter="song";
-
-renderMovies();
-
-sidebar.classList.remove("open");
-
-};
-
-
-
-
-
-document
-.getElementById("favoriteMovies")
-.onclick=function(){
-
-showFavorites=true;
-
-currentFilter="all";
-
-renderMovies();
-
-sidebar.classList.remove("open");
-
-};
