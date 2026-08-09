@@ -262,7 +262,7 @@ async function generateShareCard(item){
 
     ctx.font = "bold 40px sans-serif";
 
-    ctx.fillText("matt3xx.github.io/MyVerse", canvas.width / 2, canvas.height - 100);
+    ctx.fillText("mmcodelab.github.io/MyVerse/", canvas.width / 2, canvas.height - 100);
 
 
     // export and optional sharing
