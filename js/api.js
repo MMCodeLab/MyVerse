@@ -85,7 +85,7 @@ if(spotifyInput){
 // -------------------------------
 
 // Inserisci qui la tua API key gratuita di themoviedb.org
-const TMDB_KEY = "LA_TUA_API_KEY";
+const TMDB_KEY = "0007864f4243ad65379a35b0538acf35";
 
 
 async function fetchMovieData(movieTitle){
