@@ -3434,7 +3434,7 @@ cursor:pointer;
 
 .navbar{
 
-    top: calc(15px + env(safe-area-inset-top));
+    top: calc(5px + env(safe-area-inset-top));
 
 }
 
