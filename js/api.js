@@ -1,6 +1,23 @@
 // ===============================
-// API ESTERNE - MYVERSE
-// (Spotify oEmbed + TMDB + Open Library)
+// API CONFIGURATION - MYVERSE
+// Centralized keys: edit only here
+// ===============================
+
+
+const API_KEYS = {
+
+    tmdb: "LA_TUA_API_KEY",
+
+    googleBooks: "AIzaSyBx7Y3lkL3RnWFXpSyDJ7-lNJxrAlcBGoM"
+
+};
+
+
+
+
+// ===============================
+// EXTERNAL APIS - MYVERSE
+// (Spotify oEmbed + TMDB + Google Books)
 // ===============================
 
 
@@ -17,7 +34,7 @@ async function fetchSpotifyData(spotifyUrl){
 
         const res = await fetch(oembedUrl);
 
-        if(!res.ok) throw new Error("Link Spotify non valido");
+        if(!res.ok) throw new Error("Invalid Spotify link");
 
         const data = await res.json();
 
@@ -28,7 +45,7 @@ async function fetchSpotifyData(spotifyUrl){
 
     }catch(err){
 
-        console.error("Errore Spotify:", err);
+        console.error("Spotify error:", err);
         return null;
 
     }
@@ -84,14 +101,11 @@ if(spotifyInput){
 // TMDB
 // -------------------------------
 
-// Inserisci qui la tua API key gratuita di themoviedb.org
-const TMDB_KEY = "0007864f4243ad65379a35b0538acf35";
-
 
 async function fetchMovieData(movieTitle){
 
     const searchUrl =
-    `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(movieTitle)}&language=it-IT`;
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEYS.tmdb}&query=${encodeURIComponent(movieTitle)}&language=it-IT`;
 
     try{
 
@@ -100,12 +114,12 @@ async function fetchMovieData(movieTitle){
 
         if(!searchData.results || searchData.results.length===0) return null;
 
-        // primo risultato = più rilevante
+        // top result = most relevant
         const movieId = searchData.results[0].id;
 
-        // seconda chiamata: dettagli completi + credits (regista/cast) + video (trailer)
+        // second call: full details + credits (director/cast) + video (trailer)
         const detailsUrl =
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_KEY}&language=it-IT&append_to_response=credits,videos`;
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEYS.tmdb}&language=it-IT&append_to_response=credits,videos`;
 
         const detailsRes = await fetch(detailsUrl);
         const details = await detailsRes.json();
@@ -158,7 +172,7 @@ async function fetchMovieData(movieTitle){
 
     }catch(err){
 
-        console.error("Errore TMDB:", err);
+        console.error("TMDB error:", err);
         return null;
 
     }
@@ -166,8 +180,8 @@ async function fetchMovieData(movieTitle){
 }
 
 
-// variabili globali: tengono i dati recuperati da TMDB,
-// così app.js può usarli al momento del salvataggio
+// global variables: hold the data fetched from TMDB,
+// so app.js can use them when saving
 let tmdbPosterUrl = "";
 let tmdbGenre = "";
 let tmdbDirector = "";
@@ -239,8 +253,7 @@ if(titleInputMovie){
 
 
 // -------------------------------
-// OPEN LIBRARY (libri)
-// gratuita, senza chiave API
+// GOOGLE BOOKS (books)
 // -------------------------------
 
 
@@ -248,7 +261,7 @@ async function fetchBookData(bookTitle){
 
 
     const searchUrl =
-    `https://openlibrary.org/search.json?title=${encodeURIComponent(bookTitle)}&limit=1`;
+    `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent("intitle:" + bookTitle)}&key=${API_KEYS.googleBooks}`;
 
 
     try{
@@ -258,29 +271,48 @@ async function fetchBookData(bookTitle){
         const data = await res.json();
 
 
-        if(!data.docs || data.docs.length===0) return null;
+        if(!data.items || data.items.length===0) return null;
 
 
-        const book = data.docs[0];
+        const volume =
+        data.items[0].volumeInfo || {};
 
 
         const author =
-        book.author_name ? book.author_name.join(", ") : "";
+        volume.authors ? volume.authors.join(", ") : "";
 
 
         const pages =
-        book.number_of_pages_median || "";
+        volume.pageCount || "";
 
 
-        const cover =
-        book.cover_i
-            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-            : "";
+        let cover = "";
+
+
+        if(volume.imageLinks){
+
+
+            cover =
+            volume.imageLinks.thumbnail
+            || volume.imageLinks.smallThumbnail
+            || "";
+
+
+            // Google Books sometimes returns http:// links; force https
+            // so the browser doesn't block them as mixed content
+            if(cover.indexOf("http://") === 0){
+
+                cover = "https://" + cover.slice(7);
+
+            }
+
+
+        }
 
 
         return {
 
-            title: book.title || bookTitle,
+            title: volume.title || bookTitle,
 
             author: author,
 
@@ -293,7 +325,7 @@ async function fetchBookData(bookTitle){
 
     }catch(err){
 
-        console.error("Errore Open Library:", err);
+        console.error("Google Books error:", err);
 
         return null;
 
@@ -304,7 +336,7 @@ async function fetchBookData(bookTitle){
 
 
 
-let openLibraryCoverUrl = "";
+let bookCoverUrl = "";
 
 
 const bookTitleInput =
@@ -336,9 +368,9 @@ if(bookTitleInput){
             document.getElementById("bookPagesInput");
 
 
-            // l'autore e le pagine restano modificabili a mano:
-            // li compiliamo solo se il campo è ancora vuoto,
-            // così non sovrascriviamo quello che l'utente ha già scritto
+            // author and page count stay manually editable:
+            // we only fill them in if the field is still empty,
+            // so we never overwrite what the user already typed
             if(authorField && !authorField.value.trim() && data.author){
 
                 authorField.value = data.author;
@@ -356,7 +388,7 @@ if(bookTitleInput){
             if(data.cover){
 
 
-                openLibraryCoverUrl = data.cover;
+                bookCoverUrl = data.cover;
 
 
                 const preview =

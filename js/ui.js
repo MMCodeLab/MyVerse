@@ -56,7 +56,7 @@ modal.className =
 
 let image =
 item.image ||
-"https://via.placeholder.com/300";
+"icons/icon-512.png";
 
 
 
@@ -655,7 +655,7 @@ card.className =
 
 let image =
 item.image ||
-"https://via.placeholder.com/300";
+"icons/icon-512.png";
 
 
 
@@ -680,7 +680,7 @@ ${item.favorite ? ICONS.heartFilled : ICONS.heart}
 
 
 
-<img src="${image}">
+<img src="${image}" onerror="this.src='icons/icon-512.png'">
 
 
 
@@ -752,7 +752,7 @@ ${item.favorite ? ICONS.heartFilled : ICONS.heart}
 
 
 
-<img src="${image}">
+<img src="${image}" onerror="this.src='icons/icon-512.png'">
 
 
 
@@ -850,7 +850,7 @@ ${item.favorite ? ICONS.heartFilled : ICONS.heart}
 
 
 
-<img src="${image}">
+<img src="${image}" onerror="this.src='icons/icon-512.png'">
 
 
 
@@ -1167,7 +1167,8 @@ const recommendations = [
         image: "",
         note: "Queen's genre-bending rock epic.",
         artist: "Queen",
-        spotify: "https://open.spotify.com/intl-it/track/3z8h0TU7ReDPLIbEnYhWZb?si=3b3af4e74b7b4be4", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+        spotify: "https://open.spotify.com/intl-it/track/2ODUgS9kk95bqVaf9EzyOU?si=c245ab0b9a91499d",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
     },
     {
         title: "Blinding Lights",
@@ -1176,16 +1177,18 @@ const recommendations = [
         image: "",
         note: "A synth-pop hit with an 80s soul.",
         artist: "The Weeknd",
-        spotify: "https://open.spotify.com/intl-it/track/0VjIjW4GlUZAMYd2vXMi3b?si=157047c6392f4e8e", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+        spotify: "https://open.spotify.com/intl-it/track/0VjIjW4GlUZAMYd2vXMi3b?si=53eff75af6a54883",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
     },
     {
         title: "Hotel California",
         rating: 9,
         type: "song",
-        image: "",
+        image: "https://open.spotify.com/intl-it/track/40riOy7x9W7GXjyGp4pjAv?si=03e68ae810344d73",
         note: "A rock classic with an unforgettable guitar solo.",
         artist: "Eagles",
-        spotify: "https://open.spotify.com/intl-it/track/40riOy7x9W7GXjyGp4pjAv?si=8e69934e3e4749e3", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+        spotify: "",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
     },
     {
         title: "Shape of You",
@@ -1194,7 +1197,8 @@ const recommendations = [
         image: "",
         note: "A catchy pop hit built around a marimba riff.",
         artist: "Ed Sheeran",
-        spotify: "https://open.spotify.com/intl-it/track/7qiZfU4dY1lWllzX7mPBI3?si=f74fe6f12c0740cf", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+        spotify: "https://open.spotify.com/intl-it/track/7qiZfU4dY1lWllzX7mPBI3?si=7453e466a30841a8",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
     },
     {
         title: "Someone Like You",
@@ -1203,7 +1207,8 @@ const recommendations = [
         image: "",
         note: "A heartfelt piano ballad about lost love.",
         artist: "Adele",
-        spotify: "https://open.spotify.com/intl-it/track/3bNv3VuUOKgrf5hu3YcuRo?si=56de6e7f60484c0b", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+        spotify: "https://open.spotify.com/intl-it/track/3bNv3VuUOKgrf5hu3YcuRo?si=1189e940e50b4c59",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
     },
     {
         title: "1984",
@@ -1379,7 +1384,7 @@ function buildRecommendCard(item){
 
 
     card.innerHTML = `
-        <img src="${item.image}" onerror="this.src='https://via.placeholder.com/300'">
+        <img src="${item.image || "icons/icon-512.png"}" onerror="this.src='icons/icon-512.png'">
 
         <div class="recommend-content">
             <h3 class="icon-row">${typeIcon} ${item.title}</h3>
@@ -1389,6 +1394,30 @@ function buildRecommendCard(item){
             <button>+ Add</button>
         </div>
     `;
+
+
+    // root fix: songs have no static cover in the data, so we fetch
+    // the real one from Spotify as soon as the card is built, not
+    // just when the user clicks Add
+    if(item.type==="song" && item.spotify){
+
+
+        const img = card.querySelector("img");
+
+
+        fetchSpotifyData(item.spotify).then(function(data){
+
+            if(data && data.cover){
+
+                img.src = data.cover;
+
+            }
+
+        });
+
+
+    }
+
 
 
     // clicking the poster opens the trailer (movies only, when available)
@@ -1416,7 +1445,7 @@ function buildRecommendCard(item){
     // "+ Add" opens the matching form, prefilled, so the user
     // can review everything and optionally upload their own photo
     // before actually saving anything
-    card.querySelector("button").onclick = function(e){
+    card.querySelector("button").onclick = async function(e){
 
 
         e.stopPropagation();
@@ -1482,16 +1511,32 @@ function buildRecommendCard(item){
             document.getElementById("songNoteInput").value = item.note || "";
 
 
-            spotifyCoverUrl = item.image || "";
+            spotifyCoverUrl = "";
 
 
             const preview = document.getElementById("songCoverPreview");
 
-            if(preview && item.image){
+            preview.classList.add("hidden");
 
-                preview.src = item.image;
 
-                preview.classList.remove("hidden");
+            // wait for the real Spotify cover before opening the form,
+            // so whatever gets saved always has the correct artwork
+            if(item.spotify){
+
+
+                const data = await fetchSpotifyData(item.spotify);
+
+
+                if(data && data.cover){
+
+                    spotifyCoverUrl = data.cover;
+
+                    preview.src = data.cover;
+
+                    preview.classList.remove("hidden");
+
+                }
+
 
             }
 
@@ -1513,7 +1558,7 @@ function buildRecommendCard(item){
             document.getElementById("bookNoteInput").value = item.note || "";
 
 
-            openLibraryCoverUrl = item.image || "";
+            bookCoverUrl = item.image || "";
 
 
             const preview = document.getElementById("bookCoverPreview");

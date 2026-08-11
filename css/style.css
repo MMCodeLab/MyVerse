@@ -3530,3 +3530,112 @@ cursor:pointer;
     -ms-overflow-style:none;
 
 }
+
+.contact-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-top:20px;
+
+}
+
+
+.contact-form input,
+.contact-form textarea{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:16px;
+
+    border-radius:20px;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    background:#ffffff15;
+
+    font-family:inherit;
+
+}
+
+
+.contact-form textarea{
+
+    height:120px;
+
+    resize:none;
+
+}
+
+
+.contact-form button{
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:linear-gradient(135deg, #1ed760, #16a34a);
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+.contact-form button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+.contact-form button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+.contact-status{
+
+    margin-top:14px;
+
+    text-align:center;
+
+    font-size:14px;
+
+}
+
+
+.contact-status.contact-success{
+
+    color:#1ed760;
+
+}
+
+
+.contact-status.contact-error{
+
+    color:#ff3b30;
+
+}

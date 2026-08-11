@@ -40,7 +40,7 @@ return;
 
 
 let imageURL =
-"https://via.placeholder.com/300x450";
+"icons/icon-512.png";
 
 
 
@@ -214,10 +214,14 @@ const saveSongBtn =
 document.getElementById("saveSongBtn");
 
 
+const songImageInput =
+document.getElementById("songImageInput");
+
+
 if(saveSongBtn){
 
 
-saveSongBtn.onclick=function(){
+saveSongBtn.onclick=async function(){
 
 
 const title =
@@ -250,8 +254,25 @@ return;
 }
 
 
+
 let imageURL =
-"https://via.placeholder.com/300";
+"icons/icon-512.png";
+
+
+if(songImageInput && songImageInput.files[0]){
+
+    imageURL =
+    await convertImageToBase64(
+    songImageInput.files[0]
+    );
+
+} else if(typeof spotifyCoverUrl !== "undefined" && spotifyCoverUrl){
+
+    imageURL = spotifyCoverUrl;
+
+}
+
+
 
 
 let song={
@@ -272,9 +293,7 @@ artist:artist,
 spotify:spotify,
 
 
-image:(typeof spotifyCoverUrl !== "undefined" && spotifyCoverUrl)
-    ? spotifyCoverUrl
-    : "https://via.placeholder.com/300",
+image:imageURL,
 
 
 rating:songRating,
@@ -331,12 +350,23 @@ renderMovies();
 
 
 
+resetSongForm();
 
 
 document
 .getElementById("songModal")
 .classList.add("hidden");
 
+
+};
+
+
+
+}
+
+
+
+function resetSongForm(){
 
 
 document.getElementById("songTitleInput").value="";
@@ -346,6 +376,13 @@ document.getElementById("artistInput").value="";
 document.getElementById("spotifyInput").value="";
 
 document.getElementById("songNoteInput").value="";
+
+
+if(songImageInput){
+
+    songImageInput.value="";
+
+}
 
 
 if(typeof spotifyCoverUrl !== "undefined"){
@@ -364,20 +401,12 @@ if(preview){
 }
 
 
-rating=0;
-
-updateStars();
-
 songRating=0;
 
 updateStars(
 songStarsContainer,
 "song"
 );
-
-
-};
-
 
 
 }
@@ -398,10 +427,14 @@ const saveBookBtn =
 document.getElementById("saveBookBtn");
 
 
+const bookImageInput =
+document.getElementById("bookImageInput");
+
+
 if(saveBookBtn){
 
 
-saveBookBtn.onclick=function(){
+saveBookBtn.onclick=async function(){
 
 
 const title =
@@ -435,6 +468,24 @@ return;
 
 
 
+let imageURL =
+"icons/icon-512.png";
+
+
+if(bookImageInput && bookImageInput.files[0]){
+
+    imageURL =
+    await convertImageToBase64(
+    bookImageInput.files[0]
+    );
+
+} else if(typeof bookCoverUrl !== "undefined" && bookCoverUrl){
+
+    imageURL = bookCoverUrl;
+
+}
+
+
 
 
 let book={
@@ -455,9 +506,7 @@ author:author,
 pages:pages,
 
 
-image:(typeof openLibraryCoverUrl !== "undefined" && openLibraryCoverUrl)
-    ? openLibraryCoverUrl
-    : "https://via.placeholder.com/300x450",
+image:imageURL,
 
 
 rating:bookRating,
@@ -514,12 +563,23 @@ renderMovies();
 
 
 
+resetBookForm();
 
 
 document
 .getElementById("bookModal")
 .classList.add("hidden");
 
+
+};
+
+
+
+}
+
+
+
+function resetBookForm(){
 
 
 document.getElementById("bookTitleInput").value="";
@@ -531,9 +591,16 @@ document.getElementById("bookPagesInput").value="";
 document.getElementById("bookNoteInput").value="";
 
 
-if(typeof openLibraryCoverUrl !== "undefined"){
+if(bookImageInput){
 
-    openLibraryCoverUrl = "";
+    bookImageInput.value="";
+
+}
+
+
+if(typeof bookCoverUrl !== "undefined"){
+
+    bookCoverUrl = "";
 
 }
 
@@ -553,10 +620,6 @@ updateStars(
 bookStarsContainer,
 "book"
 );
-
-
-};
-
 
 
 }
