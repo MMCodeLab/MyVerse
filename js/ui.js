@@ -1076,6 +1076,14 @@ container.appendChild(card);
 updateStats();
 
 
+// keep the recommendations carousel in sync (hide items already added)
+if(typeof renderRecommendations === "function"){
+
+    renderRecommendations();
+
+}
+
+
 
 }
 
@@ -1088,7 +1096,13 @@ const recommendations = [
         where: "Cinema",
         type: "movie",
         image: "images/interstellar.jpg",
-        note: "An emotional journey through space, time and feeling."
+        note: "An emotional journey through space, time and feeling.",
+        genre: "Sci-Fi, Adventure, Drama",
+        director: "Christopher Nolan",
+        duration: "169 min",
+        cast: "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+        trailer: "https://www.youtube.com/results?search_query=Interstellar+official+trailer",
+        artist: "", spotify: "", author: "", pages: ""
     },
     {
         title: "Inception",
@@ -1096,7 +1110,13 @@ const recommendations = [
         where: "Netflix",
         type: "movie",
         image: "images/inception.jpg",
-        note: "A mind-bending thriller full of incredible ideas."
+        note: "A mind-bending thriller full of incredible ideas.",
+        genre: "Sci-Fi, Action, Thriller",
+        director: "Christopher Nolan",
+        duration: "148 min",
+        cast: "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
+        trailer: "https://www.youtube.com/results?search_query=Inception+official+trailer",
+        artist: "", spotify: "", author: "", pages: ""
     },
     {
         title: "The Prestige",
@@ -1104,7 +1124,13 @@ const recommendations = [
         where: "Prime Video",
         type: "movie",
         image: "images/prestige.jpg",
-        note: "A rivalry between two illusionists."
+        note: "A rivalry between two illusionists.",
+        genre: "Drama, Mystery, Thriller",
+        director: "Christopher Nolan",
+        duration: "130 min",
+        cast: "Christian Bale, Hugh Jackman, Scarlett Johansson",
+        trailer: "https://www.youtube.com/results?search_query=The+Prestige+official+trailer",
+        artist: "", spotify: "", author: "", pages: ""
     },
     {
         title: "Oppenheimer",
@@ -1112,7 +1138,13 @@ const recommendations = [
         where: "Cinema",
         type: "movie",
         image: "images/oppenheimer.jpg",
-        note: "The story behind the birth of the atomic bomb."
+        note: "The story behind the birth of the atomic bomb.",
+        genre: "Biography, Drama, History",
+        director: "Christopher Nolan",
+        duration: "180 min",
+        cast: "Cillian Murphy, Emily Blunt, Robert Downey Jr.",
+        trailer: "https://www.youtube.com/results?search_query=Oppenheimer+official+trailer",
+        artist: "", spotify: "", author: "", pages: ""
     },
     {
         title: "Dune",
@@ -1120,7 +1152,108 @@ const recommendations = [
         where: "Netflix",
         type: "movie",
         image: "images/dune.jpg",
-        note: "Epic sci-fi set on the desert planet Arrakis."
+        note: "Epic sci-fi set on the desert planet Arrakis.",
+        genre: "Sci-Fi, Adventure",
+        director: "Denis Villeneuve",
+        duration: "155 min",
+        cast: "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
+        trailer: "https://www.youtube.com/results?search_query=Dune+official+trailer",
+        artist: "", spotify: "", author: "", pages: ""
+    },
+    {
+        title: "Bohemian Rhapsody",
+        rating: 9,
+        type: "song",
+        image: "",
+        note: "Queen's genre-bending rock epic.",
+        artist: "Queen",
+        spotify: "https://open.spotify.com/intl-it/track/3z8h0TU7ReDPLIbEnYhWZb?si=3b3af4e74b7b4be4", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+    },
+    {
+        title: "Blinding Lights",
+        rating: 9,
+        type: "song",
+        image: "",
+        note: "A synth-pop hit with an 80s soul.",
+        artist: "The Weeknd",
+        spotify: "https://open.spotify.com/intl-it/track/0VjIjW4GlUZAMYd2vXMi3b?si=157047c6392f4e8e", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+    },
+    {
+        title: "Hotel California",
+        rating: 9,
+        type: "song",
+        image: "",
+        note: "A rock classic with an unforgettable guitar solo.",
+        artist: "Eagles",
+        spotify: "https://open.spotify.com/intl-it/track/40riOy7x9W7GXjyGp4pjAv?si=8e69934e3e4749e3", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+    },
+    {
+        title: "Shape of You",
+        rating: 8,
+        type: "song",
+        image: "",
+        note: "A catchy pop hit built around a marimba riff.",
+        artist: "Ed Sheeran",
+        spotify: "https://open.spotify.com/intl-it/track/7qiZfU4dY1lWllzX7mPBI3?si=f74fe6f12c0740cf", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+    },
+    {
+        title: "Someone Like You",
+        rating: 9,
+        type: "song",
+        image: "",
+        note: "A heartfelt piano ballad about lost love.",
+        artist: "Adele",
+        spotify: "https://open.spotify.com/intl-it/track/3bNv3VuUOKgrf5hu3YcuRo?si=56de6e7f60484c0b", where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
+    },
+    {
+        title: "1984",
+        rating: 10,
+        type: "book",
+        image: "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
+        note: "A dystopian classic about surveillance and control.",
+        author: "George Orwell",
+        pages: "328",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", artist: "", spotify: ""
+    },
+    {
+        title: "The Hobbit",
+        rating: 9,
+        type: "book",
+        image: "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
+        note: "A fantasy adventure that started it all.",
+        author: "J.R.R. Tolkien",
+        pages: "310",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", artist: "", spotify: ""
+    },
+    {
+        title: "Sapiens",
+        rating: 9,
+        type: "book",
+        image: "https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg",
+        note: "A sweeping look at the history of humankind.",
+        author: "Yuval Noah Harari",
+        pages: "443",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", artist: "", spotify: ""
+    },
+    {
+        title: "The Great Gatsby",
+        rating: 8,
+        type: "book",
+        image: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
+        note: "A glittering, tragic portrait of the American Dream.",
+        author: "F. Scott Fitzgerald",
+        pages: "180",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", artist: "", spotify: ""
+    },
+    {
+        title: "To Kill a Mockingbird",
+        rating: 9,
+        type: "book",
+        image: "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg",
+        note: "A powerful story about justice and growing up.",
+        author: "Harper Lee",
+        pages: "336",
+        where: "", genre: "", director: "", duration: "", cast: "", trailer: "", artist: "", spotify: ""
     }
 ];
 
@@ -1216,129 +1349,356 @@ renderMovies();
 
 });
 
+
+
+
+function buildRecommendCard(item){
+
+
+    let card =
+    document.createElement("div");
+
+
+    card.className = "recommend-card glass";
+
+    card.style.flex = "0 0 auto"; // prevents cards from shrinking
+
+
+    let typeIcon = ICONS.film;
+
+    if(item.type==="song") typeIcon = ICONS.music;
+
+    if(item.type==="book") typeIcon = ICONS.book;
+
+
+    let subtitle = "";
+
+    if(item.artist) subtitle = item.artist;
+
+    if(item.author) subtitle = item.author;
+
+
+    card.innerHTML = `
+        <img src="${item.image}" onerror="this.src='https://via.placeholder.com/300'">
+
+        <div class="recommend-content">
+            <h3 class="icon-row">${typeIcon} ${item.title}</h3>
+            ${subtitle ? `<p class="icon-row">${subtitle}</p>` : ""}
+            <p class="icon-row">${ICONS.star} ${item.rating}/10</p>
+
+            <button>+ Add</button>
+        </div>
+    `;
+
+
+    // clicking the poster opens the trailer (movies only, when available)
+    if(item.trailer){
+
+
+        const img = card.querySelector("img");
+
+        img.classList.add("has-trailer");
+
+
+        img.onclick = function(e){
+
+            e.stopPropagation();
+
+            window.open(item.trailer, "_blank");
+
+        };
+
+
+    }
+
+
+
+    // "+ Add" opens the matching form, prefilled, so the user
+    // can review everything and optionally upload their own photo
+    // before actually saving anything
+    card.querySelector("button").onclick = function(e){
+
+
+        e.stopPropagation();
+
+
+        if(item.type==="movie"){
+
+
+            document.getElementById("titleInput").value = item.title;
+
+            document.getElementById("whereInput").value = item.where || "";
+
+            document.getElementById("noteInput").value = item.note || "";
+
+
+            tmdbPosterUrl = item.image || "";
+
+            tmdbGenre = item.genre || "";
+
+            tmdbDirector = item.director || "";
+
+            tmdbDuration = item.duration || "";
+
+            tmdbCast = item.cast || "";
+
+            tmdbTrailerUrl = item.trailer || "";
+
+
+            document.getElementById("genreDisplay").value = tmdbGenre;
+
+            document.getElementById("directorDisplay").value = tmdbDirector;
+
+            document.getElementById("durationDisplay").value = tmdbDuration;
+
+            document.getElementById("castDisplay").value = tmdbCast;
+
+
+            const preview = document.getElementById("moviePosterPreview");
+
+            if(preview && item.image){
+
+                preview.src = item.image;
+
+                preview.classList.remove("hidden");
+
+            }
+
+
+            document.getElementById("modal").classList.remove("hidden");
+
+
+        }
+
+        else if(item.type==="song"){
+
+
+            document.getElementById("songTitleInput").value = item.title;
+
+            document.getElementById("artistInput").value = item.artist || "";
+
+            document.getElementById("spotifyInput").value = item.spotify || "";
+
+            document.getElementById("songNoteInput").value = item.note || "";
+
+
+            spotifyCoverUrl = item.image || "";
+
+
+            const preview = document.getElementById("songCoverPreview");
+
+            if(preview && item.image){
+
+                preview.src = item.image;
+
+                preview.classList.remove("hidden");
+
+            }
+
+
+            document.getElementById("songModal").classList.remove("hidden");
+
+
+        }
+
+        else{
+
+
+            document.getElementById("bookTitleInput").value = item.title;
+
+            document.getElementById("bookAuthorInput").value = item.author || "";
+
+            document.getElementById("bookPagesInput").value = item.pages || "";
+
+            document.getElementById("bookNoteInput").value = item.note || "";
+
+
+            openLibraryCoverUrl = item.image || "";
+
+
+            const preview = document.getElementById("bookCoverPreview");
+
+            if(preview && item.image){
+
+                preview.src = item.image;
+
+                preview.classList.remove("hidden");
+
+            }
+
+
+            document.getElementById("bookModal").classList.remove("hidden");
+
+
+        }
+
+
+    };
+
+
+    return card;
+
+
+}
+
+
+
+
 function renderRecommendations(){
 
-    function autoScrollRecommendations(){
 
-const box =
-document.getElementById("recommendedContainer");
-
-
-if(!box) return;
+    const box =
+    document.getElementById("recommendedContainer");
 
 
-let speed = 0.5;
+    if(!box) return;
 
 
-function move(){
+    // stop any previous animation loop before rebuilding the carousel
+    if(box._myverseRAF){
 
-box.scrollLeft += speed;
+        cancelAnimationFrame(box._myverseRAF);
 
+        box._myverseRAF = null;
 
-if(box.scrollLeft >= box.scrollWidth - box.clientWidth){
-
-box.scrollLeft = 0;
-
-}
+    }
 
 
-requestAnimationFrame(move);
-
-}
-
-
-move();
-
-}
+    const existingKeys =
+    movies.map(
+    m => `${m.type}::${(m.title || "").trim().toLowerCase()}`
+    );
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+    const visibleRecommendations =
+    recommendations.filter(item => {
 
-setTimeout(
-autoScrollRecommendations,
-1000
-);
+        const key = `${item.type}::${item.title.trim().toLowerCase()}`;
 
-});
+        return !existingKeys.includes(key);
 
-
-const box =
-document.getElementById(
-"recommendedContainer"
-);
-
-
-if(!box) return;
-
-// inline properties to unlock smooth scrolling on mobile
-box.style.display = "flex";
-box.style.overflowX = "auto";
-box.style.scrollBehavior = "smooth";
-box.style.webkitOverflowScrolling = "touch";
-box.style.gap = "20px";
-
-
-box.innerHTML="";
-
-
-recommendations.forEach((item,index)=>{
-
-
-let card=document.createElement("div");
-
-
-card.className="recommend-card glass";
-card.style.flex = "0 0 auto"; // prevents cards from shrinking
-
-
-card.innerHTML = `
-    <img src="${item.image}">
-
-    <div class="recommend-content">
-        <h3>${item.title}</h3>
-        <p class="icon-row">${ICONS.star} ${item.rating}/10</p>
-        <p>${item.note || item.description || ""}</p>
-
-        <button>+ Add</button>
-    </div>
-`;
-
-
-
-card.querySelector("button").onclick=()=>{
-
-
-movies.push({
-    
-        ...item,
-        id: generateId(),
-        type: "movie",
-        favorite: false
     });
 
-    card.querySelector("button").innerHTML = "✓ Added";
 
-    saveMovies();
-    renderMovies();
-
-    card.style.transform = "scale(.75) translateY(40px)";
-    card.style.opacity = "0";
-    card.style.filter = "blur(10px)";
-
-    setTimeout(() => {
-        card.remove();
-    }, 500);
-
-};
+    box.style.display = "flex";
+    box.style.overflowX = "auto";
+    box.style.webkitOverflowScrolling = "touch";
+    box.style.gap = "14px";
+    box.style.cursor = "grab";
 
 
-
-box.appendChild(card);
-
+    box.innerHTML = "";
 
 
-});
+    if(visibleRecommendations.length === 0) return;
+
+
+    // the list is rendered twice back-to-back: this is what makes
+    // the loop seamless, with no visible jump when it restarts
+    visibleRecommendations.forEach(item => box.appendChild(buildRecommendCard(item)));
+
+    visibleRecommendations.forEach(item => box.appendChild(buildRecommendCard(item)));
+
+
+
+    let isPaused = false;
+
+    let isDragging = false;
+
+    let dragStartX = 0;
+
+    let dragStartScroll = 0;
+
+    const speed = 0.6;
+
+
+
+    function tick(){
+
+
+        if(!isPaused && !isDragging){
+
+
+            box.scrollLeft += speed;
+
+
+            const halfWidth = box.scrollWidth / 2;
+
+
+            if(box.scrollLeft >= halfWidth){
+
+                box.scrollLeft -= halfWidth;
+
+            }
+
+
+        }
+
+
+        box._myverseRAF = requestAnimationFrame(tick);
+
+
+    }
+
+
+    box._myverseRAF = requestAnimationFrame(tick);
+
+
+
+    // pause on hover, so you can actually look at the cards (desktop)
+    box.onmouseenter = function(){ isPaused = true; };
+
+    box.onmouseleave = function(){ isPaused = false; };
+
+
+
+    // mouse wheel scrolls the carousel horizontally
+    box.onwheel = function(e){
+
+        e.preventDefault();
+
+        box.scrollLeft += e.deltaY;
+
+    };
+
+
+
+    // click-and-drag scrolling with the mouse
+    box.onmousedown = function(e){
+
+        isDragging = true;
+
+        box.style.cursor = "grabbing";
+
+        dragStartX = e.pageX;
+
+        dragStartScroll = box.scrollLeft;
+
+    };
+
+
+    window.addEventListener("mousemove", function(e){
+
+        if(!isDragging) return;
+
+        const delta = e.pageX - dragStartX;
+
+        box.scrollLeft = dragStartScroll - delta;
+
+    });
+
+
+    window.addEventListener("mouseup", function(){
+
+        if(isDragging){
+
+            isDragging = false;
+
+            box.style.cursor = "grab";
+
+        }
+
+    });
+
 
 }

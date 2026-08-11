@@ -3464,3 +3464,69 @@ cursor:pointer;
     touch-action: manipulation;
 
 }
+
+.recommend-card{
+
+    width:130px;
+
+    min-width:130px;
+
+    height:270px;
+
+    padding:10px;
+
+}
+
+
+.recommend-card img{
+
+    height:150px;
+
+    border-radius:16px;
+
+}
+
+
+.recommend-card h3{
+
+    font-size:13px;
+
+}
+
+
+.recommend-card p{
+
+    font-size:11px;
+
+}
+
+
+.recommend-card button{
+
+    height:30px;
+
+    font-size:12px;
+
+}
+
+
+.recommend-card img.has-trailer{
+
+    cursor:pointer;
+
+}
+
+#recommendedContainer::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+
+#recommendedContainer{
+
+    scrollbar-width:none;
+
+    -ms-overflow-style:none;
+
+}

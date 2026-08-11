@@ -1,5 +1,5 @@
 // ===============================
-// MODALI MYVERSE V3
+// MODALS MYVERSE V3
 // ===============================
 
 
@@ -29,7 +29,7 @@ let currentType = "movie";
 
 
 // ===============================
-// APERTURA MENU AGGIUNTA
+// OPEN ADD MENU
 // ===============================
 
 
@@ -64,7 +64,7 @@ addBtn.onclick=function(){
 
 
 // ===============================
-// SCELTA FILM
+// CHOOSE MOVIE
 // ===============================
 
 
@@ -87,7 +87,7 @@ document
 
 
 // ===============================
-// SCELTA CANZONE
+// CHOOSE SONG
 // ===============================
 
 
@@ -110,7 +110,7 @@ document
 
 
 // ===============================
-// SCELTA LIBRO
+// CHOOSE BOOK
 // ===============================
 
 
@@ -141,7 +141,7 @@ if(bookChoiceBtn){
 
 
 // ===============================
-// SCELTA CARTELLA
+// CHOOSE FOLDER
 // ===============================
 
 
@@ -175,7 +175,8 @@ if(folderChoiceBtn){
 
 
 // ===============================
-// CHIUSURE
+// CLOSE BUTTONS (also reset the form, so leftover
+// data from a recommendation prefill doesn't stick around)
 // ===============================
 
 
@@ -186,6 +187,8 @@ document
 
     movieModal.classList.add("hidden");
 
+    if(typeof resetMovieForm === "function") resetMovieForm();
+
 };
 
 
@@ -195,6 +198,8 @@ document
 .onclick=function(){
 
     songModal.classList.add("hidden");
+
+    if(typeof resetSongForm === "function") resetSongForm();
 
 };
 
@@ -210,6 +215,8 @@ if(closeBookBtn){
     closeBookBtn.onclick=function(){
 
         bookModal.classList.add("hidden");
+
+        if(typeof resetBookForm === "function") resetBookForm();
 
     };
 
@@ -253,7 +260,7 @@ function closeAllModals(){
 
 
 
-// chiusura cliccando fuori
+// close by clicking outside
 
 
 document.querySelectorAll(".modal")
