@@ -81,6 +81,9 @@ share:
 mail:
 `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>`,
 
+instagram:
+`<svg viewBox="0 0 24 24" width="20" height="20"><defs><linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#833AB4"/><stop offset="50%" stop-color="#E1306C"/><stop offset="100%" stop-color="#F77737"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#igGradient)"/><rect x="6" y="6" width="12" height="12" rx="3.5" fill="none" stroke="white" stroke-width="1.6"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="white" stroke-width="1.6"/><circle cx="16.4" cy="7.6" r="1" fill="white"/></svg>`,
+
 folder:
 `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>`,
 

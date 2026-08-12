@@ -1184,10 +1184,10 @@ const recommendations = [
         title: "Hotel California",
         rating: 9,
         type: "song",
-        image: "https://open.spotify.com/intl-it/track/40riOy7x9W7GXjyGp4pjAv?si=03e68ae810344d73",
+        image: "",
         note: "A rock classic with an unforgettable guitar solo.",
         artist: "Eagles",
-        spotify: "",
+        spotify: "https://open.spotify.com/intl-it/track/40riOy7x9W7GXjyGp4pjAv?si=8d24b15850f44d5d",
         where: "", genre: "", director: "", duration: "", cast: "", trailer: "", author: "", pages: ""
     },
     {

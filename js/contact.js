@@ -6,6 +6,11 @@
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xykgbzya";
 
 
+// <-- put your real Instagram profile link here
+const INSTAGRAM_URL = "https://www.instagram.com/myverse_webapp?igsh=aTNwM3dpdWw1ZjU%3D&utm_source=qr";
+
+
+
 function openContactModal(){
 
 
@@ -16,7 +21,7 @@ function openContactModal(){
     modal.className = "modal details-modal";
 
 
-    modal.innerHTML = `
+modal.innerHTML = `
 
     <div class="details-box glass info-box">
 
@@ -41,6 +46,14 @@ function openContactModal(){
             <p id="contactStatus" class="contact-status hidden"></p>
 
         </form>
+
+        <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="social-btn glass">
+
+            <span class="social-icon">${ICONS.instagram}</span>
+
+            <span class="social-label">Instagram</span>
+
+        </a>
 
     </div>
 
