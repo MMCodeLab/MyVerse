@@ -207,11 +207,11 @@ function showFolderHeader(folder){
 
     <div class="folder-view-actions">
 
-    <button id="editFolderBtn">Edit</button>
+    <button id="editFolderBtn">${t("edit_label")}</button>
 
-    <button id="deleteFolderBtn">Delete folder</button>
+    <button id="deleteFolderBtn">${t("delete_folder_label")}</button>
 
-    <button id="closeFolderBtn">Close folder</button>
+    <button id="closeFolderBtn">${t("close_folder_label")}</button>
 
     </div>
 
@@ -231,7 +231,7 @@ function showFolderHeader(folder){
     document.getElementById("deleteFolderBtn").onclick = function(){
 
 
-        if(confirm(`Delete the folder "${folder.name}"? The items inside it will not be deleted.`)){
+        if(confirm(t("delete_folder_confirm", {name: folder.name}))){
 
 
             folders = folders.filter(f => f.id !== folder.id);
@@ -293,7 +293,7 @@ function openFolderCreation(){
     selectedFolderItemIds = [];
 
 
-    document.getElementById("folderModalTitle").innerHTML = "New folder";
+    document.getElementById("folderModalTitle").innerHTML = t("new_folder_title");
 
     document.getElementById("folderNameInput").value = "";
 
@@ -316,7 +316,7 @@ function openFolderEditor(folder){
     selectedFolderItemIds = [...folder.itemIds];
 
 
-    document.getElementById("folderModalTitle").innerHTML = "Edit folder";
+    document.getElementById("folderModalTitle").innerHTML = t("edit_folder_title");
 
     document.getElementById("folderNameInput").value = folder.name;
 
@@ -429,7 +429,7 @@ if(saveFolderBtn){
 
         if(name === ""){
 
-            alert("Please enter a folder name");
+            alert(t("alert_folder_name"));
 
             return;
 
@@ -531,3 +531,45 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 });
+
+
+
+
+// ===============================
+// LANGUAGE CHANGE
+// ===============================
+
+
+if(typeof onLanguageChange === "function"){
+
+
+    onLanguageChange(function(){
+
+
+        // refresh the Edit/Delete/Close labels of the open folder view, if any
+        if(currentFolderId){
+
+            const activeFolder =
+            folders.find(f => f.id === currentFolderId);
+
+            if(activeFolder) showFolderHeader(activeFolder);
+
+        }
+
+
+        // refresh the New/Edit folder modal title, if it's currently open
+        const folderItemsModal =
+        document.getElementById("folderItemsModal");
+
+        if(folderItemsModal && !folderItemsModal.classList.contains("hidden")){
+
+            document.getElementById("folderModalTitle").innerHTML =
+            editingFolderId ? t("edit_folder_title") : t("new_folder_title");
+
+        }
+
+
+    });
+
+
+}

@@ -114,15 +114,12 @@ function createStars(container, type){
             star.addEventListener("mousedown", startPress);
 
 
-            // preventDefault stops iOS from treating this as a
-            // text-selection long-press instead of our custom gesture
-            star.addEventListener("touchstart", function(e){
-
-                e.preventDefault();
-
-                startPress();
-
-            }, {passive:false});
+            // no preventDefault here: text-selection/callout on iOS is
+            // already handled by CSS (user-select/touch-callout), and
+            // calling preventDefault on touchstart used to suppress the
+            // synthesized click event for normal taps too (that was the
+            // bug preventing +1/-1 ratings from registering on mobile)
+            star.addEventListener("touchstart", startPress, {passive:true});
 
 
             star.addEventListener("mouseup", cancelPress);

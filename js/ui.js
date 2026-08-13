@@ -73,7 +73,7 @@ if(item.type==="movie" && (item.genre || item.director || item.duration || item.
 
         ${item.genre ? `<p class="icon-row">${ICONS.tag} ${item.genre}</p>` : ""}
 
-        ${item.director ? `<p class="icon-row">${ICONS.clapper} Director: ${item.director}</p>` : ""}
+        ${item.director ? `<p class="icon-row">${ICONS.clapper} ${t("director_label")} ${item.director}</p>` : ""}
 
         ${item.duration ? `<p class="icon-row">${ICONS.clock} ${item.duration}</p>` : ""}
 
@@ -95,7 +95,7 @@ if(item.type==="book" && item.pages){
 
     <div class="details-note">
 
-        <p class="icon-row">${ICONS.book} ${item.pages} pages</p>
+        <p class="icon-row">${ICONS.book} ${item.pages} ${t("pages_label")}</p>
 
     </div>
 
@@ -193,7 +193,7 @@ ${item.where ?
 
 <div class="details-pill">
 
-${item.where}
+${formatWhereLabel(item.where)}
 
 </div>
 
@@ -226,7 +226,7 @@ ${item.note}
 
 <div class="details-note">
 
-No notes
+${t("no_notes")}
 
 </div>
 
@@ -258,7 +258,7 @@ ${ICONS.play} Spotify
 
 <button class="share-detail icon-row">
 
-${ICONS.share} Share
+${ICONS.share} ${t("share_btn")}
 
 </button>
 
@@ -266,7 +266,7 @@ ${ICONS.share} Share
 
 <button class="favorite-detail icon-row">
 
-${item.favorite ? ICONS.heartFilled : ICONS.heart} Favorite
+${item.favorite ? ICONS.heartFilled : ICONS.heart} ${t("favorite_btn")}
 
 </button>
 
@@ -274,7 +274,7 @@ ${item.favorite ? ICONS.heartFilled : ICONS.heart} Favorite
 
 <button class="delete-detail icon-row">
 
-${ICONS.trash} Delete
+${ICONS.trash} ${t("delete_btn")}
 
 </button>
 
@@ -489,7 +489,7 @@ container.innerHTML="";
 
 let layout =
 localStorage.getItem("layout")
-|| "grid";
+|| "list";
 
 
 
@@ -705,7 +705,7 @@ ${formatRating(item.rating)}
 
 ${item.where ?
 
-`<p>${item.where}</p>`
+`<p>${formatWhereLabel(item.where)}</p>`
 
 :""}
 
@@ -713,7 +713,7 @@ ${item.where ?
 
 <button class="delete icon-row">
 
-${ICONS.trash} Delete
+${ICONS.trash} ${t("delete_btn")}
 
 </button>
 
@@ -811,7 +811,7 @@ ${ICONS.play} Spotify
 
 <button class="delete icon-row">
 
-${ICONS.trash} Delete
+${ICONS.trash} ${t("delete_btn")}
 
 </button>
 
@@ -900,7 +900,7 @@ ${item.pages ?
 
 <button class="delete icon-row">
 
-${ICONS.trash} Delete
+${ICONS.trash} ${t("delete_btn")}
 
 </button>
 
@@ -1093,7 +1093,7 @@ const recommendations = [
     {
         title: "Interstellar",
         rating: 10,
-        where: "Cinema",
+        where: "cinema",
         type: "movie",
         image: "images/interstellar.jpg",
         note: "An emotional journey through space, time and feeling.",
@@ -1135,7 +1135,7 @@ const recommendations = [
     {
         title: "Oppenheimer",
         rating: 9,
-        where: "Cinema",
+        where: "cinema",
         type: "movie",
         image: "images/oppenheimer.jpg",
         note: "The story behind the birth of the atomic bomb.",
@@ -1306,7 +1306,7 @@ if(movies.length===0){
 
 
 stats.innerHTML =
-"No reviews yet";
+t("no_reviews");
 
 
 return;
@@ -1322,7 +1322,7 @@ return;
 stats.innerHTML =
 
 
-`${films} movies • ${songs} songs • ${books} books`;
+`${films} ${t("stat_movies")} • ${songs} ${t("stat_songs")} • ${books} ${t("stat_books")}`;
 
 
 
@@ -1391,7 +1391,7 @@ function buildRecommendCard(item){
             ${subtitle ? `<p class="icon-row">${subtitle}</p>` : ""}
             <p class="icon-row">${ICONS.star} ${item.rating}/10</p>
 
-            <button>+ Add</button>
+            <button>${t("add_label")}</button>
         </div>
     `;
 
@@ -1742,6 +1742,43 @@ function renderRecommendations(){
             box.style.cursor = "grab";
 
         }
+
+    });
+
+
+}
+
+
+
+
+// ===============================
+// LANGUAGE CHANGE: refresh the item details modal in place
+// (renderMovies/renderFolderSidebar are already re-called by i18n.js)
+// ===============================
+
+
+if(typeof onLanguageChange === "function"){
+
+
+    onLanguageChange(function(){
+
+
+        const favoriteBtn =
+        document.querySelector(".details-modal .favorite-detail");
+
+
+        const openModal =
+        favoriteBtn ? favoriteBtn.closest(".details-modal") : null;
+
+
+        if(openModal && selectedDetailItem){
+
+            openModal.remove();
+
+            openDetails(selectedDetailItem);
+
+        }
+
 
     });
 

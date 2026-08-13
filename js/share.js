@@ -252,7 +252,7 @@ async function generateShareCard(item){
 
     ctx.font = "44px sans-serif";
 
-    const ratingText = item.rating < 0 ? `Rating ${item.rating}` : `${item.rating}/10`;
+    const ratingText = item.rating < 0 ? `${t("rating_label")} ${item.rating}` : `${item.rating}/10`;
 
     ctx.fillText(ratingText, canvas.width / 2, afterTitleY + 80);
 
@@ -271,7 +271,7 @@ async function generateShareCard(item){
 
         if(!blob){
 
-            alert("Could not generate the image to share.");
+            alert(t("alert_share_failed"));
 
             return;
 

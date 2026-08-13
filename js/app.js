@@ -31,7 +31,7 @@ saveBtn.onclick = async function(){
 
 if(titleInput.value.trim()===""){
 
-alert("Please enter a title");
+alert(t("alert_movie_title"));
 
 return;
 
@@ -245,7 +245,7 @@ document.getElementById("songNoteInput").value;
 if(title.trim()===""){
 
 
-alert("Please enter the song title");
+alert(t("alert_song_title"));
 
 
 return;
@@ -458,7 +458,7 @@ document.getElementById("bookNoteInput").value;
 if(title.trim()===""){
 
 
-alert("Please enter the book title");
+alert(t("alert_book_title"));
 
 
 return;

@@ -47,6 +47,25 @@ Everything stays on your device.
 - Mark favorites ❤️
 - View detailed information
 
+Books
+
+MyVerse now also supports books, allowing you to add and review them alongside your movies and music. Book information and covers can be retrieved automatically, while you can give each book your own rating, add personal notes, save it as a favorite and keep track of your reading experiences.
+
+📁 Folders
+
+Your library can be organized into personal folders, making it easier to separate and manage the movies, songs and books that are part of your universe. Folders allow you to create your own structure and keep your collection organized according to your preferences.
+
+🌍 Languages
+
+MyVerse is available in multiple languages and includes a dedicated language selector inside the Settings section. You can change the language of the application whenever you want, making the experience more accessible to users from different countries.
+
+Contact
+
+MyVerse also includes a dedicated Contact Us page, created to provide a simple way to get in touch and access the available contact channels. The page also includes a direct connection to the official MyVerse Instagram channel.
+
+Easter Egg
+
+MyVerse contains a small hidden Easter egg for curious users. It is intentionally kept undisclosed, so there is only one way to discover it: explore the application.
 ---
 
 ## 🚀 Progressive Web App
@@ -92,17 +111,12 @@ Design inspired by modern glass interfaces and minimal style.
 
 Possible future improvements:
 
-- Spotify integration
-- Automatic song information retrieval
-- Cloud backup
-- Import/export library
-- More customization options
-- Advanced statistics
+MyVerse is continuously evolving, with future improvements potentially including deeper Spotify integration, automatic song information retrieval, cloud backup, import and export improvements, additional customization options and advanced statistics. 
 
 ---
 
 ## 📜 License
 
-This project is currently a personal project created for learning and experimentation.
+MyVerse is currently a personal project created for learning and experimentation. It does not currently use a specific open-source license.
 
 ---
