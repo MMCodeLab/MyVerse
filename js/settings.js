@@ -45,7 +45,7 @@ document.getElementById("sortSelect");
 
 
 
-// CARICA IMPOSTAZIONI
+// LOAD SETTINGS
 
 
 let savedTheme =
@@ -55,7 +55,7 @@ localStorage.getItem("theme")
 
 let savedLayout =
 localStorage.getItem("layout")
-|| "grid";
+|| "list";
 
 
 let savedSort =

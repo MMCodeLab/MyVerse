@@ -3739,3 +3739,130 @@ cursor:pointer;
     opacity:1;
 
 }
+
+.dev-console{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999;
+
+    background:#0a0e0a;
+
+    color:#3ef07a;
+
+    font-family:"Courier New", monospace;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:20px;
+
+    box-sizing:border-box;
+
+}
+
+
+.dev-stats{
+
+    white-space:pre-wrap;
+
+    font-size:13px;
+
+    border-bottom:1px solid rgba(62,240,122,.3);
+
+    padding-bottom:14px;
+
+    margin-bottom:14px;
+
+    line-height:1.6;
+
+}
+
+
+.dev-output{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+
+.dev-line{
+
+    white-space:pre-wrap;
+
+}
+
+
+.dev-input-echo{
+
+    color:#8be9a8;
+
+}
+
+
+.dev-error{
+
+    color:#ff5f5f;
+
+}
+
+
+.dev-input-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:14px;
+
+    border-top:1px solid rgba(62,240,122,.3);
+
+    padding-top:14px;
+
+}
+
+
+.dev-prompt{
+
+    color:#3ef07a;
+
+    font-weight:bold;
+
+}
+
+
+.dev-input-row input{
+
+    flex:1;
+
+    background:none;
+
+    border:none;
+
+    outline:none;
+
+    color:#3ef07a;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+}
+
+
+.dev-input-row input::placeholder{
+
+    color:rgba(62,240,122,.4);
+
+}
