@@ -65,7 +65,7 @@ MyVerse also includes a dedicated Contact Us page, created to provide a simple w
 
 Easter Egg
 
-MyVerse contains a small hidden Easter egg for curious users. It is intentionally kept undisclosed, so there is only one way to discover it: explore the application.
+MyVerse contains a small hidden Easter egg for curious users. It is intentionally kept undisclosed, so there is only one way to discover it: explore the application!
 ---
 
 ## 🚀 Progressive Web App

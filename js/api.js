@@ -6,7 +6,7 @@
 
 const API_KEYS = {
 
-    tmdb: "LA_TUA_API_KEY",
+    tmdb: "0007864f4243ad65379a35b0538acf35",
 
     googleBooks: "AIzaSyBx7Y3lkL3RnWFXpSyDJ7-lNJxrAlcBGoM"
 
