@@ -3,55 +3,197 @@
 body {
     transition: background .4s, color .4s;
 }
- 
 
-/* TEMA CHIARO */
+
+/* ===============================
+   LIGHT THEME
+   same glassmorphism language as dark theme,
+   just recolored + a richer, less flat background
+   =============================== */
+
 
 body[data-theme="light"] {
 
-    background:#f5f5f7;
-    color:#111;
+    background:#eef0f5;
+    color:#1c1c1e;
 
 }
 
+
+/* background: same blob-based structure as the dark theme,
+   just stronger/more visible so it doesn't read as flat white */
 
 body[data-theme="light"] .background {
 
     background:
-    radial-gradient(circle at top left,#34c75955,transparent 35%),
-    radial-gradient(circle at bottom right,#007aff55,transparent 35%),
-    #f5f5f7;
+
+    radial-gradient(circle at 15% 15%, rgba(52,199,89,.45), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(0,122,255,.4), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(175,82,222,.25), transparent 45%),
+    linear-gradient(160deg, #f5f6fb, #e9ebf2);
 
 }
 
+
+/* glass: a bit more transparent than before, so the colored
+   background actually shows through the cards instead of
+   the whole page reading as solid white blocks */
 
 body[data-theme="light"] .glass {
 
     background:
+
     linear-gradient(
     135deg,
-    rgba(255,255,255,.65),
-    rgba(255,255,255,.35)
+    rgba(255,255,255,.55),
+    rgba(255,255,255,.28)
     );
 
     border:
-    1px solid rgba(0,0,0,.1);
+    1px solid rgba(0,0,0,.08);
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.10);
 
 }
 
+
+/* headings/text: most elements never had their own hardcoded
+   color, so fixing this at a broad level cascades correctly
+   (this also recolors every icon that uses currentColor) */
+
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] p,
+body[data-theme="light"] span,
+body[data-theme="light"] label {
+
+    color:#1c1c1e;
+
+}
+
+
+body[data-theme="light"] .hero span {
+
+    color:#1ed760;
+
+}
+
+
+body[data-theme="light"] #stats,
+body[data-theme="light"] .movie-info p,
+body[data-theme="light"] .details-artist,
+body[data-theme="light"] #detailsMeta,
+body[data-theme="light"] .api-hint,
+body[data-theme="light"] .sidebar-heading,
+body[data-theme="light"] .recommend-card p {
+
+    color:#555;
+
+}
+
+
+body[data-theme="light"] .details-note,
+body[data-theme="light"] .info-content p {
+
+    color:#333;
+
+}
+
+
+/* a handful of elements had hardcoded white text, since they
+   sit on their own colored/dark backgrounds in dark mode —
+   those need an explicit override, inheritance alone won't reach them */
+
+body[data-theme="light"] .sidebar button,
+body[data-theme="light"] .folder-view-actions button,
+body[data-theme="light"] .details-x,
+body[data-theme="light"] .social-label {
+
+    color:#1c1c1e;
+
+}
+
+
+body[data-theme="light"] .sidebar button {
+
+    background:rgba(0,0,0,.05);
+
+}
+
+
+body[data-theme="light"] .folder-view-actions button {
+
+    background:rgba(0,0,0,.06);
+
+}
+
+
+body[data-theme="light"] .details-x {
+
+    background:rgba(0,0,0,.08);
+
+}
+
+
+/* inputs, textareas, selects */
 
 body[data-theme="light"] input,
 body[data-theme="light"] textarea,
 body[data-theme="light"] select {
 
-    color:#111;
+    color:#1c1c1e;
+
+    background:rgba(0,0,0,.05);
 
 }
 
 
-body[data-theme="light"] .movie-info p,
-body[data-theme="light"] #stats {
+body[data-theme="light"] input::placeholder,
+body[data-theme="light"] textarea::placeholder {
+
+    color:#8a8a8e;
+
+}
+
+
+body[data-theme="light"] .readonly-field {
 
     color:#555;
+
+}
+
+
+/* note/info boxes need a visible surface too, not translucent white on white */
+
+body[data-theme="light"] .details-note,
+body[data-theme="light"] .info-content {
+
+    background:rgba(0,0,0,.04);
+
+}
+
+
+body[data-theme="light"] .folder-item-select p {
+
+    color:#1c1c1e;
+
+}
+
+
+/* scrollbars */
+
+body[data-theme="light"] .modal-box::-webkit-scrollbar-thumb,
+body[data-theme="light"] .info-box::-webkit-scrollbar-thumb {
+
+    background:rgba(0,0,0,.15);
+
+}
+
+
+body[data-theme="light"] .footer {
+
+    color:#777;
 
 }
