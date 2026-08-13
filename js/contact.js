@@ -7,7 +7,7 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/xykgbzya";
 
 
 // <-- put your real Instagram profile link here
-const INSTAGRAM_URL = "https://www.instagram.com/your_username_here";
+const INSTAGRAM_URL = "https://www.instagram.com/myverse_webapp";
 
 
 // <-- update this if matt3xx is not the right GitHub username
