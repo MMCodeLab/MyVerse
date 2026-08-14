@@ -284,7 +284,7 @@ function run50Test(outputEl){
 
             type: type,
 
-            title: (type==="movie" ? pick(movieTitles) : type==="song" ? pick(songTitles) : pick(bookTitles)) + " " + (i+1),
+            title: type==="movie" ? pick(movieTitles) : type==="song" ? pick(songTitles) : pick(bookTitles),
 
             image: "icons/icon-512.png",
 
