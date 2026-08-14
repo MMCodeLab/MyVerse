@@ -3746,6 +3746,12 @@ cursor:pointer;
 
     inset:0;
 
+    height:100vh;
+
+    height:100dvh;
+
+    overscroll-behavior:contain;
+
     z-index:999;
 
     background:#0a0e0a;
@@ -3760,9 +3766,12 @@ cursor:pointer;
 
     padding:20px;
 
+    padding-top:calc(20px + env(safe-area-inset-top));
+
     box-sizing:border-box;
 
 }
+
 
 
 .dev-stats{
