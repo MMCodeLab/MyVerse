@@ -606,7 +606,7 @@ function runDevCommand(raw, outputEl, overlay){
 
             devPrint(outputEl, "===============================");
 
-            devPrint(outputEl, "Version: 1.0");
+            devPrint(outputEl, "Version: 3.6");
 
             devPrint(outputEl, "A personal media diary for movies, music and books.");
 
@@ -614,7 +614,7 @@ function runDevCommand(raw, outputEl, overlay){
 
             devPrint(outputEl, "Created by Matteo Minniti");
 
-            devPrint(outputEl, "matt3xx.github.io/MyVerse");
+            devPrint(outputEl, "MMCodeLab.github.io/MyVerse");
 
             break;
 
@@ -722,6 +722,14 @@ function runDevCommand(raw, outputEl, overlay){
             runMatrixEasterEgg(outputEl, overlay);
 
             break;
+
+case "green":
+
+    overlay.classList.remove("dev-matrix");
+
+    devPrint(outputEl, "Theme restored.");
+
+    break;
 
 
         case "":
