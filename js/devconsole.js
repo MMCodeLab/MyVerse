@@ -784,6 +784,7 @@ function openDevConsole(){
 
 
     document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
 
 
 
@@ -873,6 +874,8 @@ function closeDevConsole(){
     document.getElementById("devConsoleOverlay");
 
     if(overlay) overlay.remove();
+    document.body.style.overflow = "";
+
 
 
 }
