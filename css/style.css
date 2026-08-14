@@ -3922,3 +3922,30 @@ cursor:pointer;
     touch-action:manipulation;
 
 }
+
+.dev-console{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999;
+
+    background:#0a0e0a;
+
+    color:#3ef07a;
+
+    font-family:"Courier New", monospace;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:20px;
+
+    padding-top:calc(20px + env(safe-area-inset-top));
+
+    box-sizing:border-box;
+
+}
+
