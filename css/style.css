@@ -3866,3 +3866,47 @@ cursor:pointer;
     color:rgba(62,240,122,.4);
 
 }
+
+.dev-console.dev-matrix{
+
+    background:#0e0303;
+
+    color:#ff3b3b;
+
+}
+
+
+.dev-console.dev-matrix .dev-stats{
+
+    border-bottom-color:rgba(255,59,59,.4);
+
+}
+
+
+.dev-console.dev-matrix .dev-input-row{
+
+    border-top-color:rgba(255,59,59,.4);
+
+}
+
+
+.dev-console.dev-matrix .dev-prompt,
+.dev-console.dev-matrix .dev-input-row input{
+
+    color:#ff3b3b;
+
+}
+
+
+.dev-console.dev-matrix .dev-input-echo{
+
+    color:#ff8080;
+
+}
+
+
+.dev-console.dev-matrix .dev-input-row input::placeholder{
+
+    color:rgba(255,59,59,.4);
+
+}

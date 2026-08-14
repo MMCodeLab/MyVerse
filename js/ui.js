@@ -403,6 +403,8 @@ modal
 .onclick=()=>{
 
 
+logActivity("deleted", item);
+
 movies.splice(
 movies.indexOf(item),
 1
@@ -965,6 +967,7 @@ card
 e.stopPropagation();
 
 
+logActivity("deleted", item);
 
 movies.splice(
 movies.indexOf(item),

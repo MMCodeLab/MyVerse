@@ -126,6 +126,7 @@ loadMovies();
 
 movies.push(item);
 
+logActivity("added", item);
 
 saveMovies();
 
@@ -342,6 +343,7 @@ loadMovies();
 
 movies.push(song);
 
+logActivity("added", song);
 
 saveMovies();
 
@@ -555,6 +557,7 @@ loadMovies();
 
 movies.push(book);
 
+logActivity("added", book);
 
 saveMovies();
 
