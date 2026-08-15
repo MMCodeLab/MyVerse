@@ -783,6 +783,8 @@ document
 
 if(typeof closeFolderView === "function") closeFolderView();
 
+if(typeof hideGenreList === "function") hideGenreList();
+if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
 
 showFavorites=true;
 
@@ -818,23 +820,19 @@ renderMovies();
 
 
 
-document
-.getElementById("onlyMovies")
-.onclick=function(){
-
-
+document.getElementById("onlyMovies").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
-
-
+const list = document.getElementById("genreList");
+const alreadyOpen = list && !list.classList.contains("hidden") && currentFilter === "movie";
 showFavorites=false;
-
-
 currentFilter="movie";
-
-
+if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
+if(alreadyOpen){
+if(typeof hideGenreList === "function") hideGenreList();
+}else{
+if(typeof showGenreList === "function") showGenreList();
+}
 renderMovies();
-
-
 };
 
 
@@ -846,6 +844,8 @@ document
 
 if(typeof closeFolderView === "function") closeFolderView();
 
+if(typeof hideGenreList === "function") hideGenreList();
+if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
 
 showFavorites=false;
 
@@ -872,6 +872,8 @@ onlyBooksBtn.onclick=function(){
 
 if(typeof closeFolderView === "function") closeFolderView();
 
+if(typeof hideGenreList === "function") hideGenreList();
+if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
 
 showFavorites=false;
 

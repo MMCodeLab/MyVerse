@@ -585,7 +585,9 @@ item=>item.type==="movie"
 
 }
 
-
+if(typeof currentGenreFilter !== "undefined" && currentGenreFilter){
+filtered = filtered.filter(item => item.genre && item.genre.split(",").map(g=>g.trim()).includes(currentGenreFilter));
+}
 
 
 

@@ -15,14 +15,9 @@ let selectedFolderItemIds = [];
 
 function loadFolders(){
 
+    const saved = localStorage.getItem("folders");
 
-    const saved =
-    localStorage.getItem("folders");
-
-
-    folders =
-    saved ? JSON.parse(saved) : [];
-
+    folders = saved ? JSON.parse(saved) : [];
 
 }
 
@@ -30,12 +25,7 @@ function loadFolders(){
 
 function saveFolders(){
 
-
-    localStorage.setItem(
-        "folders",
-        JSON.stringify(folders)
-    );
-
+    localStorage.setItem("folders", JSON.stringify(folders));
 
 }
 
@@ -49,13 +39,10 @@ function saveFolders(){
 
 function buildDeckIcon(folder){
 
-
-    const items =
-    folder.itemIds
-    .map(id => movies.find(m => m.id === id))
-    .filter(Boolean)
-    .slice(0, 3);
-
+    const items = folder.itemIds
+        .map(id => movies.find(m => m.id === id))
+        .filter(Boolean)
+        .slice(0, 3);
 
     if(items.length === 0){
 
@@ -63,9 +50,7 @@ function buildDeckIcon(folder){
 
     }
 
-
     let imgsHTML = "";
-
 
     items.forEach((item, index) => {
 
@@ -73,9 +58,7 @@ function buildDeckIcon(folder){
 
     });
 
-
     return `<span class="deck-icon">${imgsHTML}</span>`;
-
 
 }
 
@@ -89,35 +72,19 @@ function buildDeckIcon(folder){
 
 function renderFolderSidebar(){
 
-
-    const list =
-    document.getElementById("folderList");
-
+    const list = document.getElementById("folderList");
 
     if(!list) return;
 
-
     list.innerHTML = "";
-
 
     folders.forEach(folder => {
 
-
-        let btn =
-        document.createElement("button");
-
+        let btn = document.createElement("button");
 
         btn.className = "folder-item";
 
-
-        btn.innerHTML = `
-
-        ${buildDeckIcon(folder)}
-
-        <span>${folder.name}</span>
-
-        `;
-
+        btn.innerHTML = `${buildDeckIcon(folder)}<span>${folder.name}</span>`;
 
         btn.onclick = function(){
 
@@ -127,12 +94,9 @@ function renderFolderSidebar(){
 
         };
 
-
         list.appendChild(btn);
 
-
     });
-
 
 }
 
@@ -146,19 +110,15 @@ function renderFolderSidebar(){
 
 function openFolderView(folder){
 
-
     currentFolderId = folder.id;
 
     showFavorites = false;
 
     currentFilter = "all";
 
-
     renderMovies();
 
-
     showFolderHeader(folder);
-
 
 }
 
@@ -166,15 +126,11 @@ function openFolderView(folder){
 
 function closeFolderView(){
 
-
     currentFolderId = null;
-
 
     hideFolderHeader();
 
-
     renderMovies();
-
 
 }
 
@@ -182,10 +138,7 @@ function closeFolderView(){
 
 function showFolderHeader(folder){
 
-
-    let header =
-    document.getElementById("folderViewHeader");
-
+    let header = document.getElementById("folderViewHeader");
 
     if(!header){
 
@@ -199,26 +152,24 @@ function showFolderHeader(folder){
 
     }
 
-
     header.innerHTML = `
-
-    <h2>${folder.name}</h2>
-
-
-    <div class="folder-view-actions">
-
-    <button id="editFolderBtn">${t("edit_label")}</button>
-
-    <button id="deleteFolderBtn">${t("delete_folder_label")}</button>
-
-    <button id="closeFolderBtn">${t("close_folder_label")}</button>
-
-    </div>
-
+        <h2>${folder.name}</h2>
+        <div class="folder-view-actions">
+            <button id="exportFolderBtn" class="icon-row">${ICONS.download} Export</button>
+            <button id="editFolderBtn">Edit</button>
+            <button id="deleteFolderBtn">Delete folder</button>
+            <button id="closeFolderBtn">Close folder</button>
+        </div>
     `;
 
-
     header.classList.remove("hidden");
+
+
+    document.getElementById("exportFolderBtn").onclick = function(){
+
+        exportFolderBackup(folder);
+
+    };
 
 
     document.getElementById("editFolderBtn").onclick = function(){
@@ -230,12 +181,9 @@ function showFolderHeader(folder){
 
     document.getElementById("deleteFolderBtn").onclick = function(){
 
-
-        if(confirm(t("delete_folder_confirm", {name: folder.name}))){
-
+        if(confirm(`Delete the folder "${folder.name}"? The items inside it will not be deleted.`)){
 
             folders = folders.filter(f => f.id !== folder.id);
-
 
             saveFolders();
 
@@ -243,9 +191,7 @@ function showFolderHeader(folder){
 
             closeFolderView();
 
-
         }
-
 
     };
 
@@ -256,24 +202,56 @@ function showFolderHeader(folder){
 
     };
 
-
 }
 
 
 
 function hideFolderHeader(){
 
+    const header = document.getElementById("folderViewHeader");
 
-    const header =
-    document.getElementById("folderViewHeader");
+    if(header) header.classList.add("hidden");
+
+}
 
 
-    if(header){
 
-        header.classList.add("hidden");
 
-    }
+// ===============================
+// EXPORT A SINGLE FOLDER
+// self-contained, independent from the full backup in backup.js
+// ===============================
 
+
+function exportFolderBackup(folder){
+
+    const items = folder.itemIds
+        .map(id => movies.find(m => m.id === id))
+        .filter(Boolean);
+
+    const data = {
+
+        folderName: folder.name,
+
+        exportedAt: new Date().toISOString(),
+
+        items: items
+
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = `myverse-${folder.name.replace(/[^a-z0-9]/gi, "_").toLowerCase()}.json`;
+
+    link.click();
+
+    URL.revokeObjectURL(url);
 
 }
 
@@ -287,22 +265,17 @@ function hideFolderHeader(){
 
 function openFolderCreation(){
 
-
     editingFolderId = null;
 
     selectedFolderItemIds = [];
 
-
-    document.getElementById("folderModalTitle").innerHTML = t("new_folder_title");
+    document.getElementById("folderModalTitle").innerHTML = "New folder";
 
     document.getElementById("folderNameInput").value = "";
 
-
     renderFolderItemsGrid();
 
-
     document.getElementById("folderItemsModal").classList.remove("hidden");
-
 
 }
 
@@ -310,22 +283,17 @@ function openFolderCreation(){
 
 function openFolderEditor(folder){
 
-
     editingFolderId = folder.id;
 
     selectedFolderItemIds = [...folder.itemIds];
 
-
-    document.getElementById("folderModalTitle").innerHTML = t("edit_folder_title");
+    document.getElementById("folderModalTitle").innerHTML = "Edit folder";
 
     document.getElementById("folderNameInput").value = folder.name;
 
-
     renderFolderItemsGrid();
 
-
     document.getElementById("folderItemsModal").classList.remove("hidden");
-
 
 }
 
@@ -333,75 +301,42 @@ function openFolderEditor(folder){
 
 function renderFolderItemsGrid(){
 
-
-    const grid =
-    document.getElementById("folderItemsGrid");
-
+    const grid = document.getElementById("folderItemsGrid");
 
     grid.innerHTML = "";
 
-
     movies.forEach(item => {
 
-
-        let cell =
-        document.createElement("div");
-
+        let cell = document.createElement("div");
 
         cell.className = "folder-item-select";
 
+        if(selectedFolderItemIds.includes(item.id)) cell.classList.add("selected");
 
-        if(selectedFolderItemIds.includes(item.id)){
-
-            cell.classList.add("selected");
-
-        }
-
-
-        cell.innerHTML = `
-
-        <img src="${item.image}">
-
-        <p>${item.title}</p>
-
-        `;
-
+        cell.innerHTML = `<img src="${item.image}"><p>${item.title}</p>`;
 
         cell.onclick = function(){
 
-
             if(selectedFolderItemIds.includes(item.id)){
 
-
-                selectedFolderItemIds =
-                selectedFolderItemIds.filter(id => id !== item.id);
-
+                selectedFolderItemIds = selectedFolderItemIds.filter(id => id !== item.id);
 
                 cell.classList.remove("selected");
 
-
             }
-
             else{
-
 
                 selectedFolderItemIds.push(item.id);
 
-
                 cell.classList.add("selected");
-
 
             }
 
-
         };
-
 
         grid.appendChild(cell);
 
-
     });
-
 
 }
 
@@ -413,45 +348,33 @@ function renderFolderItemsGrid(){
 // ===============================
 
 
-const saveFolderBtn =
-document.getElementById("saveFolderBtn");
+const saveFolderBtn = document.getElementById("saveFolderBtn");
 
 
 if(saveFolderBtn){
 
-
     saveFolderBtn.onclick = function(){
 
-
-        const name =
-        document.getElementById("folderNameInput").value.trim();
-
+        const name = document.getElementById("folderNameInput").value.trim();
 
         if(name === ""){
 
-            alert(t("alert_folder_name"));
+            alert("Please enter a folder name");
 
             return;
 
         }
 
-
         if(editingFolderId){
 
-
-            let folder =
-            folders.find(f => f.id === editingFolderId);
-
+            let folder = folders.find(f => f.id === editingFolderId);
 
             folder.name = name;
 
             folder.itemIds = [...selectedFolderItemIds];
 
-
         }
-
         else{
-
 
             folders.push({
 
@@ -465,52 +388,39 @@ if(saveFolderBtn){
 
             });
 
-
         }
-
 
         saveFolders();
 
         renderFolderSidebar();
 
-
         document.getElementById("folderItemsModal").classList.add("hidden");
 
 
-        // if the edited folder is the one currently open, refresh the view
         if(currentFolderId === editingFolderId && editingFolderId){
 
-
-            const updated =
-            folders.find(f => f.id === editingFolderId);
-
+            const updated = folders.find(f => f.id === editingFolderId);
 
             if(updated) openFolderView(updated);
 
-
         }
 
-
     };
-
 
 }
 
 
 
-const closeFolderItemsBtn =
-document.getElementById("closeFolderItemsBtn");
+const closeFolderItemsBtn = document.getElementById("closeFolderItemsBtn");
 
 
 if(closeFolderItemsBtn){
-
 
     closeFolderItemsBtn.onclick = function(){
 
         document.getElementById("folderItemsModal").classList.add("hidden");
 
     };
-
 
 }
 
@@ -524,52 +434,8 @@ if(closeFolderItemsBtn){
 
 document.addEventListener("DOMContentLoaded", function(){
 
-
     loadFolders();
 
     renderFolderSidebar();
 
-
 });
-
-
-
-
-// ===============================
-// LANGUAGE CHANGE
-// ===============================
-
-
-if(typeof onLanguageChange === "function"){
-
-
-    onLanguageChange(function(){
-
-
-        // refresh the Edit/Delete/Close labels of the open folder view, if any
-        if(currentFolderId){
-
-            const activeFolder =
-            folders.find(f => f.id === currentFolderId);
-
-            if(activeFolder) showFolderHeader(activeFolder);
-
-        }
-
-
-        // refresh the New/Edit folder modal title, if it's currently open
-        const folderItemsModal =
-        document.getElementById("folderItemsModal");
-
-        if(folderItemsModal && !folderItemsModal.classList.contains("hidden")){
-
-            document.getElementById("folderModalTitle").innerHTML =
-            editingFolderId ? t("edit_folder_title") : t("new_folder_title");
-
-        }
-
-
-    });
-
-
-}

@@ -302,7 +302,7 @@ function run50Test(outputEl){
 
             spotify: "",
 
-            genre: type==="movie" ? "Test" : "",
+            genre: type==="movie" ? pick(["Action","Drama","Comedy","Sci-Fi","Thriller"]) : "",
 
             director: type==="movie" ? "Test Director" : "",
 
