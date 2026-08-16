@@ -1,24 +1,18 @@
 // ===============================
 // GENRE SUB-LIST (sidebar) - MYVERSE
+// fixed list, always available even with zero movies
 // ===============================
 
 
 let currentGenreFilter = null;
 
 
-function collectGenres(){
-
-    const set = new Set();
-
-    movies.filter(m => m.type === "movie" && m.genre).forEach(m => {
-
-        m.genre.split(",").map(g => g.trim()).filter(Boolean).forEach(g => set.add(g));
-
-    });
-
-    return Array.from(set).sort();
-
-}
+const MOVIE_GENRES = [
+    "Action","Adventure","Animation","Comedy","Crime",
+    "Documentary","Drama","Family","Fantasy","History",
+    "Horror","Music","Mystery","Romance","Science Fiction",
+    "TV Movie","Thriller","War","Western"
+];
 
 
 
@@ -50,7 +44,7 @@ function renderGenreList(){
     list.appendChild(allBtn);
 
 
-    collectGenres().forEach(genre => {
+    MOVIE_GENRES.forEach(genre => {
 
         const btn = document.createElement("button");
 

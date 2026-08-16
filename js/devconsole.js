@@ -284,7 +284,7 @@ function run50Test(outputEl){
 
             type: type,
 
-            title: (type==="movie" ? pick(movieTitles) : type==="song" ? pick(songTitles) : pick(bookTitles)) + " " + (i+1),
+            title: type==="movie" ? pick(movieTitles) : type==="song" ? pick(songTitles) : pick(bookTitles),
 
             image: "icons/icon-512.png",
 
@@ -606,7 +606,7 @@ function runDevCommand(raw, outputEl, overlay){
 
             devPrint(outputEl, "===============================");
 
-            devPrint(outputEl, "Version: 1.0");
+            devPrint(outputEl, "Version: 3.6");
 
             devPrint(outputEl, "A personal media diary for movies, music and books.");
 
@@ -614,7 +614,7 @@ function runDevCommand(raw, outputEl, overlay){
 
             devPrint(outputEl, "Created by Matteo Minniti");
 
-            devPrint(outputEl, "matt3xx.github.io/MyVerse");
+            devPrint(outputEl, "MMCodeLab.github.io/MyVerse");
 
             break;
 
@@ -723,6 +723,14 @@ function runDevCommand(raw, outputEl, overlay){
 
             break;
 
+case "green":
+
+    overlay.classList.remove("dev-matrix");
+
+    devPrint(outputEl, "matrix mode remote removed");
+
+    break;
+
 
         case "":
 
@@ -776,6 +784,7 @@ function openDevConsole(){
 
 
     document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
 
 
 
@@ -865,6 +874,8 @@ function closeDevConsole(){
     document.getElementById("devConsoleOverlay");
 
     if(overlay) overlay.remove();
+    document.body.style.overflow = "";
+
 
 
 }

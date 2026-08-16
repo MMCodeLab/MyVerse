@@ -776,49 +776,14 @@ renderMovies(result);
 
 
 
-document
-.getElementById("favoriteMovies")
-.onclick=function(){
-
-
+document.getElementById("allMovies").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
-
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
-
-showFavorites=true;
-
-
-currentFilter="all";
-
-
-renderMovies();
-
-
-};
-
-
-
-document
-.getElementById("allMovies")
-.onclick=function(){
-
-
-if(typeof closeFolderView === "function") closeFolderView();
-
-
 showFavorites=false;
-
-
 currentFilter="all";
-
-
 renderMovies();
-
-
 };
-
-
 
 document.getElementById("onlyMovies").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
@@ -835,56 +800,32 @@ if(typeof showGenreList === "function") showGenreList();
 renderMovies();
 };
 
-
-
-document
-.getElementById("onlySongs")
-.onclick=function(){
-
-
+document.getElementById("onlySongs").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
-
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
-
 showFavorites=false;
-
-
 currentFilter="song";
-
-
 renderMovies();
-
-
 };
 
-
-
-const onlyBooksBtn =
-document.getElementById("onlyBooks");
-
-
+const onlyBooksBtn = document.getElementById("onlyBooks");
 if(onlyBooksBtn){
-
-
 onlyBooksBtn.onclick=function(){
-
-
 if(typeof closeFolderView === "function") closeFolderView();
-
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
-
 showFavorites=false;
-
-
 currentFilter="book";
-
-
 renderMovies();
-
-
 };
-
-
 }
+
+document.getElementById("favoriteMovies").onclick=function(){
+if(typeof closeFolderView === "function") closeFolderView();
+if(typeof hideGenreList === "function") hideGenreList();
+if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
+showFavorites=true;
+currentFilter="all";
+renderMovies();
+};
