@@ -1388,17 +1388,16 @@ function buildRecommendCard(item){
     if(item.author) subtitle = item.author;
 
 
-    card.innerHTML = `
-        <img src="${item.image || "icons/icon-512.png"}" onerror="this.src='icons/icon-512.png'">
+card.innerHTML = `
+    <img src="${item.image || "icons/icon-512.png"}" onerror="this.src='icons/icon-512.png'">
 
-        <div class="recommend-content">
-            <h3 class="icon-row">${typeIcon} ${item.title}</h3>
-            ${subtitle ? `<p class="icon-row">${subtitle}</p>` : ""}
-            <p class="icon-row">${ICONS.star} ${item.rating}/10</p>
+    <div class="recommend-content">
+        <h3 class="icon-row">${typeIcon} ${item.title}</h3>
+        ${subtitle ? `<p class="icon-row">${subtitle}</p>` : ""}
 
-            <button>${t("add_label")}</button>
-        </div>
-    `;
+        <button>+ Add</button>
+    </div>
+`;
 
 
     // root fix: songs have no static cover in the data, so we fetch

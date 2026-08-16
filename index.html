@@ -10,6 +10,17 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
 
 <title>MyVerse</title>
 
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "1f758f84-2f9c-4bdd-8818-217d08dc64b6",
+    });
+  });
+</script>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/glass.css">
 <link rel="stylesheet" href="css/animations.css">
