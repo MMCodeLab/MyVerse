@@ -1,3 +1,5 @@
+importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
+
 const CACHE_NAME = "MyVerse-cache-v1";
 
 const urlsToCache = [
@@ -22,14 +24,10 @@ const urlsToCache = [
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(urlsToCache))
+            .then(cache => {
+                return cache.addAll(urlsToCache);
+            })
     );
-
-    self.skipWaiting();
-});
-
-self.addEventListener("activate", event => {
-    event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener("fetch", event => {
@@ -39,6 +37,7 @@ self.addEventListener("fetch", event => {
     }
 
     event.respondWith(
+
         caches.match(event.request).then(response => {
 
             return response || fetch(event.request).catch(() => {
@@ -51,6 +50,7 @@ self.addEventListener("fetch", event => {
             });
 
         })
+
     );
 
 });
