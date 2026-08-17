@@ -1,0 +1,56 @@
+const CACHE_NAME = "MyVerse-cache-v1";
+
+const urlsToCache = [
+    "/",
+    "index.html",
+    "css/style.css",
+    "css/glass.css",
+    "css/themes.css",
+    "css/settings.css",
+    "css/animations.css",
+    "css/responsive.css",
+    "js/storage.js",
+    "js/stars.js",
+    "js/ui.js",
+    "js/app.js",
+    "js/modal.js",
+    "js/settings.js",
+    "js/sort.js",
+    "js/backup.js"
+];
+
+self.addEventListener("install", event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(urlsToCache))
+    );
+
+    self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+    event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener("fetch", event => {
+
+    if (event.request.url.indexOf(self.location.origin) !== 0) {
+        return;
+    }
+
+    event.respondWith(
+        caches.match(event.request).then(response => {
+
+            return response || fetch(event.request).catch(() => {
+
+                return new Response("", {
+                    status: 503,
+                    statusText: "Service Unavailable"
+                });
+
+            });
+
+        })
+    );
+
+});
