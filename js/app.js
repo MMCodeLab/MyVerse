@@ -138,9 +138,7 @@ renderMovies();
 resetMovieForm();
 
 
-document
-.getElementById("modal")
-.classList.add("hidden");
+closeModalWithFly(document.getElementById("modal"), ICONS.film);
 
 };
 
@@ -355,9 +353,7 @@ renderMovies();
 resetSongForm();
 
 
-document
-.getElementById("songModal")
-.classList.add("hidden");
+closeModalWithFly(document.getElementById("songModal"), ICONS.music);
 
 
 };
@@ -569,9 +565,7 @@ renderMovies();
 resetBookForm();
 
 
-document
-.getElementById("bookModal")
-.classList.add("hidden");
+closeModalWithFly(document.getElementById("bookModal"), ICONS.book);
 
 
 };

@@ -6,8 +6,7 @@
 .movie-card,
 .navbar,
 .search-box,
-.modal-box,
-.sidebar{
+.modal-box{
 
     animation:
     fadeUp .55s cubic-bezier(.2,.8,.2,1);

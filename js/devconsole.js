@@ -873,8 +873,21 @@ function closeDevConsole(){
     const overlay =
     document.getElementById("devConsoleOverlay");
 
-    if(overlay) overlay.remove();
-    document.body.style.overflow = "";
+    if(overlay){
+
+        overlay.style.transition = "opacity .35s ease";
+        overlay.style.opacity = "0";
+
+        setTimeout(function(){
+            overlay.remove();
+            document.body.style.overflow = "";
+        }, 350);
+
+    } else {
+
+        document.body.style.overflow = "";
+
+    }
 
 
 

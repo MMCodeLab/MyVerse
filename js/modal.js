@@ -225,20 +225,50 @@ if(closeBookBtn){
 
 
 
+function closeModalWithFly(modalEl, iconSvg){
+
+    const box = modalEl.querySelector(".modal-box");
+
+    if(iconSvg){
+
+        const icon = document.createElement("div");
+        icon.className = "fly-icon";
+        icon.innerHTML = iconSvg;
+        document.body.appendChild(icon);
+        setTimeout(function(){ icon.remove(); }, 1150);
+
+    }
+
+    modalEl.classList.add("closing");
+
+    setTimeout(function(){
+
+        modalEl.classList.add("hidden");
+        modalEl.classList.remove("closing");
+
+    }, 300);
+
+}
+
+
 function closeAllModals(){
 
 
-    typeModal.classList.add("hidden");
+    [typeModal, movieModal, songModal, bookModal].forEach(function(m){
 
-    movieModal.classList.add("hidden");
+        if(!m || m.classList.contains("hidden")) return;
 
-    songModal.classList.add("hidden");
+        m.classList.add("closing");
 
-    if(bookModal){
-        bookModal.classList.add("hidden");
-    }
+        setTimeout(function(){
+            m.classList.add("hidden");
+            m.classList.remove("closing");
+        }, 300);
 
-    if(typeof settingsModal !== "undefined"){
+    });
+
+
+    if(typeof settingsModal !== "undefined" && settingsModal){
         settingsModal.classList.add("hidden");
     }
 
