@@ -930,21 +930,37 @@ textarea{
 
     position:fixed;
 
-    top:20px;
+    top:90px;
 
-    left:-300px;
+    left:20px;
 
-    width:260px;
+    right:20px;
 
-    height:calc(100vh - 40px);
+    width:auto;
 
-    padding:30px;
+    max-height:0;
+
+    padding:0 25px;
 
     border-radius:30px;
 
-    z-index:200;
+    z-index:90;
 
-    transition:.45s cubic-bezier(.2,1,.3,1);
+    overflow:hidden;
+
+    opacity:0;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-content:flex-start;
+
+    gap:10px;
+
+    transform:translateY(-12px);
+
+    transition:max-height .3s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .3s cubic-bezier(.16,1,.3,1), padding .3s;
 
 }
 
@@ -952,7 +968,25 @@ textarea{
 
 .sidebar.open{
 
-    left:20px;
+    max-height:80vh;
+
+    opacity:1;
+
+    padding:25px;
+
+    transform:translateY(0);
+
+    overflow-y:auto;
+
+}
+
+
+
+.sidebar h2{
+
+    flex-basis:100%;
+
+    margin:0 0 5px;
 
 }
 
@@ -960,19 +994,23 @@ textarea{
 
 .sidebar button{
 
-    width:100%;
+    width:auto;
 
-    margin-top:15px;
+    flex:0 1 auto;
 
-    padding:15px;
+    margin-top:0;
+
+    padding:12px 18px;
 
     border:none;
 
-    border-radius:20px;
+    border-radius:16px;
 
     background:#ffffff15;
 
     color:white;
+
+    white-space:nowrap;
 
 }
 
@@ -3220,22 +3258,77 @@ cursor:pointer;
 
 .sidebar-divider{
 
+    flex-basis:100%;
+
     border:none;
 
     border-top:1px solid rgba(255,255,255,.15);
 
-    margin:20px 0 10px;
+    margin:10px 0 0;
 
 }
 
 
 .sidebar-heading{
 
+    flex-basis:100%;
+
     font-size:14px;
 
     color:#999;
 
-    margin-bottom:10px;
+    margin-bottom:0;
+
+}
+
+
+.movies-nav-item{
+    position:relative;
+}
+
+.genre-list{
+    position:fixed;
+    margin:0;
+    padding:10px;
+    border-radius:18px;
+    z-index:150;
+    max-width:280px;
+    max-height:50vh;
+    overflow-y:auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+#folderList{
+
+    display:flex;
+
+    flex-wrap:nowrap;
+
+    overflow-x:auto;
+
+    flex-basis:100%;
+
+    gap:8px;
+
+    padding-bottom:4px;
+
+}
+
+#folderList .folder-item{
+
+    flex:0 0 auto;
+
+}
+
+#genreList{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:6px;
 
 }
 
@@ -3246,7 +3339,7 @@ cursor:pointer;
 
     align-items:center;
 
-    gap:10px;
+    gap:8px;
 
     text-align:left;
 
@@ -3458,9 +3551,7 @@ cursor:pointer;
 
 .sidebar{
 
-    top: calc(20px + env(safe-area-inset-top));
-
-    height: calc(100vh - 40px - env(safe-area-inset-top));
+    top: calc(90px + env(safe-area-inset-top));
 
 }
 
@@ -3958,10 +4049,7 @@ cursor:pointer;
 }
 
 .genre-list{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    margin:6px 0 6px 16px;
+    margin:0;
 }
 .genre-item{
     padding:8px 12px;

@@ -91,6 +91,7 @@ function renderFolderSidebar(){
             openFolderView(folder);
 
             sidebar.classList.remove("open");
+            if(typeof hideGenreList === "function") hideGenreList();
 
         };
 

@@ -319,15 +319,18 @@ sidebar.classList.toggle("open");
 document.addEventListener(
 "click",
 function(e){
+const genreListEl = document.getElementById("genreList");
 if(
 sidebar.classList.contains("open")
 &&
 !sidebar.contains(e.target)
 &&
 !menuBtn.contains(e.target)
+&&
+!(genreListEl && genreListEl.contains(e.target))
 ){
 sidebar.classList.remove("open");
-if(typeof currentFilter !== "undefined" && currentFilter !== "movie" && typeof hideGenreList === "function"){
+if(typeof hideGenreList === "function"){
 hideGenreList();
 }
 }

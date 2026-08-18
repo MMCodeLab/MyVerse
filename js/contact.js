@@ -226,6 +226,7 @@ if(contactBtn){
     contactBtn.onclick = function(){
 
         sidebar.classList.remove("open");
+        if(typeof hideGenreList === "function") hideGenreList();
 
         openContactModal();
 

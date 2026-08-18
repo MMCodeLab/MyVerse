@@ -14,6 +14,7 @@ document.getElementById("closeSettings");
 settingsBtn.onclick=function(){
 
 sidebar.classList.remove("open");
+if(typeof hideGenreList === "function") hideGenreList();
 
 settingsModal.classList.remove("hidden");
 

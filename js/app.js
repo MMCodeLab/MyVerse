@@ -780,6 +780,7 @@ document.getElementById("allMovies").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
+sidebar.classList.remove("open");
 showFavorites=false;
 currentFilter="all";
 renderMovies();
@@ -804,6 +805,7 @@ document.getElementById("onlySongs").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
+sidebar.classList.remove("open");
 showFavorites=false;
 currentFilter="song";
 renderMovies();
@@ -815,6 +817,7 @@ onlyBooksBtn.onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
+sidebar.classList.remove("open");
 showFavorites=false;
 currentFilter="book";
 renderMovies();
@@ -825,6 +828,7 @@ document.getElementById("favoriteMovies").onclick=function(){
 if(typeof closeFolderView === "function") closeFolderView();
 if(typeof hideGenreList === "function") hideGenreList();
 if(typeof currentGenreFilter !== "undefined") currentGenreFilter=null;
+sidebar.classList.remove("open");
 showFavorites=true;
 currentFilter="all";
 renderMovies();

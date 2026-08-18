@@ -234,9 +234,11 @@ main{
 .sidebar{
 
 
-    width:240px;
+    left:10px;
 
-    left:-260px;
+    right:10px;
+
+    top:80px;
 
 
 }
@@ -246,7 +248,7 @@ main{
 .sidebar.open{
 
 
-    left:10px;
+    max-height:75vh;
 
 
 }

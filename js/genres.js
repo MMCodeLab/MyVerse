@@ -9,9 +9,8 @@ let currentGenreFilter = null;
 
 const MOVIE_GENRES = [
     "Action","Adventure","Animation","Comedy","Crime",
-    "Documentary","Drama","Family","Fantasy","History",
-    "Horror","Music","Mystery","Romance","Science Fiction",
-    "TV Movie","Thriller","War","Western"
+    "Drama","Fantasy","Horror","Mystery","Romance",
+    "Science Fiction","Thriller"
 ];
 
 
@@ -39,6 +38,10 @@ function renderGenreList(){
 
         renderMovies();
 
+        sidebar.classList.remove("open");
+
+        hideGenreList();
+
     };
 
     list.appendChild(allBtn);
@@ -60,6 +63,10 @@ function renderGenreList(){
 
             renderMovies();
 
+            sidebar.classList.remove("open");
+
+            hideGenreList();
+
         };
 
         list.appendChild(btn);
@@ -74,9 +81,23 @@ function showGenreList(){
 
     const list = document.getElementById("genreList");
 
-    if(list) list.classList.remove("hidden");
+    if(!list) return;
+
+    list.classList.remove("hidden");
 
     renderGenreList();
+
+    const btn = document.getElementById("onlyMovies");
+
+    if(btn){
+
+        const rect = btn.getBoundingClientRect();
+
+        list.style.top = (rect.bottom + 8) + "px";
+
+        list.style.left = rect.left + "px";
+
+    }
 
 }
 
